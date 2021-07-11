@@ -1,0 +1,106 @@
+\section{Front-end}
+	\subsection{SPA}
+	
+		 Web sẽ thiết kế theo kiểu Single Page Application (SPA) thay vì theo kiểu truyền thống là Server side rendering. Ưu điểm của cách thiết kế này là web sẽ có trải nghiệm như khi dùng ứng dụng trên điện thoại hoặc máy tính. Mỗi lần thực hiện một thao tác hay chuyển trang trên web thì trình duyệt sẽ không phải load lại trang nữa. Việc này được thực hiện bằng cách sử dụng AJAX để lấy dữ liệu một cách bất đồng bộ từ phía server mỗi khi có một event do người dùng thực hiện trên trình duyệt. Sau đó, ta sẽ sử dụng dữ liệu lấy được (Thường là dưới dạng JSON) để đổ giao diện lên trình duyệt hiển thị cho người dùng.
+    
+	\subsection{ReactJS}
+	
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{/MPA.png}
+			\centering
+			\linebreak
+			\caption{Luồng dữ liệu của các trang web MPA truyền thống}
+		\end{figure}
+	
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{/SPA.png}
+			\centering
+			\linebreak
+			\caption{Luồng dữ liệu của các trang web SPA}
+		\end{figure}
+	
+		\textbf{ReacJS} được phát triển bởi Facebook là một thư viện rất phổ biến để phát triển các ứng dụng web SPA hiện nay. React Cho phép người lập trình có thể chia ứng dụng thành các component và tái sử dụng, nhờ vậy mà tiết kiệm được thời gian lập trình. Hơn nữa, cơ chế DOM ảo \textbf{(Virtual DOM)} mới chính là điểm đặc biệt hơn cả của thư viện ReactJS. Cập nhật cây DOM là một tác vụ khá tốn chi phí. Nếu như để lập trình một cách thông thường, lập trình viên tự quản lí DOM bằng các Native API của môi trường web thì sẽ dễ gây ra vấn đề về hiệu suất. Chính vì vậy ReactJS sẽ giúp ta cập nhật DOM bằng cách quản lí ngầm một cây DOM ảo và sẽ đối chiếu những thay đổi so với các phiên bản DOM ảo trước đó để cập nhật lên cây DOM thật, giúp ứng dụng web tăng hiệu suất. Chính vì những lí do trên mà nhóm quyết định sẽ sử dụng thư viện này để phát triển luận văn này.\\
+		
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{/ReactJS.jpg}
+			\centering
+			\linebreak
+			\caption{ReactJS và những lợi ích khi sử dụng}
+		\end{figure}
+		
+		Bên cạnh đó, ReactJS cho phép người lập trình có thể viết bằng 2 ngôn ngữ: Javascript và Typescript. Javascript đã ra đời và được sử dụng từ rất lâu. Hiện nay, đây là ngôn ngữ được rất nhiều lập trình viên sử dụng, cả trong việc phát triển ứng dụng phía client-side lẫn phía server-side. JS là một ngôn ngữ prototype-based hỗ trợ cả lập trình hướng đối tượng và lập trình hàm, các tính năng được bảo trì và phát triển liên tục. Tuy vậy, quá linh động cũng là một điểm yếu của ngôn ngữ này. JS không kiểm tra ràng buộc kiểu khi chúng ta viết mã nguồn. Người lập trình có thể sử dụng một biến mà không cần khai báo kiểu, khiến cho việc truyền tham số hay khi tương tác các biến khác kiểu trở nên khó kiểm soát. Lấy ví dụ đơn giản như biểu thức "1" + 1 sẽ là hợp lệ và không bị bắt lỗi trong quá trình kiểm tra kiểu tĩnh khi chúng ta lập trình. Hay khi ta định nghĩa một hàm với các tham số cần truyền vào, do JS không hỗ trợ khai báo kiểu nên khi gọi hàm ta có thể truyền bất cứ tham số với bất cứ kiểu nào, làm cho hàm có thể thực thi ngoài ý muốn. Chính vì vậy, TypeScript ra đời để giải quyết vấn đề của JS kể trên. TypeScript yêu cầu người dùng định nghĩa kiểu rõ ràng cho các biến, kiểu trả về của hàm và bắt lỗi các biểu thức mà có sự tương tác của các biến không tương thích kiểu. Nhờ vậy, Sử dụng TS sẽ giúp cho mã nguồn của dự án dễ đọc, minh bạch, dễ bảo trì và phát triển hơn rất nhiều.
+		
+		\begin{figure}[!ht]
+			\includegraphics[width=0.6\textwidth]{/TypeScript.jpg}
+			\centering
+			\linebreak
+			\caption{TypeScript là phiên bản mở rộng của JS có hỗ trợ kiểm tra kiểu tĩnh}
+		\end{figure}
+			
+	
+        		
+        \subsection{Continuous integration / Continuous deployment (CI/CD)}
+
+		
+		Do web SPA sẽ trả về file html tĩnh cho người dùng tương tác (Dữ liệu hiển thị được cập nhật bằng cách tương tác với API phía server) nên ta có thể host website trên những dịch vụ cho host static web miễn phí. Nhóm sẽ chọn dịch vụ host web tĩnh miễn phí của gitlab để làm môi trường test (staging). Ưu điểm của gitlab là vừa có thể giúp nhóm quản lí source code cũng như cung cấp dịch vụ Continuous integration (CI) và continuous delivery (CD) giúp có thể deploy ứng dụng một cách tự động mỗi khi ta push code lên gitlab.\\
+		
+		Cụ thể, CI/CD giúp chúng ta chỉ phải code, chia branch đẩy lên git. Các công đoạn như unit test, deployment sẽ được gitlab-runner thực hiện một cách tự động mỗi khi có thay đổi mã nguồn. Bất kì ứng dụng được phát triển hiện nay đều cần phải qua khâu Unit Test do chính người lập trình viết trước khi được chuyển qua cho bộ phận kiểm thử phần mềm. Khi ta đẩy mã nguồn lên git mà quên chạy lệnh để kiểm thử unit test ở dưới máy local thì gitlab-runner sẽ giúp nhóm lập trình chạy các test case đó và sẽ thông báo trên giao diện git nếu có test case bị fail. Sau giai đoạn chạy các unit test và đã qua hết các test case thì tất nhiên, ứng dụng phải được deploy lên các môi trường (staging, production, etc). Việc phải SSH vào server host ứng dụng, sau đó tải mã nguồn mới nhất về, build ứng dụng ra các file tối ưu để chạy là khá tốn thời gian. Các thao tác trên thực chất cũng chỉ là chạy các câu lệnh trên terminal, vậy tại sao không để hệ thống tự động chạy những câu lệnh đó? Ta chỉ cần liệt kê các câu lệnh của một hành động cần phải thực hiện theo đúng thứ tự và hệ thống CI/CD của gitlab sẽ tự động chạy các câu lệnh đó cho chúng ta.
+		
+		\begin{figure}[!ht]
+1			\includegraphics[width=1\textwidth]{/cicd.png}
+			\centering
+			\linebreak
+			\caption{Gitlab CICD}
+		\end{figure}
+	
+		\subsection{Những thư viện nổi bật giúp hiện thực chức năng hệ thống}
+			Một số lập trình viên rất thích việc xây dựng mọi thứ từ đầu và hạn chế sử dụng thư viện càng nhiều càng tốt. Tuy vậy, có những tính năng đã được một số thư viện hỗ trợ đầy đủ và đã được kiểm thử qua hàng ngàn người dùng. Khi đó, ta nên sử dụng thư viện để tiết kiệm thời gian phát triển cũng như có thể sử dụng ngay lập tức tính năng chất lượng đã qua kiểm thử. Nhóm sẽ liệt kê một số thư viện nổi bật (Ngoài thư viện chính React) mà nhóm đã dùng để hiện thực một vài chức năng của hệ thống: \\
+			
+			\begin{itemize}
+				\item \textbf{chart.js (version 2.9.4):} Dùng để hiện thực chức năng tạo biểu đồ thống kê của admin.
+				\item \textbf{date-fns (version 2.21.1):} Dùng để thực hiện việc tính toán ngày tháng như lấy thời gian bắt đầu / kết thúc của ngày, tăng giảm số ngày vv...
+				\item \textbf{antd (version 4.9.4):} Thư viện CSS và component tương thích với React.
+				\item \textbf{json-bigint (version 1.0.0):} Giúp parse ra được ID lớn của đơn hàng thành chuỗi dạng string.
+				\item \textbf{@react-pdf/renderer (version 2.0.8):} Giúp tạo ra template cho phiếu nhập/xuất kho dưới dạng pdf.
+				\item \textbf{gzipper (version 4.5.0):} Giúp tạo ra những file gzip của những file static đã build ra. Như vậy sẽ giảm dung lượng đường truyền mạng cần thiết để tải file và trang web sẽ hiển thị nhanh hơn vào lần đầu tiên truy cập.
+			\end{itemize}
+			
+	
+		\subsection{Giám sát lỗi hệ thống bằng dịch vụ Sentry}
+			\subsubsection{Giới thiệu về Sentry}
+				Một hệ thống không những phải hoạt động tốt mà còn cần phải có hệ thống ghi log và báo cáo lỗi không mong muốn xảy ra từ người dùng. Thay vì phải tự hiện thực lại hệ thống như trên thì nhóm đã quyết định sử dụng một dịch vụ trực tuyến khá phổ biến và nổi tiếng hiện nay: Sentry. Về cơ bản. Sentry giúp chúng ta theo dõi lại những lỗi xảy ra bên trong ứng dụng trong quá trình người dùng sử dụng. Thông thường khi lỗi xảy ra, người dùng sẽ có xu hướng tắt ứng dụng và mở lại chứ không report lại cho bên phía đội ngũ phát triển. Sentry sẽ tự động gửi report chi tiết về lỗi đó một cách tự động và nhanh chóng. Giúp cho người lập trình có thể nhanh chóng cập nhật bản vá sửa lỗi đó trước khi nhiều người dùng bị lỗi tương tự.
+				
+				Nhóm sẽ giới thiệu một số thư viện được áp dụng trong việc viết code phía client mà nhóm thấy nổi bật để trình bày:\\
+				
+				
+			
+			\subsubsection{Áp dụng sentry cho hệ thống giao hàng liên tỉnh}
+			 	Nhận thấy tác dụng hữu ích và đồng thời muốn học thêm những công nghệ đang thịnh hành ngoài thị trường. Nhóm chúng em đã thử áp dụng Sentry vào hệ thống giao hàng liên tỉnh này. Sau đây là một số kết quả mà nhóm đã thu được từ việc áp dụng Sentry:
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/sentry/sentry_dashboard.png}
+			 		\centering
+			 		\caption{Giao diện dashboard để xem những lỗi được gửi về}
+			 	\end{figure}
+		 	
+		 		Có thể thấy giao diện trên liệt kê ra những lỗi chưa được xử lý của ứng dụng khi người dùng tương tác. Ở giao diện dashboard đó ta có thể chọn một hoặc nhiều lỗi được gửi về và đánh dấu đã xử lí (Resolve) sau khi đã thực hiện bản vá sửa lỗi hoặc bỏ qua (Ignore) nếu như lỗi đó không cần phải giải quyết. Những lỗi đã được xử lí sẽ bị mất đi trong danh sách lỗi ở màn hình dashboard đó. \\
+		 		
+		 		Ngoài ra, khi click vào liên kết của một lỗi cụ thể. Sentry sẽ đưa ta đến một giao diện để xem một cách chi tiết thông tin về lỗi đó:
+		 		
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/sentry/sentry_detail_1.png}
+			 		\centering
+			 		\caption{Giao diện xem lỗi gửi về chi tiết (Nửa trên màn hình)}
+			 	\end{figure}
+		 	
+		 		\begin{figure}[H]
+		 			\includegraphics[width=0.8\textwidth]{/sentry/sentry_detail_2.png}
+		 			\centering
+		 			\caption{Giao diện xem lỗi gửi về chi tiết (Nửa dưới màn hình)}
+		 		\end{figure}
+			 	
+			 	Giao diện đó cung cấp cho người lập trình toàn bộ thông tin quan trọng để có thể bắt đầu việc debug và sửa lỗi. Có thể kể đến một số thông tin hữu ích như ngày xảy ra lỗi, trình duyệt web, địa chỉ IP, OS của người dùng. Không những thế, Sentry còn liệt kê cho ta chi tiết lỗi xảy ra ở đoạn mã lệnh nào giúp cho người lập trình dễ dàng phát hiện đoạn mã lỗi để sửa. Ở ví dụ cụ thể trong hình trên. Ta có thể thấy được lỗi xảy ra tại địa chỉ IP 42.116.148.203, trình duyệt web Chrome và hệ điều hành Linux. Đoạn lệnh lỗi cũng được chỉ ra nằm ở tập tin nào và nguyên nhân xảy ra lỗi. \\
+			 	
+			 	Tóm tắt lại, Sentry là một nền tảng rất phổ biến hiện nay giúp cho hệ thống chúng ta xây dựng có thể nhanh chóng phát hiện lỗi từ phía người dùng. Hầu như mọi dự án lớn đều đang sử dụng Sentry và hiệu quả nó mang lại là không phải bàn cãi.
+		
+	

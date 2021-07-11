@@ -1,0 +1,87 @@
+\chapter{Kiểm thử hệ thống}\label{chap:testing}
+		Kiếm thử phần mềm là một việc rất quan trọng trong quy trình phát triển phần mềm.
+        Để một hệ thống có thể đi vào hoạt động ổn định, các nhà phát triển cần kiểm tra tất
+        cả tính năng, các thành phần của hệ thống, mọi thứ phải hoạt động một cách trơn tru
+        mới có thể chuyển giao đến tay người sử dụng. Bất kỳ một lỗi nhỏ nào nếu không kiểm
+        tra kỹ càng cũng có thể để lại hậu quả về sau, làm cho hệ thống không đáng tin cậy và
+        không được sự hưởng ứng từ phía người dùng.
+        
+        Quy trình kiểm thử cần phải qua nhiều loại khác nhau: Unit test, Intergration test, System test, Acceptance test, Functional testing, Non Functional testing, End to end test... Hiện nay có rất nhiều thư viện kiểm thử hiệu quả và mạnh mẽ. Katalon Recorder là một extension dành cho chrome đã tích hợp tính năng kiểm thử vào trong nó để kiểm thử chức năng. Jmeter là công cụ để đo độ tải và performance của trang web và nhóm đã sử dụng K6 cloud platform có tích hợp jmeter để có thể kiểm thử phi chức năng cho trang web của nhóm.
+		\section{Kiểm thử API}
+		Đối với hệ thống nhóm xây dựng, các thành phần giao tiếp với nhau thông qua API. Vì vậy, cần phải kiểm thử riêng biệt các API trước khi tích hợp vào các bên. Nhóm chọn phần mềm Postman để kiểm thử các API.\\
+		
+		\textbf{API đăng nhập}
+		
+		Gọi API với postman
+		
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/postman/api_sign_in.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 10 users đồng thời}
+		\end{figure}
+		
+		\section{Kiểm thử chức năng}
+		    Vì tính chất nghiệp vụ có nhiều vai trò cũng như chức năng của các vai trò đó của trang web nên nhóm đã sử dụng Katalon Recorder để có thể kiểm thử tự động theo luồng các chức năng cơ bản của hệ thống.
+			
+		\section{Kiểm thử phi chức năng}
+		    Kiểm thử phi chức năng (Non-functional testing) là kiểm tra một ứng dụng hoặc hệ thống phần mềm cho các yêu cầu phi chức năng của nó: cách thức hoạt động của một hệ thống, thay vì các hành vi cụ thể của hệ thống đó. Có rất nhiều loại kiểm thử phi chức năng như: performance test, baseline test, stress test... Đối với hệ thống của nhóm, nhóm sẽ tiến hành kiểm thử tải (load test). Kiểm tra tải là loại kiểm thử đề cập đến việc mô hình hóa sử dụng dự kiến của một hệ thống bằng cách mô phỏng nhiều người dùng truy cập hệ thống đồng thời.
+		    
+		    Nhóm sẽ sử dụng K6 cloud platform để tiến hành xây dựng kiểm thử với API đăng nhập:
+		    https://auth-management-staging.osc-fr1.scalingo.io/api/auth/sign-in
+		    
+		Hình ảnh kiểm thử:
+        
+        \begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/testing/testing_10.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 10 users đồng thời}
+		\end{figure}
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/testing/testing_20.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 20 users đồng thời}
+		\end{figure}
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/testing/testing_30.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 30 users đồng thời}
+		\end{figure}
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/testing/testing_40.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 40 users đồng thời}
+		\end{figure}
+		\begin{figure}[!ht]
+			\includegraphics[width=0.5\textwidth]{Images/testing/testing_50.png}
+			\centering
+			\linebreak
+			\caption{Kiểm thử với 50 users đồng thời}
+		\end{figure}
+		    Kết quả kiểm thử được thống kế trong bảng sau:
+		    
+        \begin{center}
+        \begin{table}[!htp]
+        \begin{tabular}{|c|c|c|c|c|c|}
+        \hline 
+        Concurrent users & Duration & Requets Made & Peak RPS & Avg Response Time & Http Failures\\ 
+        \hline 
+        10 & 1m 30s & 389 & 9.67 reqs/s & 266 ms & 0 reqs\\ 
+        \hline
+        20 & 1m 30s & 773 &  16.67 reqs/s & 256 ms & 0 reqs\\
+        \hline 
+        30 & 1m 30s & 1163 & 25 reqs/s & 255 ms & 0 reqs\\
+        \hline
+        40 & 1m 30s & 1554 & 32.67 reqs/s & 250 ms & 0 reqs\\
+        \hline
+        50 & 1m 30s & 1930 & 42.33 reqs/s & 260 ms & 0 reqs\\
+        \hline
+        \end{tabular}
+        \caption{Kết quả kiểm thử}
+        \end{table}
+        \end{center}
+        Nhìn vào bảng số liệu trên, ta thấy được hệ thống hoạt động ổn định với 50 user truy cập đồng thời cùng với số lượng request là 1930 mà không xảy ra lỗi. Bước đầu hệ thống có những kết quả tương đối tốt, nhưng sẽ cần phải có những cải thiện hơn nữa cũng như kiểm thử  hệ thống với nhiều user hơn để có thể mở rộng hệ thống.

@@ -1,0 +1,137 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Luồng cơ bản giao nhận hàng hóa\relax }}{2}{figure.caption.1}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Lược đồ ERD\relax }}{3}{figure.caption.2}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sơ đồ Use case\relax }}{5}{figure.caption.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Giao diện tạo đơn hàng (dự kiến)\relax }}{7}{figure.caption.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Giao diện xem danh sách các đơn hàng (dự kiến)\relax }}{8}{figure.caption.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Giao diện theo dõi tình trạng đơn hàng (dự kiến)\relax }}{9}{figure.caption.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Wireframe list các kiện hàng cần lấy của tài xế (dự kiến)\relax }}{9}{figure.caption.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wireframe miêu tả qui trình xác nhận thông tin sai sót\relax }}{10}{figure.caption.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Wireframe xem danh sách hàng trong kho của thủ kho\relax }}{12}{figure.caption.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Wireframe xác nhận kiện hàng vào kho\relax }}{13}{figure.caption.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Wireframe xác nhận đơn hàng vào kho\relax }}{13}{figure.caption.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Ví dụ mail thông báo dự kiến khi đơn hàng chuyển trạng thái\relax }}{14}{figure.caption.12}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Luồng dữ liệu của các trang web MPA truyền thống\relax }}{16}{figure.caption.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Luồng dữ liệu của các trang web SPA\relax }}{16}{figure.caption.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces ReactJS và những lợi ích khi sử dụng\relax }}{16}{figure.caption.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces TypeScript là phiên bản mở rộng của JS có hỗ trợ kiểm tra kiểu tĩnh\relax }}{17}{figure.caption.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Gitlab CICD\relax }}{18}{figure.caption.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Giao diện dashboard để xem những lỗi được gửi về\relax }}{20}{figure.caption.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Giao diện xem lỗi gửi về chi tiết (Nửa trên màn hình)\relax }}{20}{figure.caption.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Giao diện xem lỗi gửi về chi tiết (Nửa dưới màn hình)\relax }}{21}{figure.caption.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Mô hình Microservices\relax }}{25}{figure.caption.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Mô hình services\relax }}{25}{figure.caption.22}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Công nghệ sử dụng\relax }}{27}{figure.caption.23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Canvas\relax }}{31}{figure.caption.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Dev Tool\relax }}{32}{figure.caption.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces gRPC\relax }}{34}{figure.caption.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Active MQ\relax }}{39}{figure.caption.27}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Point-to-point\relax }}{40}{figure.caption.28}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Publisher-Subcriber\relax }}{40}{figure.caption.29}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Vai trò Kafka\relax }}{42}{figure.caption.30}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Communicate giữa các hệ thống\relax }}{42}{figure.caption.31}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Cấu trúc Kafka\relax }}{43}{figure.caption.32}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Kiểm thử với 10 users đồng thời\relax }}{45}{figure.caption.33}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Kiểm thử với 10 users đồng thời\relax }}{45}{figure.caption.34}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Kiểm thử với 20 users đồng thời\relax }}{46}{figure.caption.35}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Kiểm thử với 30 users đồng thời\relax }}{46}{figure.caption.36}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Kiểm thử với 40 users đồng thời\relax }}{46}{figure.caption.37}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Kiểm thử với 50 users đồng thời\relax }}{47}{figure.caption.38}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Giao diện đăng kí dành cho người muốn gửi đơn hàng\relax }}{48}{figure.caption.40}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Giao diện đăng nhập dành cho actor của hệ thống\relax }}{49}{figure.caption.41}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Giao diện điền thông tin để lên yêu cầu gửi hàng\relax }}{49}{figure.caption.42}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Thông tin xác nhận yêu cầu muốn tạo\relax }}{50}{figure.caption.43}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Giao diện list yêu cầu của người gửi (Rỗng)\relax }}{50}{figure.caption.44}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Giao diện list yêu cầu của người gửi (Có yêu cầu)\relax }}{51}{figure.caption.45}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Giao diện xem danh sách các đơn hàng nhỏ được tách từ yêu cầu\relax }}{51}{figure.caption.46}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Giao diện chỉnh sửa thông tin của người gửi\relax }}{52}{figure.caption.47}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Giao diện tìm những yêu cầu được gán\relax }}{52}{figure.caption.48}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Giao diện xác nhận lại thông tin yêu cầu muốn nhận\relax }}{53}{figure.caption.49}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Giao diện xem thông tin đơn hàng đang đến lấy\relax }}{53}{figure.caption.50}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Giao diện xác nhận lại thông tin đơn hàng đang muốn nhận\relax }}{54}{figure.caption.51}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Giao diện xem thông tin các đơn hàng đang ở trong xe\relax }}{54}{figure.caption.52}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Giao diện báo cáo vấn đề ghi gặp sự cố\relax }}{55}{figure.caption.53}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Giao diện xem lịch sử giao nhận hàng\relax }}{55}{figure.caption.54}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Giao diện nhập ID của tài xế để nhập các đơn hàng trong xe tài xế vào kho\relax }}{56}{figure.caption.55}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Xác nhận nhập hàng vào kho\relax }}{56}{figure.caption.56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Nhập hàng thành công và cho thủ kho có thể tài phiếu nhập kho\relax }}{57}{figure.caption.57}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Danh sách các đơn hàng trong kho\relax }}{57}{figure.caption.58}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Lịch sử nhập/xuất kho\relax }}{58}{figure.caption.59}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Thông tin chi tiết của một lần nhập/xuất đơn hàng (Cho phép tải pdf về)\relax }}{58}{figure.caption.60}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Format mẫu của 1 đơn nhập/xuất kho\relax }}{59}{figure.caption.61}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Nhập ID của khách hàng để nhập đơn vào kho\relax }}{59}{figure.caption.62}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Cho phép nhập khối lượng mà khách muốn nhập vào kho\relax }}{60}{figure.caption.63}%

@@ -1,0 +1,107 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Tổng quan và mô tả nghiệp vụ}{1}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Lược đồ ERD}{3}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Sơ đồ Use case}{4}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Đặc tả Use case}{5}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}Trạng thái đơn hàng}{5}{subsection.3.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}Người gửi}{6}{subsection.3.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.3}Người nhận}{8}{subsection.3.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.4}Tài xế nội tỉnh đi lấy}{8}{subsection.3.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.5}Tài xế nội tỉnh đi giao}{10}{subsection.3.1.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.6}Tài xế liên tỉnh}{10}{subsection.3.1.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.7}Hê thống phân phối}{10}{subsection.3.1.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.8}Quản lí}{11}{subsection.3.1.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.9}Thủ kho}{11}{subsection.3.1.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.10}Hệ thống thông báo}{14}{subsection.3.1.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Công nghệ sử dụng}{15}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Front-end}{15}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.1}SPA}{15}{subsection.4.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}ReactJS}{15}{subsection.4.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.3}Continuous integration / Continuous deployment (CI/CD)}{17}{subsection.4.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.4}Những thư viện nổi bật giúp hiện thực chức năng hệ thống}{18}{subsection.4.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.5}Giám sát lỗi hệ thống bằng dịch vụ Sentry}{19}{subsection.4.1.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Giới thiệu về Sentry}{19}{subsection.4.1.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Áp dụng sentry cho hệ thống giao hàng liên tỉnh}{19}{subsection.4.1.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Back-end}{21}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}Giới thiệu kiến trúc Microservices}{21}{subsection.4.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Kiến trúc Microservicces}{23}{subsection.4.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.3}Công nghệ tổng quan}{27}{subsection.4.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.4}Kiến trúc RESTful API}{32}{subsection.4.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.5}Công nghệ gRPC}{33}{subsection.4.2.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.6}MySQL}{35}{subsection.4.2.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.7}Cassandra}{35}{subsection.4.2.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.8}Redis}{37}{subsection.4.2.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.9}ActiveMQ}{38}{subsection.4.2.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.10}Kafka}{41}{subsection.4.2.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Kiểm thử hệ thống}{44}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Kiểm thử API}{44}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Kiểm thử chức năng}{44}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Kiểm thử phi chức năng}{45}{section.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Kết quả hiện thực}{48}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Chức năng đăng nhập, đăng kí}{48}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1.1}Đăng kí}{48}{subsection.6.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1.2}Đăng nhập}{49}{subsection.6.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Chức năng dành cho người gửi}{49}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.1}Lên yêu cầu gửi hàng}{49}{subsection.6.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.2}Xem danh sách yêu cầu đã tạo}{50}{subsection.6.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.3}Xem danh sách các đơn hàng nhỏ được tách từ yêu cầu}{51}{subsection.6.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.4}Chỉnh sửa thông tin của người gửi}{52}{subsection.6.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Chức năng dành cho tài xế}{52}{section.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.1}Tìm những yêu cầu được gán}{52}{subsection.6.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.2}Xem thông tin đơn hàng đang đến lấy}{53}{subsection.6.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.3}Xem thông tin các đơn hàng đang ở trong xe}{54}{subsection.6.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.4}Xem lịch sử giao nhận hàng}{55}{subsection.6.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Chức năng dành cho thủ kho}{56}{section.6.4}%

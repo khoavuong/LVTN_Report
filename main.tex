@@ -1,0 +1,312 @@
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[top=3.5cm,bottom=4cm,left=3cm,right=2cm]{geometry}
+\usepackage{graphicx}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\graphicspath{ {./Images/} }
+\usepackage{lipsum}
+\usepackage{titlesec}
+\usepackage{lmodern}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{calc,shapes.geometric,arrows,shapes.misc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\righttab[1][3.5cm]{\hspace*{#1}}
+\newcommand\tab[1][0.25cm]{\hspace*{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% \fancyhead{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\ifnum\value{chapter}>0 Chương \thechapter \fi}
+\fancyhead[RE]{\chaptername}
+% \fancyhead[R]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{apacite}
+% \addbibresource{ref.bib}
+\usepackage{biblatex}
+\addbibresource{ref.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multicol}
+\usepackage{multirow}
+\setlength{\columnsep}{1cm}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{array}
+
+%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+\usepackage[Bjornstrup]{fncychap}
+
+% For vietnamese typing
+\usepackage{vntex}
+
+% For url link reference
+% \usepackage{hyperref}
+
+% For chapter name reference
+\usepackage{nameref}
+
+% For code block inserting
+\usepackage{listings}
+\usepackage{xcolor}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1,1,1}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+% Support javascript listing
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+% openresty language
+\lstdefinelanguage{OpenResty}{
+  keywords={http, server, listen, server_name, location, resolver, set, rewrite_by_lua_block, proxy_pass, error_page, root, modsecurity, modsecurity_rules_file, worker_processes, error_log, events, worker_connections, default_type, content_by_lua_block, load_module, proxy_set_header},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={ngx, local, if, else, elseif, then, end, return},
+  ndkeywordstyle=\color{codepurple}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{codegreen}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  moredelim=*[s][\color{codepurple}]{\$}{\ },
+}
+
+% docker
+\lstdefinelanguage{docker}{
+  keywords={FROM, RUN, COPY, ADD, ENTRYPOINT, CMD,  ENV, ARG, WORKDIR, EXPOSE, LABEL, USER, VOLUME, STOPSIGNAL, ONBUILD, MAINTAINER},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% docker-compose
+\lstdefinelanguage{docker-compose}{
+  keywords={image, environment, ports, container_name, ports, volumes, links},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinelanguage{docker-compose-2}{
+  keywords={version, volumes, services},
+  keywordstyle=\color{blue}\bfseries,
+  keywords=[2]{image, environment, ports, container_name, ports, links, build},
+  keywordstyle=[2]\color{olive}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% javascript language
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, async, await, let},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={document, page, process},
+  ndkeywordstyle=\color{codepurple}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% docker
+\lstdefinelanguage{Lua}{
+  keywords={local, require},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{--},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+% json language
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\footnotesize\ttfamily,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    string=[s]{"}{"},
+    stringstyle=\color{black},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+% none language
+\lstdefinelanguage{none}{
+  identifierstyle=,
+  commentstyle=
+}
+
+\lstset{style=mystyle}
+
+% count number of chapter
+\usepackage{totcount}
+\regtotcounter{chapter}
+
+% align footnote to bottom
+\usepackage[bottom]{footmisc}
+
+% indent first paragraph
+\usepackage{indentfirst}
+% unbreak url link
+
+% highlight color in lstlisting
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.80}
+
+% change caption size
+\usepackage[font=small,labelfont=bf]{caption}
+
+% highlight text
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+% scale table vertically
+\usepackage{adjustbox}
+
+\begin{document}
+	\frontmatter
+	\input{titlepage.tex}
+	
+	\input{abstract.tex}
+
+	\tableofcontents
+	\listoffigures
+	\newpage
+	
+	\mainmatter
+	
+	\input{introduction.tex}
+	\input{ERD.tex}
+	\input{UC.tex}
+    \input{Tech.tex}
+    \input{testing.tex}
+    \input{result.tex}
+    
+    \begin{thebibliography}{80}
+        \bibitem{} ReactJS - xem 05/10/2020\\
+        \url{https://reactjs.org/}
+        
+        \bibitem{} GHN - xem 05/10/2020\\
+        \url{https://ghn.vn/}
+    
+        \bibitem{} SPA vs MPA - xem 05/10/2020\\
+        \url{https://www.mindk.com/blog/single-page-applications-the-definitive-guide/}
+    
+        \bibitem{} ReactJS benefits - xem 27/10/2020\\
+        \url{https://www.cloudways.com/blog/why-reactjs-for-front-end/}
+    
+        \bibitem{} Gitlab CICD - xem 27/10/2020\\
+        \url{https://git.metabarcoding.org/help/ci/README.md}    
+        
+        \bibitem{} Kiến trúc Microservices - xem 27/11/2020\\
+        \url{https://callistaenterprise.se/}
+        
+        \bibitem{} Kafka - xem 27/11/2020\\
+        \url{https://viblo.asia/p/kafka-la-gi-gDVK2Q7A5Lj}
+        
+        \bibitem{} MySQL - xem 27/11/2020\\
+        \url{https://bizflycloud.vn/tin-tuc/mysql-la-gi-tai-sao-nen-su-dung-mysql-20200917180705499.htm}
+        
+        \bibitem{} Redis - xem 27/11/2020\\
+        \url{https://www.hnammobilecare.com/blog/tu-van/redis-la-gi-vi-sao-redis-tro-thanh-lua-chon-hang-dau-cua-developer.583.html}
+        
+        \bibitem{} Cassandra - xem 27/11/2020\\
+        \url{https://viblo.asia/p/tim-hieu-ve-cassandra-cassandra-la-gi-3P0lPzJoKox}
+        
+        \bibitem{} Message Queue - xem 27/11/2020\\
+        \url{https://viblo.asia/p/microservice-tai-sao-lai-su-dung-message-queue-maGK734AKj2}
+        
+        
+    \end{thebibliography}
+
+\end{document}
+
