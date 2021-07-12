@@ -102,5 +102,35 @@
 			 	Giao diện đó cung cấp cho người lập trình toàn bộ thông tin quan trọng để có thể bắt đầu việc debug và sửa lỗi. Có thể kể đến một số thông tin hữu ích như ngày xảy ra lỗi, trình duyệt web, địa chỉ IP, OS của người dùng. Không những thế, Sentry còn liệt kê cho ta chi tiết lỗi xảy ra ở đoạn mã lệnh nào giúp cho người lập trình dễ dàng phát hiện đoạn mã lỗi để sửa. Ở ví dụ cụ thể trong hình trên. Ta có thể thấy được lỗi xảy ra tại địa chỉ IP 42.116.148.203, trình duyệt web Chrome và hệ điều hành Linux. Đoạn lệnh lỗi cũng được chỉ ra nằm ở tập tin nào và nguyên nhân xảy ra lỗi. \\
 			 	
 			 	Tóm tắt lại, Sentry là một nền tảng rất phổ biến hiện nay giúp cho hệ thống chúng ta xây dựng có thể nhanh chóng phát hiện lỗi từ phía người dùng. Hầu như mọi dự án lớn đều đang sử dụng Sentry và hiệu quả nó mang lại là không phải bàn cãi.
-		
-	
+			 	
+			\subsection{Phân tích số lượng và hành vi người dùng với Google Analytics}
+				Một website không chỉ cần có hệ thống giám sát lỗi không mong muốn từ người dùng mà cũng cần phải có một hệ thống dùng để thống kê, theo dõi lưu lượng truy cập và những tương tác của người dùng với trang web. Từ đó đội ngũ phát triển có thể đưa ra những quyết định và những bản cập nhật để phục vụ nhu cầu người dùng tốt hơn. Cũng tương tự như trên, thay vì phải tốn thời gian và công sức xây dựng hệ thống đó thì nhóm cũng quyết định sử dụng một dịch vụ thống kê rất phổ biến và được ưa chuộng hiện nay: Google Analytics. Đây là một dịch vụ được cung cấp miễn phí bởi Google.
+				
+				\subsubsection{Áp dụng Google Analytics vào hệ thống}
+					Nhận thấy đây là công nghệ rất phổ biến và hữu dụng. Nhóm đã quyết định sử dụng Google Analytics vào để có thể xem được chi tiết những thống kê người dùng truy cập đến trang web. Đây cũng là một cơ hội để học hỏi thêm một công nghệ mới được sử dụng bởi nhiều doanh nghiệp.\\
+				
+					Sau đây là một số tính năng theo dõi và thống kê thời gian thực của người dùng của website do Google Analytics đã thu thập:
+					
+					\begin{figure}[H]
+						\includegraphics[width=0.8\textwidth]{/GA/GA_overview.png}
+						\centering
+						\caption{Màn hình thống kê thời gian thực tổng quan}
+					\end{figure}
+				
+					\begin{figure}[H]
+						\includegraphics[width=0.8\textwidth]{/GA/GA_location.png}
+						\centering
+						\caption{Màn hình thống kê thời gian thực theo địa lý}
+					\end{figure}
+				
+					\begin{figure}[H]
+						\includegraphics[width=0.8\textwidth]{/GA/GA_events.png}
+						\centering
+						\caption{Màn hình thống kê thời gian thực theo sự kiện}
+					\end{figure}
+				
+					Ở các màn hình kể trên, ta đều có thể thấy số lượng người dùng đang truy cập website hiện tại (Ở ví dụ trong hình là 2). Google Analytics cũng giúp chúng ta thống kê người truy cập là ở những nước nào (Ví dụ trong hình là ở Việt Nam) và thống kê những tác vụ mà người dùng thực hiện (Ở ví dụ trong hình ta có thể thấy có 2 tác vụ là người dùng đăng nhập và người dùng tạo yêu cầu gửi hàng). Nhờ những thống kê trên mà đội ngũ phát triển hệ thống có thể đưa ra những quyết định phát triển cho tương lai phù hợp hơn.
+				
+			\subsection{Front-end Unit testing}
+				Trong quá trình xây dựng phần mềm thì việc đảm bảo chất lượng và qui trình kiểm thử phần mềm cũng là một công đoạn rất quan trọng. Không có phần mềm nào là không có lỗi. Chính vì vậy, việc kiểm thử phần mềm giúp hạn chế tối đa lỗi trước khi đưa phần mềm cho khách hàng.
+				
