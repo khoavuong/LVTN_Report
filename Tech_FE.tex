@@ -102,5 +102,82 @@
 			 	Giao diện đó cung cấp cho người lập trình toàn bộ thông tin quan trọng để có thể bắt đầu việc debug và sửa lỗi. Có thể kể đến một số thông tin hữu ích như ngày xảy ra lỗi, trình duyệt web, địa chỉ IP, OS của người dùng. Không những thế, Sentry còn liệt kê cho ta chi tiết lỗi xảy ra ở đoạn mã lệnh nào giúp cho người lập trình dễ dàng phát hiện đoạn mã lỗi để sửa. Ở ví dụ cụ thể trong hình trên. Ta có thể thấy được lỗi xảy ra tại địa chỉ IP 42.116.148.203, trình duyệt web Chrome và hệ điều hành Linux. Đoạn lệnh lỗi cũng được chỉ ra nằm ở tập tin nào và nguyên nhân xảy ra lỗi. \\
 			 	
 			 	Tóm tắt lại, Sentry là một nền tảng rất phổ biến hiện nay giúp cho hệ thống chúng ta xây dựng có thể nhanh chóng phát hiện lỗi từ phía người dùng. Hầu như mọi dự án lớn đều đang sử dụng Sentry và hiệu quả nó mang lại là không phải bàn cãi.
+			 	
+			 	\subsection{Phân tích số lượng và hành vi người dùng với Google Analytics}
+			 	Một website không chỉ cần có hệ thống giám sát lỗi không mong muốn từ người dùng mà cũng cần phải có một hệ thống dùng để thống kê, theo dõi lưu lượng truy cập và những tương tác của người dùng với trang web. Từ đó đội ngũ phát triển có thể đưa ra những quyết định và những bản cập nhật để phục vụ nhu cầu người dùng tốt hơn. Cũng tương tự như trên, thay vì phải tốn thời gian và công sức xây dựng hệ thống đó thì nhóm cũng quyết định sử dụng một dịch vụ thống kê rất phổ biến và được ưa chuộng hiện nay: Google Analytics. Đây là một dịch vụ được cung cấp miễn phí bởi Google.
+			 	
+			 	\subsubsection{Áp dụng Google Analytics vào hệ thống}
+			 	Nhận thấy đây là công nghệ rất phổ biến và hữu dụng. Nhóm đã quyết định sử dụng Google Analytics vào để có thể xem được chi tiết những thống kê người dùng truy cập đến trang web. Đây cũng là một cơ hội để học hỏi thêm một công nghệ mới được sử dụng bởi nhiều doanh nghiệp.\\
+			 	
+			 	Sau đây là một số tính năng theo dõi và thống kê thời gian thực của người dùng của website do Google Analytics đã thu thập:
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/GA/GA_overview.png}
+			 		\centering
+			 		\caption{Màn hình thống kê thời gian thực tổng quan}
+			 	\end{figure}
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/GA/GA_location.png}
+			 		\centering
+			 		\caption{Màn hình thống kê thời gian thực theo địa lý}
+			 	\end{figure}
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/GA/GA_events.png}
+			 		\centering
+			 		\caption{Màn hình thống kê thời gian thực theo sự kiện}
+			 	\end{figure}
+			 	
+			 	Ở các màn hình kể trên, ta đều có thể thấy số lượng người dùng đang truy cập website hiện tại (Ở ví dụ trong hình là 2). Google Analytics cũng giúp chúng ta thống kê người truy cập là ở những nước nào (Ví dụ trong hình là ở Việt Nam) và thống kê những tác vụ mà người dùng thực hiện (Ở ví dụ trong hình ta có thể thấy có 2 tác vụ là người dùng đăng nhập và người dùng tạo yêu cầu gửi hàng). Nhờ những thống kê trên mà đội ngũ phát triển hệ thống có thể đưa ra những quyết định phát triển cho tương lai phù hợp hơn.
+			 	
+			 	\subsection{Front-end Unit testing}
+			 	Trong quá trình xây dựng phần mềm thì việc đảm bảo chất lượng và qui trình kiểm thử phần mềm cũng là một công đoạn rất quan trọng. Không có phần mềm nào là không có lỗi. Chính vì vậy, việc kiểm thử phần mềm giúp hạn chế tối đa lỗi trước khi đưa phần mềm cho khách hàng. Đương nhiên, ngoài đội ngũ xây dựng và phát triển phần mềm cũng cần một đội ngũ tester đảm bảo chất lượng sản phẩm. Tuy vậy, không có nghĩa là lập trình viên chỉ việc viết mã nguồn mà không phải thực hiện kiểm thử phần mềm. Lập trình viên ít nhất cũng nên viết kiểm thử đơn vị (Unit Test) để đảm bảo module mình viết ra ít lỗi nhất có thể và khi có sự thay đổi trong tương lai thì đảm bảo không gây lỗi cho các thành phần cũ của phần mềm.
+			 	
+			 	\subsubsection{Khái niệm về Unit Test}
+			 	Unit Test là một loại kiểm thử phần mềm trong đó các đơn vị hay thành phần riêng lẻ của phần mềm được kiểm thử. Kiểm thử đơn vị được thực hiện trong quá trình phát triển ứng dụng. Mục tiêu của Kiểm thử đơn vị là cô lập một phần code và xác minh tính chính xác của đơn vị đó.
+			 	
+			 	\subsubsection{Lợi ích và đánh đổi của Unit Test}
+			 	Thông thường, ở một vài qui trình phát triển phần mềm, đội ngũ kiểm thử phần mềm sẽ yêu cầu lập trình viên phải thực hiện Sanity Test (Kiểm thử sơ bộ) để chắc chắn rằng những những chức năng chính của phần mềm hoạt động ổn định. Mỗi lần sanity test thường có từ vài chục cho đến vài trăm test case và những test case đó có thể xuất hiện lại sau mỗi bản cập nhật phần mềm. Việc phải kiểm đi kiểm lại những test case đó là điều cần thiết, tuy vậy nó khá tốn thời gian và nhàm chán. Chính vì vậy, nếu có thể viết unit test cho những test case đơn giản đó một cách tự động thì sẽ tiết kiệm được rất nhiều thời gian và đảm bảo tính chính xác nếu unit test của người lập trình viết ra có chất lượng tốt. Không những vậy, việc viết unit test sẽ giúp cho người lập trình cảm thấy tự tin hơn mỗi khi xây dựng một module mới hay chỉnh sửa module cũ. Nhờ vào những test case đã viết sẵn đó mà ta có thể chắc chắn sẽ không có lỗi liên quan xảy ra.\\
+			 	
+			 	Tuy rằng việc viết unit test có rất nhiều lợi ích nhưng có cũng những đánh đổi sau:
+			 	\begin{itemize}
+			 		\item Tốn thời gian và tương đối khó khăn. Viết test tuy giảm bớt thời gian và công sức cho giai đoạn duy trì (maintain) phần mềm nhưng sẽ làm mất thời gian lúc đầu để viết một unit test tốt.
+			 		\item Test pass không có nghĩa ứng dụng, function của chúng ta chạy đúng hoàn toàn.
+			 		\item Cũng đôi khi, test fail, nhưng ứng dụng, function vẫn chạy hoàn toàn bình thường. Việc viết test không tốt như vậy sẽ còn nguy hiểm hơn do nó tạo cho người lập trình một suy nghĩ rằng phần mềm viết ra không có lỗi, trong khi thực sự thì có.
+			 	\end{itemize}
+			 	
+			 	\subsubsection{Viết unit test cho client-side code của hệ thống}
+			 	Có thể hiểu nôm na, viết unit test cho Front-end thì ngoài viết test cho những hàm tính toán, ta còn có thể viết test để kiểm thử giao diện và hành vi khi một số sự kiện người dùng xảy ra. Chẳng hạn sau đây là một số thứ ta có thể kiểm thử ở client-side code:
+			 	
+			 	\begin{itemize}
+			 		\item Kiểm thử xem một node trong cây DOM có xuất hiện (tồn tại) trong giao diện sau khi đã render component hay chưa. Chẳng hạn kiểm thử xem giao diện đăng nhập có tồn tại một nút với dòng chữ là "Đăng nhập" hay không. Hay nút đó có được áp dụng đúng class hay không để có style css đúng như mong muốn.
+			 		\item Kiểm thử xem sau khi người dùng đã nhập đủ thông tin đăng nhập và ấn nút đăng nhập, người dùng có chuyển đến trang màn hình chính hay không.
+			 		\item Chẳng hạn giao diện ta có một carousel có yêu cầu cứ mỗi 2 giây sẽ chuyển sang hình kế tiếp. Ta có thể viết unit test để kiểm chứng điều đó.
+			 	\end{itemize}
+			 	
+			 	Trên đây chỉ là một số ví dụ về những chức năng ta có thể thực hiện bằng việc viết unit test cho front-end code của ứng dụng.\\
+			 	
+			 	Nhóm sẽ ví dụ 2 test case đơn giản mà nhóm đã viết để demo việc áp dụng việc viết unit test vào hệ thống. Nhóm sẽ dùng 2 thư viện hỗ trợ cho việc viết test cho những component của React khá phổ biến hiện nay: \textbf{Jest} và \textbf{React Testing Library}. 2 test case đơn giản mà nhóm sẽ viết sẽ như nhau:
+			 	
+			 	\begin{itemize}
+			 		\item Kiểm thử xem component để hiển thị khi data rỗng có dòng chữ \textbf{Không có dữ liệu hiển thị} tồn tại trong giao diện nếu component được render hay không.
+			 		\item Kiểm thử xem component hiển thị data rỗng đó có hiển thị hình ảnh đi kèm mong muốn hay không.
+			 	\end{itemize}
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/FE_unit_test/code.png}
+			 		\centering
+			 		\caption{Đoạn mã hiện thực}
+			 	\end{figure}
+			 	
+			 	\begin{figure}[H]
+			 		\includegraphics[width=0.8\textwidth]{/FE_unit_test/result.png}
+			 		\centering
+			 		\caption{Kết quả chạy 2 test case}
+			 	\end{figure}s
+			 	
+			 	\subsection{Tổng kết}
+			 	Trên đây là những công nghệ nhóm đã dùng để hiện thực tương đối hoàn chỉnh phần front-end của hệ thống. Một hệ thống Front-end hoàn chỉnh không những chỉ cần những thành phần để hệ thống có thể chạy được mà cần phải có hệ thống track lỗi, thống kê truy cập vào website và đảm bảo lỗi thông qua unit test.
 		
 	
