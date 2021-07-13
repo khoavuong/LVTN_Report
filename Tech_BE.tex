@@ -56,50 +56,8 @@
 			\linebreak
 			\caption{Mô hình Microservices}
 		\end{figure}
-		Các services dự kiến hệ thống của nhóm\\\\
-		\begin{figure}[!ht]
-			\includegraphics[width=0.8\textwidth]{Images/architecture.png}
-			\centering
-			\linebreak
-			\caption{Mô hình services}
-		\end{figure}\\
-		\begin{itemize}
-			\item \textbf{User Management}
-			\begin{itemize}
-				\item Service chịu trách nhiệm quản lý user trong hệ thống. Ở đây sẽ lưu trữ Database của user
-				\item Mỗi khi user login vào hệ thống thì sẽ vào Service này để authen: Ban đầu user được yêu cầu sẽ nhập username và password, Sau khi authen là đúng user đó thì hệ thống sẽ sinh ra JWT (Json Web Token) để gửi trả về cho user. Sau này cứ mỗi request lên hệ thống thì user sẽ gửi kèm theo JWT để hệ thống có thể authen và author.
-				\item User có thể get thông tin để có thể xem và chỉnh sửa
-			\end{itemize}
-			\item \textbf{Order Management}
-			\begin{itemize}
-				\item Service chịu trách nhiệm tạo Order cho user. Ở đây sẽ lưu trữ database về order.
-				\item Mỗi khi có request lên thì service đi authen sau đó gọi qua service Calculator Fee để tính toán các chi phí rồi lưu Order đó vào DB với trạng thái là “Đơn nháp”. Sau đó sẽ gửi thông tin về Order cho user xác nhận. Sau khi nhận được request xác nhận của user thì trạng thái của đơn hàng chuyển thành “Chờ bàn giao”.
-			\end{itemize}
-			\item \textbf{Distribution Order}
-			\begin{itemize}
-				\item Service chịu trách nhiệm chia nhỏ các đơn hàng theo từng mặt hàng và chạy giải thuật để phân phối các đơn hàng cho tài xế.
-				\item Ở đây lưu trữ Database về thông tin của đơn hàng sau khi được chia nhỏ thành các mặt hàng.
-			\end{itemize}
-			\item \textbf{Notify}
-			\begin{itemize}
-				\item Service chịu trách nhiệm quản lý các thông báo.
-				\item Mobile/Web Backend sẽ liên tục gọi API getNotify để thông báo cho các user mỗi khi cần xác nhận bàn giao hàng
-				\item Ngoài ra mỗi khi trạng thái đơn hàng thay đổi thì hê thống sẽ tự động gửi mail thông báo cho các user
-			\end{itemize}
-			\item \textbf{Calculator Fee}
-			\begin{itemize}
-				\item Service chịu trách nhiệm tính toán các khoản phí phát sinh
-				\item Database lưu thông tin về phí của mỗi đơn hàng để các user có thể đối soát
-			\end{itemize}
-			\item \textbf{Payment}
-			\begin{itemize}
-				\item Service này sẽ liên kết với 1 bên thứ 3 như: ngân hàng, ví điện từ, .... để thực hiện chức năng thanh toán cho các user
-			\end{itemize}
-			\item \textbf{Data}
-			\begin{itemize}
-				\item Các service khác sẽ gửi data qua service này phục vụ cho việc tạo dashboard thống kê các hoạt động theo tuần, tháng, năm. Ngoài ra còn cung cấp data để team dev có thể monitor các service khác hoạt động như thế nào.
-			\end{itemize}
-		\end{itemize}
+	
+		
 		\newpage
 		\subsection{Công nghệ tổng quan}
 		Bảng bên dưới là công nghệ dự tính thực hiện của nhóm:
@@ -216,41 +174,7 @@
 	        \begin{itemize}
 	            \item REST Chỉ hoạt động trên các giao thức HTTP.
 	        \end{itemize}
-	        \subsection{Công nghệ gRPC}
-		    
-		    gRPC có thể được xem là một giao thức request và response thông thường tuy nhiên nó được dùng cho việc giao tiếp giữa các server với nhau (server-server) nhiều hơn là client-server. Việc này có ý nghĩa rất quan trọng vì trong các hệ thống phân tán, request sẽ được xử lý bởi nhiều server hơn là một server. Ví dụ thường thấy nhất chính là kiến trúc Microservices.
-		    
-		    Thông thường mỗi khi có request từ client, thì request đó có thể được xử lý bởi nhiều server khác nhau thì mới trả kết quả về cho client. Chính sự giao tiếp giữa các server có thể làm tăng thời gian xử lý của request đó. Chính điều này thúc đẩy sự ra đời của gRPC nhằm tăng hiệu suất giao tiếp giữa các server với nhau.
-		    
-		    gRPC sử dụng Protocol Buffer và giao thức HTTP/2 để transfer data thay vì JSON/XML và giao thức HTTP/1.1 truyền thống nên tốc độ được gia tăng đáng kể.
-		    \newpage
-    	    \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/gRPC.jpg}
-    		\centering
-    		\linebreak
-    		\caption{gRPC}
-	        \end{figure}
-		    
-		    Cách hoạt động: Ở phía server sẽ hiện thực cách xử lý method mà nó cung cấp, sau đó ở phía client chỉ việc gửi các tham số cùng với tên method muốn gọi. Sau khi nhận được request phía server sẽ dựa trên các tham số và tên method để thực thi. Sau khi có kết quả thì server sẽ trả về cho client.
-		    
-		    Ưu điểm
-		    
-		    \begin{itemize}
-		        \item Dựa trên file protobuf thì dữ liệu sẽ được serialize ra dạng binary nên tốc độ truyền đi trong mạng rất nhanh.
-		        \item Sử dụng HTTP/2 giúp tận dụng tối đa băng thông, giúp client trải nghiệm sản phẩm tốt hơn.
-		    \end{itemize}
-		    
-		    Nhược điểm
-		    
-		    \begin{itemize}
-		        \item Chưa được hỗ trợ toàn diện
-		        \item Khó hiện thực
-		        \item Dữ liệu ở dạng binary nên khó debug
-		        \item Các tool để test API như Postman, curl, … chưa hỗ trợ
-		    \end{itemize}
-		    
-		    Trong quá trình nghiên cứu và tìm hiểu thì nhóm nhận thấy có rất nhiều công nghệ hỗ trợ cho việc giao tiếp giữa client-server, server-server như: SOAP, RESTful API, gRPC,...
-
-            Đối với SOAP thì nhóm nhận thấy nó có một số nhược điểm như: Nó duy trì trạng thái (stateful) khiến chúng ta tiêu tốn tài nguyên cho các metadata, không phổ biến như REST cho các ứng dụng web và chỉ sử dụng XML vì thế nhóm quyết định chọn RESTful API để giao tiếp giữa client-server, server-server. Ngoài ra còn sử dụng gRPC cho server-server nhằm làm tăng tốc độ quá trình truyền tải dữ liệu.
+	 
             \subsection{MySQL}
             
             MySQL là hệ quản trị cơ sở dữ liệu tự do nguồn mở phổ biến nhất thế giới và được các nhà phát triển rất ưa chuộng trong quá trình phát triển ứng dụng. Vì MySQL là cơ sở dữ liệu tốc độ cao, ổn định và dễ sử dụng, có tính khả chuyển, hoạt động trên nhiều hệ điều hành cung cấp một hệ thống lớn các hàm tiện ích rất mạnh. Với tốc độ và tính bảo mật cao, MySQL rất thích hợp cho các ứng dụng có truy cập CSDL trên internet.
@@ -440,4 +364,49 @@
             Tại sao lại sử dụng Kafka và không sử dụng Message Queue truyền thống
             
             Như nhóm đã trình bày ở phần trước thì Message Queue truyền thống sẽ đảm nhận nhiệm vụ xử lý bất đồng bộ trong từng service. Còn kafka sẽ là thành phần trung gian để gửi message từ service này đến service khác. Bởi vì kafka hoạt động rất nhanh do nó sử dụng cơ chế ZeroCopy, dữ liệu được sắp xếp theo khối, nén dữ liệu và giảm độ trễ I/O. Ngoài ra kafka rất dễ mở rộng khi lượng message cần trao đổi tăng lên và có cơ chế sao chép message ra nhiều partition để làm giảm rủi ro mất mát message trong quá trình xử lý.
+            
+            \subsection{Docker}
+            
+            Docker là nền tảng cung cấp cho các công cụ, service để các developers, adminsystems có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.
+            
+            \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/docker.png}
+    		\centering
+    		\linebreak
+    		\caption{Giới thiệu về Docker}
+            \end{figure}
+            
+            Ứng dụng Docker chạy trong vùng chứa (container) có thể được sử dụng trên bất kỳ hệ thống nào: máy tính xách tay của nhà phát triển, hệ thống trên cơ sở hoặc trong hệ thống đám mây. Và là một công cụ tạo môi trường được "đóng gói" (còn gọi là Container) trên máy tính mà không làm tác động tới môi trường hiện tại của máy, môi trường trong Docker sẽ chạy độc lập.
+            
+            Do nhóm viết ứng dụng theo kiến trúc Microservice vì thế có rất nhiều cơ sở hạ tầng phải deploy như: Cassandra, Kafka, Redis, Mysql, ActiveMQ, ... Ngoài ra còn rất nhiều service mà nhóm đã viết. Cho nên việc deploy và quản lý trên server vật lý hay virtual machine đều gặp rất nhiều khó khăn. Vì thế nhóm đã tìm hiểu và sử dụng Docker để đơn giản hóa quá trình deploy cơ sở hạ tầng và quản lý tài nguyên của mỗi service sao cho hiệu quả và tiết kiệm nhất. Đặc biệt việc sử dụng \textbf{Docker Compose} giúp chúng ta khởi tạo và quản lý các containers rất dễ dàng chi thông qua 1 dòng lệnh
+            
+            
+            \subsection{NGINX}
+            
+            NGINX là một web server mạnh mẽ và sử dụng kiến trúc đơn luồng, hướng sự kiện vì thế nó hiệu quả hơn Apache server nếu được cấu hình chính xác. Nó cũng có thể làm những thứ quan trọng khác, chẳng hạn như load balancing, HTTP caching, hay sử dụng như một reverse proxy.
+            
+            NGINX được xây dựng để cung cấp việc sử dụng bộ nhớ thấp và đồng thời cao. Thay vì tạo các quy trình mới cho mỗi yêu cầu web, NGINX sử dụng cách tiếp cận theo hướng sự kiện, không đồng bộ trong đó các yêu cầu được xử lý trong một luồng.
+            
+            Reverse proxy là một proxy server mà khi đứng trước client, chúng hoạt động giống như những server bình thường. Reverse proxy chuyển tiếp request đến một hoặc nhiều server thật, kết quả sau đó trả về cho client như thể là chúng được trả về từ reverse proxy, khiến cho client không biết về những server thật nói trên. Reverse proxy được cài đặt trong một private network của một hoặc nhiều server, và tất cả lưu lượng truy cập đều phải đi qua proxy này. 
+            
+             \begin{figure}[!ht]   			
+             \includegraphics[width=0.8\textwidth]{Images/reverseproxy.png}
+    		\centering
+    		\linebreak
+    		\caption{Reverse Proxy}
+            \end{figure}
+            
+            Nhờ vào reverse proxy nhóm có thẻ:
+            
+            \begin{itemize}
+                \item Che giấu được thông tin các service đươc deploy bên trong private network
+                \item Tăng khả năng xử lý nhiều request dống thời
+                \item Phân chia tải cho các service bên trong.
+                \item Thiêt lập cấu hình HTTPS
+            \end{itemize}
+          
+            
+            
+            
+            
+            
 		\end{itemize}
