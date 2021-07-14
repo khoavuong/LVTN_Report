@@ -128,7 +128,7 @@
 				\end{itemize}
 			\end{itemize}
 			
-				\item Database
+				\item \textbf{Database}
 				\begin{itemize}
 					\item \textbf{MySQL}: Hệ thống sử dụng MySql để lưu các thông tin ít được truy xuất như log, cấu hình service,...
 					\item \textbf{Cassandra}: Với khả năng đọc/ghi có tốc độ nhanh cùng với đó là khả năng chịu lỗi cao hệ thống sử dụng Cassandra để lưu các thông tin về Order, Hóa đơn nhập/xuất kho,...
@@ -138,7 +138,7 @@
 		\end{itemize}
 
 \newpage
-\subsection{Thiết kế Use Case}
+\subsection{Thiết kế và đặc tả Use Case}
 
 \begin{figure}[!ht]
 	\includegraphics[width=1\textwidth]{/UseCase.jpg}
@@ -147,195 +147,958 @@
 	\caption{Sơ đồ Use case}
 \end{figure}
 
-\begin{itemize}
-	\item 
-% 	\subsection{Trạng thái đơn hàng}
+	\newpage
+	
 	\begin{itemize}
-		\item Đơn nháp: Trạng thái đầu, khi người dùng tạo yêu cầu đơn hàng
-		\item Chờ bàn giao: Khi người dùng ấn nút gửi yêu cầu. Cho phép tối đa 30s để người dùng có thể chỉnh sửa hoặc hủy đơn (Có thể nhấn nút submit để chốt sớm hơn). Sau thời gian đó đơn hàng sẽ chuyển status sang trạng thái kế tiếp
-		\item Trong hàng chờ phân phối: Đưa vào hàng chờ của hệ thống phân phối (Chi tiết ghi trong actor "Hệ thống phân phối")
-		\item Đang lấy hàng: Các kiện hàng của đơn hàng đã và đang được đến lấy về kho (Có thông tin thêm là <x / tổng số kiện hàng> đã được lấy).
-		\item Đã vào kho tập trung <Địa điểm 1>: Các kiện hàng của đơn hàng đã được lấy hết và được đưa vào kho <Địa điểm 1> 
-		\item Đang giao liên tỉnh: Đơn hàng đã xuất kho 1 và đang được giao liên tỉnh từ kho 1 đến kho 2
-		\item Đã vào kho tập trung <Địa điểm 2>: Các kiện hàng của đơn hàng đã được lấy hết và được đưa vào kho <Địa điểm 2>
-		\item Đang giao hàng: Các kiện hàng của đơn hàng đã và đang được giao đến người nhận cuối
-		\item Hoàn tất: Khi tất cả các kiện hàng của đơn hàng đã đến địa điểm cuối
-		\item Đơn hủy: Trạng thái khi khách hàng hủy đơn ở trạng thái chờ bàn giao (Khách hàng chỉ được hủy ở trạng thái chờ bàn giao).
-	\end{itemize}
-% 	\subsection{Người gửi}
-	\begin{itemize}
-		\item \textbf{Tạo đơn hàng:} Người gửi cần điền những thông tin sau: 
+		\item \textbf{Use case cho Khách Hàng}
 		\begin{itemize}
-			\item Bên gửi:
+			\item \textbf{Tạo đơn hàng:} Người gửi cần điền những thông tin sau: 
 			\begin{itemize}
-				\item Tên người gửi
-				\item Số điện thoại
-				\item Địa chỉ, chia làm 3 phần gồm Số địa chỉ + tên đường, Quận - Huyện, Phường - Xã. Quận - Huyện và Phường - Xã được nhập bằng cách chọn trong một dropdown có sẵn.
-			\end{itemize}
-			\item Bên nhận:
-			\begin{itemize}
-				\item Tên người nhận
-				\item Số điện thoại
-				\item Địa chỉ, tương tự như bên gửi.
-			\end{itemize}
-			\item Thông tin về (các) món hàng muốn gửi:
-			\begin{itemize}
-				\item Tên sản phẩm + số lượng (Mặc định là 1). Có thể thêm nhiều sản phẩm và có thể chỉnh sửa số lượng của từng sản phẩm đã thêm.
-				\item Khối lượng (Để tính phí vận chuyển). Nhân viên đến lấy hàng sẽ tiến hành xác nhận bằng cách đo lại và sẽ yêu cầu khách hàng cập nhật lại khối lượng nếu như khối lượng đã nhập trước đó là không chính xác.
+				\item Bên gửi:
+				\begin{itemize}
+					\item Tên người gửi
+					\item Số điện thoại
+					\item Địa chỉ, chia làm 3 phần gồm Số địa chỉ + tên đường, Quận - Huyện, Phường - Xã. Quận - Huyện và Phường - Xã được nhập bằng cách chọn trong một dropdown có sẵn.
+				\end{itemize}
+				\item Bên nhận:
+				\begin{itemize}
+					\item Tên người nhận
+					\item Số điện thoại
+					\item Địa chỉ, tương tự như bên gửi.
+				\end{itemize}
+				\item Thông tin về món hàng muốn gửi:
+				\begin{itemize}
+					\item Tên sản phẩm + số lượng (Mặc định là 1). Có thể thêm nhiều sản phẩm và có thể chỉnh sửa số lượng của từng sản phẩm đã thêm.
+					\item Khối lượng (Để tính phí vận chuyển). Nhân viên đến lấy hàng sẽ tiến hành xác nhận bằng cách đo lại và sẽ yêu cầu khách hàng cập nhật lại khối lượng nếu như khối lượng đã nhập trước đó là không chính xác.
+					
+				\end{itemize}
+				\item Lựa chọn cho bên nhận:
+				\begin{itemize}
+					\item Không cho xem hàng.
+					\item Cho xem hàng nhưng không cho thử.
+					\item Cho thử hàng.
+				\end{itemize}
+				\item Lựa chọn tính phí cho bên gửi hoặc bên nhận 
+				\item Lựa chon gửi hàng/nhận hàng tại kho sẽ không tính phí nội tỉnh(phí liên tỉnh luôn có ). Ngược lại sẽ tính phí nội tỉnh (gửi và nhận giống nhau). 
+				\item Hệ thống sẽ tự tính cước vận chuyển dựa trên khoảng cách bên gửi/nhận và khối lượng món hàng.
+				\item Các thông tin ghi chú khác (Người gửi tự điền vào ô textbox).
+			\end{itemize} 
 				
-			\end{itemize}
-			\item Lựa chọn cho bên nhận:
-			\begin{itemize}
-				\item Không cho xem hàng.
-				\item Cho xem hàng nhưng không cho thử.
-				\item Cho thử hàng.
-			\end{itemize}
-			\item Lựa chọn tính phí cho bên gửi hoặc bên nhận 
-			\item Lựa chon gửi hàng / nhận hàng tại kho sẽ không tính phí nội tỉnh(phí liên tỉnh luôn có ). Ngược lại sẽ tính phí nội tỉnh (gửi và nhận giống nhau). 
-			\item Hệ thống sẽ tự tính cước vận chuyển dựa trên khoảng cách bên gửi/nhận và khối lượng món hàng.
-			\item Các thông tin ghi chú khác (Người gửi tự điền vào ô textbox).
-			\item Mockup / Wireframe (Dự kiến tham khảo thiết kế UI của GHN):
-		\end{itemize} 
+			
+			
+				\begin{table}[!htp]
+					\centering\begin{tabular}{|c|m{25em}|}
+						\hline 
+						Use case name & Tạo đơn hàng\\ 
+						\hline 
+						Actors & Khách hàng \\ 
+						\hline
+						Description & Người dùng có thể tạo đơn hàng của mình \\
+						\hline 
+						Preconditions & Người dùng đã đăng nhập vào hệ thống \\
+						\hline
+						Postconditions & Đơn hàng được tạo ra, các thông tin về đơn hàng được lưu trữ, đơn hàng sẽ được gán cho tài xế đến lấy (nếu người dùng không đến kho gửi hàng) \\
+						\hline
+						Nomar Flow & \begin{enumerate}
+											\item Ở trang chủ khách hàng chọn Tab "Quản lý đơn hàng".
+											\item Chọn "Lên đơn hàng" ở góc trên bên trái màn hình.
+											\item Nhập đầy đủ các thông tin yêu cầu.
+											\item Nhấn "Tạo đơn".
+									\end{enumerate}
+							\\
+						\hline
+					\end{tabular}
+					\caption{Tạo đơn hàng}
+				\end{table}
+			
+			
+			\newpage
+			
+			
+			\item \textbf{Xem đơn hàng được nhận}: Người nhận có thể nhập số điện thoại để xem các đơn hàng được nhận, các đơn hàng sẽ được chia theo trạng thái đã định nghĩa ở trên và người gửi có thể xem list các đơn hàng lọc theo trạng thái đó. 
+			
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xem đơn hàng được nhận\\ 
+					\hline 
+					Actors & Người nhận \\ 
+					\hline
+					Description & Nguời nhận có thể xem đơn hàng được nhận thông qua số điện thoại mà không cần đăng nhập \\
+					\hline 
+					Preconditions & Thông tin đơn hàng phải có số điện thoại và email của người nhận \\
+					\hline
+					Postconditions & Danh sách đơn hàng được hiển thị cho người nhận \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang landing page người nhận chọn "Xem danh sách đơn hàng".
+						\item Nhập số điện thoại.
+						\item Nhập mã OTP nhận được thông qua Email.
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xem đơn hàng được nhận}
+			\end{table}
 		
-		\begin{figure}[!ht]
-			\includegraphics[width=1\textwidth]{/create-order.png}
-			\centering
-			\linebreak
-			\caption{Giao diện tạo đơn hàng (dự kiến)}
-		\end{figure}
 		
-		\item \textbf{Chỉnh sửa thông tin đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), người gửi có thể chỉnh sửa thông tin đơn hàng (Thông tin như trong mục tạo đơn, sẽ có giới hạn thông tin được chỉnh sửa).
+		\item \textbf{Xem thông tin đơn hàng:} Khách hàng có thể xem thông tin đơn hàng theo các trạng thái khác nhau, theo mã đơn hàng hoặc theo khoảng thời gian nào đó.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xem thông tin đơn hàng\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng xem thông tin đơn hàng sau khi đã đăng nhập vào hệ thống \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Danh sách đơn hàng được hiển thị. Khách hàng có thể lọc đơn hàng theo mã đơn hàng, trạng thái, ngày tháng. \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Quản lí đơn hàng". Mặc định sẽ hiển thị tất cả đơn hàng của khách hàng đó.
+						\item Khách hàng có thể lọc theo các tiêu chí khác nhau nếu cần
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xem thông tin đơn hàng}
+			\end{table}
+			
+			\newpage
+			
+			\item \textbf{Chỉnh sửa đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), người gửi có thể chỉnh sửa thông tin đơn hàng (Thông tin như trong mục tạo đơn, sẽ có giới hạn thông tin được chỉnh sửa).
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Chỉnh sửa đơn hàng\\ 
+					\hline 
+					Actors & Người gửi \\ 
+					\hline
+					Description & Người gửi có thể chỉnh sửa nếu đơn hàng chưa đươc bàn giao cho tài xế. Chi có thể chỉnh sửa môt số thông tin như: Tên người nhận, SĐT, địa chỉ, ... \\
+					\hline 
+					Preconditions & Người gửi đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Thông tin đơn hàng được chỉnh sửa \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Quản lí đơn hàng". Mặc định sẽ hiển thị tất cả yêu cầu của khách hàng đó.
+						\item Tại đơn hàng khách hàng nhấn vào "Chỉnh sửa đơn hàng".
+						\item Điền các thông tin muốn chỉnh sửa.
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Chỉnh sửa đơn hàng}
+			\end{table}
+			
+			\item \textbf{Hủy đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), thì người gửi có thể hủy đơn hàng nếu muốn.
+			
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Hủy đơn hàng\\ 
+					\hline 
+					Actors & Người gửi \\ 
+					\hline
+					Description & Người gửi có thể hủy nếu đơn hàng chưa đươc bàn giao cho tài xế. \\
+					\hline 
+					Preconditions & Người gửi đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Đơn hàng bị hủy \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Quản lí đơn hàng". Mặc định sẽ hiển thị tất cả yêu cầu của khách hàng đó.
+						\item Tại đơn hàng khách hàng nhấn vào "Hủy đơn hàng".
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Hủy đơn hàng}
+			\end{table}
 		
-		\item \textbf{Hủy đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), người gửi có thể hủy đơn hàng. Đơn hàng bị hủy sẽ được chuyển vào mục thùng rác và cho phép người dùng tái sử dụng thông tin của đơn hàng bị hủy ấy (Tạo lại đơn hàng mới dựa trên thông tin đơn hàng bị xóa ấy).
+			\newpage
+			
+			
+			\item \textbf{Gửi yêu cầu hỗ trợ:} Trong quá trinh vận chuyển nếu có thắc mắc nào thì khách hàng có thể gửi yêu cầu để quản lý hỗ trợ.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Gửi yêu cầu hỗ trợ\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng gửi yêu cầu và quản lý sẽ trực tiếp phản hồi yêu cầu đó. \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Yêu cầu được submit và chờ quản lý phản hồi \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Yêu cầu hỗ trợ".
+						\item Nhấn "Lên yêu cầu".
+						\item Nhập các thông tin cần thiết như: Mã đơn hàng, trình bày nội dung cần hỗ trợ.
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Gửi yêu cầu hỗ trợ}
+			\end{table}
 		
-		\item \textbf{Xem danh sách các đơn hàng}: Các đơn hàng sẽ được chia theo trạng thái đã định nghĩa ở trên và người gửi có thể xem list các đơn hàng lọc theo trạng thái đó. Mockup / Wireframe (Dự kiến tham khảo thiết kế UI của GHN):
-		
-		\begin{figure}[!ht]
-			\includegraphics[width=1\textwidth]{/order-status.png}
-			\centering
-			\linebreak
-			\caption{Giao diện xem danh sách các đơn hàng (dự kiến)}
-		\end{figure}
-		
-		\item \textbf{Xem nợ công và thanh toán}: Do phí có thể được tính cho người gửi hoặc người nhận (theo nhu cầu của người gửi), người gửi và người nhận đều có thể xem nợ công và thực hiện thanh toán. Thanh toán dự định sẽ được thực hiện qua ZaloPay
-	\end{itemize}
-	
-% 	\subsection{Người nhận}
-	\begin{itemize}
-		\item \textbf{Xem nợ công và thanh toán}: Tương tự UC của người gửi
-		
-		\item \textbf{Tra cứu thông tin đơn hàng:} Mỗi đơn hàng được tạo sẽ có một mã riêng biệt dùng cho người gửi/nhận tra cứu thông tin và tình trạng hiện tại của đơn hàng. Mockup / Wireframe (Dự kiến tham khảo thiết kế UI của GHN): 
-		
-		\begin{figure}[!ht]
-			\includegraphics[width=0.95\textwidth]{/tracking.png}
-			\centering
-			\linebreak
-			\caption{Giao diện theo dõi tình trạng đơn hàng (dự kiến)}
-		\end{figure}
-		
-		\item \textbf{Xác nhận đơn hàng đã nhận}: Người nhận sẽ check vào những kiện hàng sẽ được nhận (trong đơn hàng của người nhận) có trong xe hoặc trong kho (nếu lựa là người nhận tự đến lấy). Nếu tất cả kiện hàng ở trong đơn hàng đã được check thì trạng thái đơn hàng cập nhật từ (Đang giao hàng -> Hoàn tất). Trong trường hợp nếu người nhận tự đến lấy thì sẽ có thêm khoản phí lưu kho (Được tính theo khoảng thời gian từ lúc đơn hàng nhập kho đến khi người nhận đến lấy).
-	\end{itemize}
-	
-% 	\subsection{Tài xế nội tỉnh đi lấy}
-	\begin{itemize}
-		\item \textbf{Xem danh sách kiện hàng cần lấy:} Tài xế nội tỉnh sẽ được assign những kiện hàng cần đi lấy để thu gom về kho. Tài xế nội tỉnh có thể xem những thông tin cần thiết để tiến hành xử lí vận chuyển list danh sách các kiện hàng đó.
-		
-		\begin{figure}[!ht]
-			\includegraphics[width=0.7\textwidth]{/ntlay.png}
-			\centering
-			\linebreak
-			\caption{Wireframe list các kiện hàng cần lấy của tài xế (dự kiến)}
-		\end{figure}
-		
-		\item \textbf{Cập nhật nếu có thông tin sai sót}: Tài xế đến lấy hàng sẽ tiến hành đo lại và cập nhật thông tin kiện hàng nếu thông tin kiện hàng có sai sót (Như khối lượng, kích thước vv...). Sau đó, khách hàng sẽ tiến hành xác nhận lại thông tin tài xế cập nhật là chính xác để tiến hành giao nhận.
+			\item \textbf{Xem phản hồi hỗ trợ}: Sau khi yêu cầu hỗ trợ được phản hồi bởi quản lý thì khách hàng có thể xem thông tin phản hồi đó.
+			
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xem phản hồi hỗ trợ\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng xem yêu cầu hỗ trợ được phản hồi bởi quản lý \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Hiển thị danh sách yêu cầu phản hồi \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Yêu cầu hỗ trợ". Mặc định sẽ hiển thị ra thông tin các yêu cầu và phản hồi của quản lý (nếu yêu cầu đã đươc xử lý)
+						\item Khách hàng có thẻ lọc yêu cầu theo: Mã yêu cầu, ngày tháng.
+				
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xem phản hồi hỗ trợ}
+			\end{table}
 		
 		\newpage
 		
-		\begin{figure}[!ht]
-			\includegraphics[width=1\textwidth]{/reconfirm.png}
-			\centering
-			\linebreak
-			\caption{Wireframe miêu tả qui trình xác nhận thông tin sai sót}
-		\end{figure}
-	\end{itemize}
-	
-% 	\subsection{Tài xế nội tỉnh đi giao}
-	\textbf{Xem danh sách kiện hàng cần giao}:  Tài xế nội tỉnh sẽ được assign những kiện hàng cần được giao cho người nhận. Tài xế nội tỉnh có thể xem những thông tin cần thiết để tiến hành xử lí vận chuyển list danh sách các kiện hàng đó.
-	
-% 	\subsection{Tài xế liên tỉnh} 
-	\textbf{Xem danh sách kiện hàng cần lấy}: Tài xế liên tỉnh sẽ được assign những đơn hàng cần đi lấy để vận chuyển đến kho liên tỉnh. Tài xế liên tỉnh có thể xem những thông tin cần thiết để tiến hành xử lí vận chuyển list danh sách các đơn hàng đó.
-% 	\subsection{Hê thống phân phối}
-	\begin{itemize}
-		\item \textbf{Phân phối đơn hàng cho tài xế nội tỉnh}: Các đơn hàng sẽ được đưa vào 2 loại hàng chờ (nội tỉnh): Hàng chờ hôm nay và hàng chờ các đơn hàng cho ngày hôm sau. Hệ thống qui định những kiện hàng được tạo trước <6h> tối sẽ được đưa vào hàng chờ hôm nay, còn những kiện hàng được tạo sau <6h> tối sẽ được đưa vào hàng chờ ngày hôm sau. Hệ thống sẽ chỉ phân phối các kiện hàng trong hàng chờ ngày hôm nay cho các tài xế nội tỉnh. Nếu hàng chờ ngày hôm nay chưa xử lí hết các kiện hàng thì sẽ được đẩy qua ngày hôm sau.Đơn vị ở đây là kiện hàng do xe nội tỉnh thường có kích thước nhỏ, không thể lấy hết cả 1 đơn hàng mà chỉ có thể lấy một số kiện hàng từ đơn ấy. Hệ thống sẽ cập nhật trạng thái từ <Trong hàng chờ phân phôi>  -->  <Đang lấy hàng>
-		\item \textbf{Phân phối đơn hàng cho tài xế liên tỉnh}: Đơn hàng đã được tập kết đầy đủ (Tức toàn bộ kiện hàng của đơn hàng đã đến kho) sẽ được đưa vào hàng chờ liên tỉnh. Hệ thống qui định những đơn hàng đã được tập kết trước <12h> đêm sẽ được đưa vào hàng chờ hôm nay, còn những đơn hàng được tập kết sau <12h> đêm sẽ được đưa vào hàng chờ ngày hôm sau. Hệ thống sẽ chỉ phân phối các đơn hàng trong hàng chờ ngày hôm nay cho các tài xế liên tỉnh. Nếu hàng chờ ngày hôm nay chưa xử lí hết các đơn hàng thì sẽ được đẩy qua ngày hôm sau. Đơn vị ở đây là đơn hàng do xe liên tỉnh thường có kích thước lớn nên có thể chở cả 1 hoặc nhiều đơn hàng.
-	\end{itemize}
-	
-% 	\subsection{Quản lí}
-	
-	\textbf{Xem thống kê}: Người quản lý có thể  xem thống kê về số lương đơn hàng trong tuần, tháng, năm thông qua biểu đồ; xem thống kê hiệu suất làm việc của tài xế ; số đơn hàng giao thành công và đơn hàng bị hủy trong tuần, tháng, năm.
-	
-	
-% 	\subsection{Thủ kho}
-	\begin{itemize}
-		\item \textbf{Xem danh sách hàng trong kho}: Thủ kho sẽ xem list các đơn hàng có trong kho (Lọc theo tiêu chí tất cả, đơn hàng mà các kiện đã vào đủ, đơn hàng mà các kiện chưa vào đủ). Thông tin từng đơn hàng là loại hàng, <số kiện hàng đã vào kho / tổng số kiện>. 
+			
+			\item \textbf{Xem thông báo}: Mỗi khi trạng thái đơn hàng thay đổi thì khách hàng đều nhận được email thông báo để khách hàng có thể nắm bắt đươc tình trạng của đơn hàng. Ngoài ra môt số chức năng cần phải nhập OTP để xác thực khách hàng thì cũng được gửi thông qua email.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xem thông báo\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng xem thông báo của mình thông qua Email \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào email của mình \\
+					\hline
+					Postconditions & Khách hàng xem đươc thông báo của mình từ BKShipment \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Người dùng đăng nhập Email của mình
+						\item Mở hộp thư đến
+						
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xem thông báo}
+			\end{table}
 		
-		\begin{figure}[!ht]
-			\includegraphics[width=0.75\textwidth]{/hangtrongkho.png}
-			\centering
-			\linebreak
-			\caption{Wireframe xem danh sách hàng trong kho của thủ kho}
-		\end{figure}
-		
-		\item \textbf{Xác nhận kiện hàng vào kho}:
-		Khi tài xế nội tỉnh đến kho, thủ kho sẽ search ID của tài xế để xem list kiện hàng được phân công của tài xế Thủ kho sẽ kiểm tra xe của tài xế và check vào những kiện hàng thật sự có trong xe để hoàn tất quá trình nhập kho của kiện hàng. (Tức hệ thống sẽ cập nhật số kiện hàng đã vào kho của đơn hàng). Trạng thái đơn hàng cập nhật từ <Đang lấy hàng>  -->  <Đã vào kho tập trung 1>  nếu tất cả các kiện hàng của đơn đã được check vào kho. 
-		
-		\begin{figure}[!ht]
-			\includegraphics[width=1\textwidth]{/xacnhankienhangvaokho.png}
-			\centering
-			\linebreak
-			\caption{Wireframe xác nhận kiện hàng vào kho}
-		\end{figure}
-		
-		\item \textbf{Xác nhận đơn hàng xuất kho}: Khi tài xế liên tỉnh xuất kho đến yêu cầu thủ kho những đơn hàng cần giao liên tỉnh thì thủ kho sẽ search ID của tài xế liên tỉnh đó và xem được list các đơn hàng mà tài xế liên tỉnh đó được phân phối. Khi tài xế liên tỉnh chuyển những đơn hàng đó lên xe liên tỉnh thì thủ kho sẽ check vào những kiện hàng sẽ lên xe để hoàn tất quá trình xuất kho của kiện hàng. Việc check như vậy sẽ cập nhật trạng thái của đơn hàng trên hệ thống (Đã vào kho tập trung 1 -> Đang giao liên tỉnh).
-		\item \textbf{Xác nhận đơn hàng vào kho}: Khi tài xế liên tỉnh đến kho, thủ kho sẽ search ID của tài xế liên tỉnh để xem list đơn hàng được phân công của tài xế Thủ kho sẽ kiểm tra xe của tài xế và check vào những đơn hàng thật sự có trong xe để hoàn tất quá trình nhập kho của đơn hàng.Trạng thái đơn hàng cập nhật từ (Đang giao liên tỉnh -> Đã vào kho tập trung 2). Nếu người gửi chọn option tự gửi đến kho, thủ kho sẽ search ID của người gửi và thực hiện tiếp các bước như trên. 
+			\item \textbf{Xem nợ công}: Sau khi đơn hàng được xác nhận là hoàn thành thì sẽ có thống kê về nợ công để khách hàng dễ dàng quan sát và thanh toán.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xem nợ công\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng có thể xem nợ công của mình \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Hiển thị danh sách nợ công với tương ứng với các đơn hàng của người dùng \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Thanh toán". Mặc định sẽ hiển thị ra thông tin các đơn hàng đã hoàn thành và số tiền phải thanh toán.
+					
+						
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xem nợ công}
+			\end{table}
 		
 		\newpage
 		
-		\begin{figure}[!ht]
-			\includegraphics[width=1\textwidth]{/xacnhandonhangvaokho.png}
-			\centering
-			\linebreak
-			\caption{Wireframe xác nhận đơn hàng vào kho}
-		\end{figure}
+			\item \textbf{Thanh toán}: Sau khi xem xét nợ công của các đơn hàng thì khách hàng có thể tiến hành thanh toán chi phí cho doanh nghiệp. Khách hàng có thể thanh toán từng đơn hàng hoặc chọn nhiều đơn hàng cùng một lúc.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Thanh toán\\ 
+					\hline 
+					Actors & Khách hàng \\ 
+					\hline
+					Description & Khách hàng thanh toán đơn hàng thông qua trung gian là Ví điện tử \\
+					\hline 
+					Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+					\hline
+					Postconditions & Đơn hàng đã được thanh toán. Tiền trong ví điện tử của khách hàng được trả cho doanh nghiệp. \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Thanh toán". Mặc định sẽ hiển thị ra thông tin các đơn hàng đã hoàn thành và số tiền phải thanh toán.
+						\item Khách hàng có thể lựa chọn từng đơn hàng hoặc nhiều đơn hàng.
+						\item Chọn phương thức thanh toán.
+						\item Nhấn "Xác nhận".
+						
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Thanh toán}
+			\end{table}
 		
-		\item \textbf{Xác nhận kiện hàng xuất kho}: Khi tài xế nội tỉnh đến yêu cầu thủ kho những kiện hàng cần giao nội tỉnh thì thủ kho sẽ search ID của tài xế nội tỉnh đó và xem được list các kiện hàng mà tài xế nội tỉnh đó được phân phối. Khi tài xế nội tỉnh chuyển những kiện hàng đó lên xe nội tỉnh thì thủ kho sẽ check những kiện hàng trong list xem ở trên để xác nhận việc tài xế nội tỉnh đã chất hàng lên xe. Việc check như vậy sẽ cập nhật trạng thái của đơn hàng trên hệ thống (Đã vào kho tập trung 2 -> Đang giao hàng (x/tổng số kiện)).
+			\item \textbf{Chỉnh sửa thông tin cá nhân}: Khách hàng có thể thay đổi một số thông tin cá nhân khi cần thiết.
+			
+				\begin{table}[!htp]
+					\centering\begin{tabular}{|c|m{25em}|}
+						\hline 
+						Use case name & Chỉnh sửa thông tin cá nhân\\ 
+						\hline 
+						Actors & Khách hàng \\ 
+						\hline
+						Description & Khách hàng có thể thay đổi thông tin cá nhân của mình. \\
+						\hline 
+						Preconditions & Khách hàng đã đăng nhập vào hệ thống \\
+						\hline
+						Postconditions & Thông tin cá nhân của khách hàng được thay đổi. \\
+						\hline
+						Nomar Flow & \begin{enumerate}
+							\item Ở trang chủ nhấn "Chỉnh sửa thông tin".
+							\item Khách hàng có thể thay đổi một số thông tin như: Email, SĐT, tên tài khoản, địa chỉ, mật khẩu.
+							\item Nhấn "Cập nhật".
+							
+						\end{enumerate}
+						\\
+						\hline
+					\end{tabular}
+					\caption{Chỉnh sửa thông tin cá nhân}
+				\end{table}
+			
+				\newpage
+			
+		\end{itemize}
+	
+	
+	\item \textbf{Use case cho Tài xế}
+	
+	\begin{itemize}
+		\item \textbf{Xem thông báo}: Tương tự như Khách hàng thì khi mỗi đơn hàng được gán cho Tài xế thì sẽ có mail thông báo giúp cho tài xế tiếp nhận thông tin kịp thời.
+		
+		\item \textbf{Báo cáo vấn đề}: Trong quá trình vận chuyển có thể xảy ra các trường hợp ngoài ý muốn như mất hàng, chậm trễ việc chuyển hàng thì Tài xế có thể báo cáo vấn đề lên đê Quản lý có thể giải quyết kịp thời.
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|c|m{25em}|}
+				\hline 
+				Use case name & Báo cáo vấn đề\\ 
+				\hline 
+				Actors & Tài xế \\ 
+				\hline
+				Description & Tài xế báo cáo vấn đề lên Quản lý để xử lý \\
+				\hline 
+				Preconditions & Tài xế đã đăng nhập vào hệ thống \\
+				\hline
+				Postconditions & Nội dung vấn đề được gửi lên để chờ Quản lý xử lý. \\
+				\hline
+				Nomar Flow & \begin{enumerate}
+					\item Ở trang chủ nhấn "Báo cáo vấn đề".
+					\item Nhấn "Tạo yêu cầu".
+					\item Nhập các thông tin cần thiết
+					\item Nhấn "Gửi yêu cầu".
+					
+				\end{enumerate}
+				\\
+				\hline
+			\end{tabular}
+			\caption{Báo cáo vấn đề}
+		\end{table}
+	
+		\item \textbf{Chỉnh sửa thông tin}: Tài xế có thể chính sửa một số thông tin khi có thay đổi.
+		
+		\item \textbf{Xem danh sách đơn hàng}: Tài xế có thể xem danh sách đơn hàng cần lấy, danh sách đơn hàng đã giao, đã hoàn thành, đã hủy,...
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|c|m{25em}|}
+				\hline 
+				Use case name & Xem danh sách đơn hàng\\ 
+				\hline 
+				Actors & Tài xế \\ 
+				\hline
+				Description & Tài xế xem các thông tin về đơn hàng \\
+				\hline 
+				Preconditions & Tài xế đã đăng nhập vào hệ thống \\
+				\hline
+				Postconditions & Đơn hàng được hiển thị. Tài xế có thể lọc theo mã đơn hàng, ngày tháng, trạng thái. \\
+				\hline
+				Nomar Flow & \begin{enumerate}
+					\item Ở trang chủ nhấn "Quản lý đơn hàng".
+					\item Chọn tab "Đơn hàng cân lấy", "Đơn hàng đang giao", "Đơn hàng đã giao" để xem thông tin về đơn hàng cần biết.	
+				\end{enumerate}
+				\\
+				\hline
+			\end{tabular}
+			\caption{Xem danh sách đơn hàng}
+		\end{table}
+	
+	\newpage
+	
+	
+		\item \textbf{Xác nhận đơn hàng}: Mỗi khi giao nhận hàng thì tài xế có nhiệm vụ phải kiểm tra kĩ tình trạng và số lượng của kiện hàng. Sau đó cần phải xác nhận lại với hệ thống và phải chịu hoàn toàn trách nhiệm nếu đơn hàng có sai sót về tình trạng và số lượng.
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|c|m{25em}|}
+				\hline 
+				Use case name & Xác nhận đơn hàng\\ 
+				\hline 
+				Actors & Tài xế \\ 
+				\hline
+				Description & Tài xế xác nhận đơn hàng \\
+				\hline 
+				Preconditions & Tài xế đã đăng nhập vào hệ thống \\
+				\hline
+				Postconditions & Đơn hàng được xác nhận với hệ thống. Hệ thống lưu trữ lại thông tin mới nhất về đơn hàng. \\
+				\hline
+				Nomar Flow & \begin{enumerate}
+					\item Ở trang chủ nhấn "Quản lý đơn hàng".
+					\item Chọn đơn hàng cần xác nhận.
+					\item Chỉnh sửa các thông tin sai sót nếu có.
+					\item Nhấn "Xác nhận".
+				\end{enumerate}
+				\\
+				\hline
+			\end{tabular}
+			\caption{Xác nhận đơn hàng}
+		\end{table}
+		
 	\end{itemize}
-% 	\subsection{Hệ thống thông báo}
-	\textbf{Gửi thông báo đến mail người dùng cho mỗi mức chuyển trạng thái}: Hệ thống sẽ gửi mail đến người dùng mỗi khi đơn hàng chuyển qua một trạng thái
 	
-	\begin{figure}[!ht]
-		\includegraphics[width=1\textwidth]{/mail.png}
-		\centering
-		\linebreak
-		\caption{Ví dụ mail thông báo dự kiến khi đơn hàng chuyển trạng thái}
-	\end{figure}
+		
 	
-\end{itemize}
+	\item \textbf{Use case cho Thủ kho}
+	
+	\begin{itemize}
+		\item \textbf{Nhập kho}: Sau khi hàng được vận chuyển về kho thì thủ kho chịu trách nhiệm kiểm tra lại tình trạng và số lượng của đơn hàng. Nếu không có vấn đề gì xảy ra thì thủ kho nhập hàng vào kho để lưu trữ và chờ phân phối cho tài xế.
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|c|m{25em}|}
+				\hline 
+				Use case name & Nhập kho\\ 
+				\hline 
+				Actors & Thủ kho \\ 
+				\hline
+				Description & Thủ kho tiến hành nhập hàng hóa vào kho \\
+				\hline 
+				Preconditions & Thủ kho đã đăng nhập vào hệ thống. \\
+				\hline
+				Postconditions & Hàng đươc nhập vào kho. Thông tin nhập kho được lưu trữ lại để đối soát về sau. \\
+				\hline
+				Nomar Flow & \begin{enumerate}
+					\item Ở trang chủ nhấn "Nhập kho".
+					\item Nhập mã tài xế
+					\item Chọn từng đơn hàng hoăc nhiều đơn hàng.
+					\item Nhấn "Nhập hàng".
+					\item Thủ kho có thể nhấn "Xuất hóa đơn" và bàn giao hóa đơn cho Tài xế để dễ dàng đối soát về sau.
+				\end{enumerate}
+				\\
+				\hline
+			\end{tabular}
+			\caption{Nhập kho}
+		\end{table}
+	
+	\newpage
+	
+		\item \textbf{Xuất kho}: Sau khi đơn hàng đươc phân phối cho tài xế. Thì tài xế đến kho nhận hàng và tiếp tục vận chuyển. Khi xuất hàng thủ kho có trách nhiệm kiểm tra hàng hóa về số lượng và tình trạng một lần nữa trước khi bàn giao cho Tài xế.
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|c|m{25em}|}
+				\hline 
+				Use case name & Xuất kho\\ 
+				\hline 
+				Actors & Thủ kho \\ 
+				\hline
+				Description & Thủ kho tiến hành xuất hàng hóa để tài xế tiếp tục vận chuyển \\
+				\hline 
+				Preconditions & Thủ kho đã đăng nhập vào hệ thống. \\
+				\hline
+				Postconditions & Hàng đươc xuất kho giao cho Tài xế đi giao. Thông tin xuất kho được lưu trữ lại để đối soát về sau. \\
+				\hline
+				Nomar Flow & \begin{enumerate}
+					\item Ở trang chủ nhấn "Xuất kho".
+					\item Nhập mã tài xế
+					\item Chọn từng đơn hàng hoăc nhiều đơn hàng.
+					\item Nhấn "Xuất hàng".
+					\item Thủ kho có thể nhấn "Xuất hóa đơn" và bàn giao hóa đơn cho Tài xế để dễ dàng đối soát về sau.
+				\end{enumerate}
+				\\
+				\hline
+			\end{tabular}
+			\caption{Xuất kho}
+		\end{table}
+	
+		\item \textbf{Chỉnh sửa thông tin}: Thủ kho có thể chỉnh sửa một số thông tin khi cần thiết.
+		
+		\item \textbf{Xem đơn hàng đang có trong kho}: Thủ kho có thể xem thông tin về các đơn hàng có trong kho mà mình đang quản lý.
+		
+		\item \textbf{Xem thống kê}: Thủ kho có thể xem thống kê về số lượng đơn hàng có trong kho, số lượng tài xế, ...
+		
+	\end{itemize}
+		
+		
+		
+		\item \textbf{Use case cho Quản lý}
+		
+		\begin{itemize}
+			\item \textbf{Xem thống kê}: Quản lý có thể xem thông tin thống kê về tình hình kinh doanh của của doanh nghiệp như: dòng tiền, nhân sự, số lương đơn hàng thành công, thất bại,...
+			
+			\item \textbf{Tạo tài xế}: Mỗi khi tài xế mới nhận việc làm thì quản lý có trách nhiệm tạo tài xế và chỉ định kho hoạt động cho tài xế.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Tạo tài xế\\ 
+					\hline 
+					Actors & Quản lý \\ 
+					\hline
+					Description & Quản lý tạo tài xế để tài xế hoàn thành quá trình nhận việc. \\
+					\hline 
+					Preconditions & Quản lý đã đăng nhập vào hệ thống. \\
+					\hline
+					Postconditions & Tài xế được tạo thành công. Thông tin tài khoản và mật khẩu có thể được bàn giao cho tài xế. \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Tạo tài xế".
+						\item Nhập các thông tin cần thiết như: Kho hoạt động, phương tiện, mã phương tiện, ...
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Tạo tài xế}
+			\end{table}
+		
+			\item \textbf{Phản hồi yêu cầu hỗ trợ}: Sau khi nhận được yêu cầu hỗ trợ từ khách hàng thì quản lý có trách nhiệm phản hồi, giải đáp các yêu cầu, thắc mắc của khách hàng.
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Phản hồi yêu cầu hỗ trợ\\ 
+					\hline 
+					Actors & Quản lý \\ 
+					\hline
+					Description & Quản lý có thể phản hồi yêu cầu hỗ trợ từ khách hàng. \\
+					\hline 
+					Preconditions & Quản lý đã đăng nhập vào hệ thống. \\
+					\hline
+					Postconditions & Yêu cầu được phản hồi và thông báo về khách hàng. \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Danh sách yêu cầu".
+						\item Chọn yêu cầu và nhập thông tin phản hồi.
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Phản hồi yêu cầu hỗ trợ}
+			\end{table}
+		
+			\newpage
+		
+			\item \textbf{Xử lý sự cố}: Sau khi nhận đươc thông tin có sự cố từ phía Tài xế thì Quản lý có trách nhiệm giải quyết các vấn đề. 
+			
+			\begin{table}[!htp]
+				\centering\begin{tabular}{|c|m{25em}|}
+					\hline 
+					Use case name & Xử lý sự cố\\ 
+					\hline 
+					Actors & Quản lý \\ 
+					\hline
+					Description & Quản lý có thể xử lý sự cố bất ngờ từ tài xế. \\
+					\hline 
+					Preconditions & Quản lý đã đăng nhập vào hệ thống. \\
+					\hline
+					Postconditions & Sự cố đươc xử lý. Trạng thái đơn hàng đươc cập nhật. \\
+					\hline
+					Nomar Flow & \begin{enumerate}
+						\item Ở trang chủ nhấn "Danh sách sự cố".
+						\item Chọn sự cố, giải quyết và cập nhật trạng thái đơn hàng.
+						\item Nhấn "Xác nhận".
+					\end{enumerate}
+					\\
+					\hline
+				\end{tabular}
+				\caption{Xử lý sự cố}
+			\end{table}
+			
+			
+		\end{itemize}
+	\end{itemize}
+	
 
-
-
-% \subsection{Lược đồ ERD}
-    \begin{figure}[!ht]
-		\includegraphics[width=1\textwidth]{Images/erd.jpg}
-		\centering
-		\linebreak
-		\caption{Lược đồ ERD}
-	\end{figure}
-	
-	
-	
+    
 	
 	\subsection{Thiết kế cơ sở dữ liệu}
+	
+		\begin{figure}[!ht]
+			\includegraphics[angle=90, width=15cm, height=20cm]{Images/ERD.jpg}
+			\centering
+			\linebreak
+			\caption{Lược đồ ERD}
+		\end{figure}
+	
+	\newpage
+	
+	\newpage
+	
+	Sau khi thiết kế ERD nhóm tiến hành chuyển đổi thành các bảng tương ứng trong database như sau:
+	
+	\begin{itemize}
+		\item \textbf{Order}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				orderId & Mã đơn hàng\\
+				\hline 
+				assignedDrivers & Lưu danh sách tài xế đang được gán để đi lấy hàng \\ 
+				\hline
+				countcompletesuborder & Đếm số lượng kiện hàng đã hoàn tất \\
+				\hline 
+				driverIds & Danh sách các tài xế vận chuyển đơn hàng \\
+				\hline
+				fee & Phí vận chuyển \\
+				\hline
+				isDirectlyReceive & Người nhận có nhận trực tiếp hay không \\
+				\hline
+				isDirectlySend & Người gửi có gửi trực tiếp hay không \\
+				\hline
+				destStockId & Mã kho đích \\
+				\hline
+				detailOrder & Chi tiết đơn hàng \\
+				\hline
+				description & Mô tả đơn hàng \\
+				\hline
+				orderStatus & Trạng thái đơn hàng \\
+				\hline
+				orderTime & Thời gian tạo đơn hàng \\
+				\hline
+				paymentSide & Người thanh toán \\
+				\hline
+				paymentStatus & Trạng thái thanh toán \\
+				\hline
+				provinceCode & Mã tỉnh thành \\
+				\hline
+				remainWeight & Khối lượng còn lại \\
+				\hline
+				srcStockId & Mã kho nguồn \\
+				\hline
+				subOrderIds & Danh sách các kiện hàng tạo thành \\
+				\hline
+				totalWeight & Tổng khối lượng đơn hàng \\
+				\hline
+				userId & Mã khách hàng \\
+				\hline
+				value & Giá trị đơn hàng \\
+				\hline
+			\end{tabular}
+			\caption{Schema Order}
+		\end{table}
+	
+	\newpage
+	
+		\item \textbf{SubOrder}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				subOrderId & Mã kiện hàng\\
+				\hline 
+				destDriverId & Mã tài xế đi giao \\ 
+				\hline
+				destDriverName & Tên tài xế đi giao \\
+				\hline 
+				destDriverPhone & Số điện thoại tài xế đi giao \\
+				\hline
+				destStockId & Mã kho đích \\
+				\hline
+				driverId & Mã tài xế đi lấy \\
+				\hline
+				driverName & Tên tài xế đi lấy \\
+				\hline
+				driverPhone & Số điện thoại tài xế đi lấy \\
+				\hline
+				externalDriverId & Mã tài xế liên tỉnh \\
+				\hline
+				externalDriverName & Tên tài xế liên tỉnh \\
+				\hline
+				externalDriverPhone & Số điện thoại tài xế liên tỉnh \\
+				\hline
+				issue & Nội dung vấn đề phát sinh \\
+				\hline
+				orderId & Mã đơn hàng \\
+				\hline
+				subOrderStatus & Trạng thái kiện hàng \\
+				\hline
+				provinceCode & Mã tỉnh thành \\
+				\hline
+				srcStockId & Mã kho nguồn \\
+				\hline
+				subOrderTime & Thời gian tạo kiện hàng \\
+				\hline
+				timeHistory & Danh sách thời gian update trạng thái đơn hàng \\
+				\hline
+				userId & Mã người dùng \\
+				\hline
+				weight & Khối lượng kiện hàng \\
+				\hline
+			\end{tabular}
+			\caption{Schema SubOrder}
+		\end{table}
+	
+	
+	
+		\item \textbf{ImportInfo}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã nhập kho\\
+				\hline 
+				driverId & Mã tài xế nhập kho\\ 
+				\hline
+				driverName & Tên tài xế nhập kho \\
+				\hline 
+				driverPhone & Số điện thoại tài xế nhập kho \\
+				\hline
+				importTime & Thời gian nhập kho \\
+				\hline
+				stockId & Mã kho \\
+				\hline
+				stockkeeperId & Mã thủ kho \\
+				\hline
+				stockkeeperName & Tên thủ kho \\
+				\hline
+				stockkeeperPhone & Số điện thoại thủ kho \\
+				\hline
+				subOrderIds & Danh sách kiện hàng nhập kho \\
+				\hline
+			\end{tabular}
+			\caption{Schema ImportInfo}
+		\end{table}
+	
+	\newpage
+	
+	
+		\item \textbf{ExportInfo}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã xuất kho\\
+				\hline 
+				driverId & Mã tài xế xuất kho\\ 
+				\hline
+				driverName & Tên tài xế xuất kho \\
+				\hline 
+				driverPhone & Số điện thoại tài xế xuất kho \\
+				\hline
+				importTime & Thời gian xuất kho \\
+				\hline
+				stockId & Mã kho \\
+				\hline
+				stockkeeperId & Mã thủ kho \\
+				\hline
+				stockkeeperName & Tên thủ kho \\
+				\hline
+				stockkeeperPhone & Số điện thoại thủ kho \\
+				\hline
+				subOrderIds & Danh sách kiện hàng xuất kho \\
+				\hline
+			\end{tabular}
+			\caption{Schema ExportInfo}
+		\end{table}
+
+	
+		\item \textbf{SupportRequest}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã yêu cầu\\
+				\hline 
+				userId & Mã khách hàng\\
+				\hline 
+				orderId & Mã đơn hàng\\ 
+				\hline
+				reqTime & Thời gian yêu cầu \\
+				\hline 
+				content & Nội dung yêu cầu \\
+				\hline
+				emailAddress & Địa chỉ mail của khách hàng \\
+				\hline
+				reply & Thông tin phản hồi \\
+				\hline
+			\end{tabular}
+			\caption{Schema SupportRequest}
+		\end{table}
+	
+		\item \textbf{StatisticFee}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				date & Ngày tháng năm theo format yyMMđd\\
+				\hline 
+				totalFee & Mã khách hàng\\
+				\hline 
+			\end{tabular}
+			\caption{Schema StatisticFee}
+		\end{table}
+	
+	
+		\item \textbf{StatisticTrans}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				date & Ngày tháng năm theo format yyMMđd\\
+				\hline 
+				transSuccess & Số đơn hàng thành công\\
+				\hline 
+				transCancel & Số đơn hàng bị hủy\\
+				\hline 
+				transFail & Số đơn hàng thất bại\\
+				\hline 
+			\end{tabular}
+			\caption{Schema StatisticFee}
+		\end{table}
+	
+	\newpage
+	
+		\item \textbf{Driver}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã tài xế\\
+				\hline 
+				area & Mã khu vực hoạt động của tài xế\\
+				\hline 
+				status & Trạng thái hoạt động của tài xế\\
+				\hline 
+				vehicleId & Mã phương tiện\\
+				\hline 
+			\end{tabular}
+			\caption{Schema Driver}
+		\end{table}
+	
+		\item \textbf{Role}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				userId & Mã user\\
+				\hline 
+				role & Vai trò của user\\
+				\hline 
+			\end{tabular}
+			\caption{Schema Role}
+		\end{table}
+	
+		\item \textbf{Stocker}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã thủ kho\\
+				\hline 
+				areaId & Mã kho\\
+				\hline 
+			\end{tabular}
+			\caption{Schema Stocker}
+		\end{table}
+	
+		\item \textbf{User}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã user\\
+				\hline 
+				address & Địa chỉ\\
+				\hline 
+				email & Email\\
+				\hline 
+				password & Mật khẩu\\
+				\hline 
+				phone & Số điện thoại\\
+				\hline 
+				provinceCode & Mã tỉnh\\
+				\hline 
+				username & Tên tài khoản\\
+				\hline 
+			\end{tabular}
+			\caption{Schema User}
+		\end{table}
+	
+		\item \textbf{Vehicle}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã phương tiện\\
+				\hline 
+				currentWeight & Trọng tải hiện tại\\
+				\hline 
+				totalWeight & Trọng tải\\
+				\hline 
+				number & Biển số\\
+				\hline 
+			\end{tabular}
+			\caption{Schema Vehicle}
+		\end{table}
+	
+	\newpage
+	
+		\item \textbf{Warehouse}
+		
+		\begin{table}[!htp]
+			\centering\begin{tabular}{|l|m{30em}|}
+				\hline 
+				id & Mã kho\\
+				\hline 
+				address & Địa chỉ kho\\
+				\hline 
+				areaCode & Mã khu vực\\
+				\hline 
+			\end{tabular}
+			\caption{Schema Warehouse}
+		\end{table}
+
+
+	\end{itemize}
+
+
+
+	
 
 
 
