@@ -64,61 +64,84 @@
             \item Hệ thống phải được thiết kế để khi có nhu cầu mở rộng, thêm tính năng mới phải dễ dàng.
             \item Hệ thống cân xuất thống kê về số lượng đơn hàng được vận chuyển thành công, thất bại, doanh thu vào ngày cuối cùng trong tháng.
         \end{itemize}
+    
+    \newpage
 
 \section{Thiết kế hệ thống}
 
 \subsection{Kiến trúc hệ thống}
-
+	
 		\begin{figure}[!ht]
-			\includegraphics[width=0.8\textwidth]{Images/architecture.png}
+			\includegraphics[width=1\textwidth]{Images/SystemArchitecture.jpg}
 			\centering
 			\linebreak
-			\caption{Mô hình services}
+			\caption{Kiến trúc hệ thống}
 		\end{figure}
+	
+
 		
 		\begin{itemize}
-			\item \textbf{User Management}
+			\item \textbf{User Service}
 			\begin{itemize}
 				\item Service chịu trách nhiệm quản lý user trong hệ thống. Ở đây sẽ lưu trữ Database của user
 				\item Mỗi khi user login vào hệ thống thì sẽ vào Service này để authen: Ban đầu user được yêu cầu sẽ nhập username và password, Sau khi authen là đúng user đó thì hệ thống sẽ sinh ra JWT (Json Web Token) để gửi trả về cho user. Sau này cứ mỗi request lên hệ thống thì user sẽ gửi kèm theo JWT để hệ thống có thể authen và author.
 				\item User có thể get thông tin để có thể xem và chỉnh sửa
 			\end{itemize}
-			\item \textbf{Order Management}
+			\item \textbf{Order Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm tạo Order cho user. Ở đây sẽ lưu trữ database về order.
-				\item Mỗi khi có request lên thì service đi authen sau đó gọi qua service Calculator Fee để tính toán các chi phí rồi lưu Order đó vào DB với trạng thái là “Đơn nháp”. Sau đó sẽ gửi thông tin về Order cho user xác nhận. Sau khi nhận được request xác nhận của user thì trạng thái của đơn hàng chuyển thành “Chờ bàn giao”.
+				\item Service chịu trách nhiệm tạo, xử lý, lưu trữ các thông tin về đơn hàng cho User.
+				\item Ngoài ra service còn chịu trách nhiệm phân phối các đơn hàng đến tài xế
+				\item Đây là service chịu tải khá lớn trong hệ thống vì nhóm sử dụng kết hợp các giải pháp sau nhằm tăng hiệu suất cho service: 
+					\begin{itemize}
+						\item Sử dụng Message Queue để hiện thực cơ chế bất đồng bộ cho các tác vụ: Tạo đơn hàng, ghi dữ liệu vào Database.
+						\item Sử dụng Kafka để gửi message cho service khác
+						\item Trong quá trinh xử lý thì dữ liệu của đơn hàng được lưu trên Cache. Đến khi nào có \textbf{trạng thái cuối} thì đơn hàng mới được lưu vào Database. Bởi vì đơn hàng đươc lấy và thay đổi trạng thái rất nhiều lần trong quá trình xử lý, nếu ghi vào Database (thực hiện nhiều I/O operations) sau mỗi lần xử lý như vậy thì sẽ làm giảm performance rất nhiều. Việc xử lý dữ liệu trên Cache cũng có thể gặp rủi ro như Cache Server sập thì dữ liệu có thể mất hết, nhưng rất may Redis có hỗ trợ cơ chế Persistence (định kỳ sao lưu dữ liệu) nên rủi ro này có thể chấp nhận được.
+					\end{itemize}
+				\item Mỗi khi đơn hàng thay đổi trạng thái hoăc tài xế đươc phân phối đơn thì service sẽ produce message vào \textbf{Kafka Broker} để \textbf{Notify Service} consume và tiếp tục xử lý
 			\end{itemize}
-			\item \textbf{Distribution Order}
+			\item \textbf{Notify Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm chia nhỏ các đơn hàng theo từng mặt hàng và chạy giải thuật để phân phối các đơn hàng cho tài xế.
-				\item Ở đây lưu trữ Database về thông tin của đơn hàng sau khi được chia nhỏ thành các mặt hàng.
+				\item Service chịu trách nhiệm quản lý các thông báo cho hệ thống.
+				\item Service sẽ consume message tử \textbf{Order Service} và gửi yêu cầu về mail cho \textbf{Google Mail Server}.
+				\item Hệ thống sẽ gửi thông báo mỗi khi: 
+					\begin{itemize}
+						\item Gửi thông báo cho khách hàng mỗi khi trạng thái đơn hàng thay đổi. 
+						\item Gửi thông báo cho tài xế mỗi khi được phân phối đơn.
+						\item Gửi mã xác thực OTP
+					\end{itemize}
 			\end{itemize}
-			\item \textbf{Notify}
+			\item \textbf{Fee Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm quản lý các thông báo.
-				\item Mobile/Web Backend sẽ liên tục gọi API getNotify để thông báo cho các user mỗi khi cần xác nhận bàn giao hàng
-				\item Ngoài ra mỗi khi trạng thái đơn hàng thay đổi thì hê thống sẽ tự động gửi mail thông báo cho các user
+				\item Service chịu trách nhiệm hiện thực giải thuât, công thức để tính toán các khoản phí phát sinh cho khách hàng.
+				\item Database lưu thông tin về phí của mỗi đơn hàng để các user có thể đối soát.
 			\end{itemize}
-			\item \textbf{Calculator Fee}
+			\item \textbf{Payment Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm tính toán các khoản phí phát sinh
-				\item Database lưu thông tin về phí của mỗi đơn hàng để các user có thể đối soát
+				\item Service này sẽ liên kết với 1 bên thứ 3 như: ngân hàng, ví điện từ, .... để thực hiện chức năng thanh toán cho các user.
 			\end{itemize}
-			\item \textbf{Payment}
+			\item \textbf{Reverse Proxy}
 			\begin{itemize}
-				\item Service này sẽ liên kết với 1 bên thứ 3 như: ngân hàng, ví điện từ, .... để thực hiện chức năng thanh toán cho các user
+				\item Hệ thống sử dụng NGINX như là một \textbf{Reverse Proxy} nhằm thực hiện một số chức năng như: 
+				\begin{itemize}
+					\item \textbf{Bảo mât}: Kiểm soát các yêu cầu của Client gửi tới, nếu hợp lệ sẽ luân chuyển đến các service bên trong để xử lý. Che giấu địa chỉ IP của các service bên trong nhằm giúp các service trách khỏi các cuôc tấn công mạng. Ngoài ra còn có thể dễ dàng thiết lập SSL nhằm mã hóa dữ liệu trong quá trình giao tiếp giữa Client và các service bên trong.
+					\item \textbf{Cân bằng tải}: Mỗi service có thể được deploy với nhiều instance để có thể chịu tải cao hơn. Reverse proxy sẽ thực hiện một số giải thuật như: Round Robin, Least Connection, ... để đẩy các request vào cho các service xử lý.
+				\end{itemize}
 			\end{itemize}
-			\item \textbf{Data}
-			\begin{itemize}
-				\item Các service khác sẽ gửi data qua service này phục vụ cho việc tạo dashboard thống kê các hoạt động theo tuần, tháng, năm. Ngoài ra còn cung cấp data để team dev có thể monitor các service khác hoạt động như thế nào.
-			\end{itemize}
+			
+				\item Database
+				\begin{itemize}
+					\item \textbf{MySQL}: Hệ thống sử dụng MySql để lưu các thông tin ít được truy xuất như log, cấu hình service,...
+					\item \textbf{Cassandra}: Với khả năng đọc/ghi có tốc độ nhanh cùng với đó là khả năng chịu lỗi cao hệ thống sử dụng Cassandra để lưu các thông tin về Order, Hóa đơn nhập/xuất kho,...
+					\item \textbf{Redis}: Với Redis thì dữ liệu được lưu trữ trong memory vì thế giúp cho service truy xuất thông tin rất nhanh chóng. Hệ thống sẽ lưu các thông tin thường xuyên được truy xuất bởi user như thông tin về yêu cầu, đơn hàng,... Ngoài ra còn tận dụng cấu trúc dữ liệu đa dạng trong Redis để giải quyết một số bài toán phức tạp. 
+				\end{itemize}
+		
 		\end{itemize}
 
-
+\newpage
 \subsection{Thiết kế Use Case}
 
 \begin{figure}[!ht]
-	\includegraphics[width=1\textwidth]{/UseCase.png}
+	\includegraphics[width=1\textwidth]{/UseCase.jpg}
 	\centering
 	\linebreak
 	\caption{Sơ đồ Use case}
