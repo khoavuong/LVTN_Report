@@ -137,6 +137,88 @@
 	       	
 	       	    Trong đoạn code trên ta lưu thông tin của số giao dịch thành công trong 1 ngày. Khi có yêu cầu lấy thông tin về số giao dịch thành công trong một khoảng thời gian nào đó thì ta chỉ cần gọi hàm như ví dụ để lấy. Do các thông tin này được lưu trên memory nên việc xử lý rất nhanh đảm bảo trải nghiệm tốt cho user.
 		  
-		    
+		  \section{Bài toán triển khai các services và cơ sở hạ tầng}
+		 
+		  
+		  Việc deploy hệ thống có thể được hỗ trợ bởi rất nhiều bên như: Git, Heroku, ... thông thường chúng ta chỉ đưa mã nguồn lên Git, thiết lập một vài bước là có thể dễ dàng triển khai hệ thống lên cho khách hàng sử dụng. Nhưng do nhóm sử dụng khá nhiều hạ tầng liên quan để tăng cường hiệu suất cho hệ thống như: Redis, Kafka, Mysql, Message Queue, Cassandra, ...cho nên việc sử dụng các nền tảng đó sẽ không được hỗ trợ một cách tối đa. Ngoài ra để hiểu rõ hơn về quy trình deploy một ứng dụng cũng như là cơ hội để có thể áp dụng các kiến thức đã được học về Network, System, Security, ... vào thực tế thì nhóm quyết định thuê 1 VPS (Virtual Private Server) trên Google Cloud Platform để tự cấu hình và triển khai hệ thống của mình.
+		  
+		  Như đã trình bày ở phần Công nghệ để deploy nhanh chóng, tiện lợi các services và cơ sở hạ tầng đi kèm thì nhóm sử dụng nền tảng \textbf{Docker} và \textbf{Docker compose}.
+		  
+		  
+		  \begin{figure}
+		  	\centering
+		  	\includegraphics[width=0.8\linewidth]{Images/flowDocker}
+		  	\linebreak
+		  	\caption{Flow docker}
+		  \end{figure}
+		  
+		  Đầu tiên thì mỗi service cần phải có một \textbf{Dockerfile}, sau đó tiến hàng build Dockerfile thì ta có được \textbf{Image}, cuối cùng chỉ cần chạy Image đó là ta đã deploy được service trong \textbf{Container}.
+		  
+		  \begin{figure}
+		  	\centering
+		  	\includegraphics[width=0.7\linewidth]{Images/DockerfileOrderService}
+		  	\linebreak
+		  	\caption{Dockerfile OrderService}
+		  \end{figure}
+	  \newpage
+		  
+		  Dockerfile thực thi các câu lệnh để build ra file *.jar và chạy file jar đó trong containers. Ở đây thì nhóm có tìm hiểu một số kỹ thuật để tăng cường hiệu suất cho Docker như sau:
+		  
+		  \begin{itemize}
+		  	\item \textbf{Multi-stage build}: Thông thường để chạy được service ta cần phải tạo môi trường, cấu hình package, module, ... và sẽ cần dung lượng khá cao, làm cho Image nặng lên từ đó làm tăng thời gian build, run và làm giảm hiệu suất của Docker. Vì thể nhóm sẽ build Image trên 2 stage, ở stage thứ nhất thì ta thiết lập môi trường, các package liên quan sau đó tiến hành build file *.jar. Ở stage thứ 2 ta chỉ cần copy file *.jar qua và thực thi. Điều này giúp cho quá trình build và run Image trở nên nhanh hơn đáng kể.
+		  	\item \textbf{Sử dụng base image đươc dựng trên alpine}: Alpine Linux là một distro linux dựa trên musl và busybox, được phát triển chú trọng về đơn giản, bảo mật và hiệu quả tài nguyên. Ở đây nhóm đã sử dụng base image đó là: openjdk:8-jdk-alpine để thực thi file *.jar.
+		  \end{itemize}
+		  
+		  
+		  Một hệ thống thông thường sẽ phải deploy rất nhiều container khác nhau. Khi có nhiều container việc phải start, stop, run từng container trở nên khó khăn và khó quản lý. Vì thế nhóm đã dụng \textbf{Docker compose} cho phép quản lý nhiều container một cách rất dễ dàng.
+		  
+		  Tương tự như các service thì các cơ sở hạ tầng như: MySQL, Cassandra, Redis, Kafka, ActiveMq, ... cũng được deploy và triển khai dựa trên Docker.
+		  
+		  
+		  
+		  \begin{figure}
+		  	\centering
+		  	\includegraphics[width=0.8\linewidth]{Images/DockercomposeOrderService}
+		  	\linebreak
+		  	\caption{Docker compose OrderService}
+		  \end{figure}
+		  
+		  \begin{figure}
+		  	\centering
+		  	\includegraphics[width=0.8\linewidth]{Images/DockerResult}
+		  	\linebreak
+		  	\caption{Kết quả}
+		  \end{figure}
+	  
+	  \newpage
+	  
+	  \section{Bài toán bảo mật các service trong private network, cấu hình SSL, cân bằng tải}
+	  
+	  
+	  Thông thường sau khi deploy thì các service được gọi thống qua \textbf{IP:port/service-name/...}, điều này có nghĩa là service sẽ được public ra bên ngoài. Điều này có thê gặp một số rủi ro về vấn đề an ninh và bảo mật. Vì thế nhóm đã sử dụng NGINX như là một \textbf{Reverse Proxy} để tăng cường bảo mật, cũng như cân bằng tải.
+	  
+	  
+	  \begin{figure}
+	  	\centering
+	  	\includegraphics[width=0.8\linewidth]{Images/NGINXconfig}
+	  	\linebreak
+	  	\caption{Cấu hình của NGINX}
+	  \end{figure}
+  
+  		
+  
+  
+  	
+		Như trên file đã cấu hình thì server Frond end có thể gửi request xuống server Back end thông qua domain là: \textbf{dungdang.codes} ở port 80 cho HTTP và 443 cho HTTPS. Đối với những request có domain là: https://dungdang.codes/order-management/... sẽ được route vào service đươc deploy ở port 8080 còn https://dungdang.codes/support-service/... thì sẽ được route vào service deploy ở port 7070
+		
+		Điều này đã giúp che giấu và bảo mật các services chạy trong private network.
+		
+		\newpage
+		
+		
+		  
+		  
+		  
+
 		    
 		  
