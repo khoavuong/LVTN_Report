@@ -59,90 +59,16 @@
 		
 		\newpage
 		\subsection{Công nghệ tổng quan}
-		Bảng bên dưới là công nghệ dự tính thực hiện của nhóm:
-		\begin{figure}[!ht]
-			\includegraphics[width=0.8\textwidth]{Images/tech.png}
-			\centering
-			\linebreak
-			\caption{Công nghệ sử dụng}
-		\end{figure}\\
-		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ NETFLIX OSS
+		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ SPRING SECURITY
 		\begin{itemize}
 		    \item \textbf{Spring Boot} là một dự án nổi bật trong hệ sinh thái Spring Framework. Nếu như trước đây, công đoạn khởi tạo một dự án Spring khá vất vả từ việc khai báo các dependency trong file pom.xml cho đến cấu hình bằng XML hoặc annotation phức tạp, thì giờ đây với Spring Boot, chúng ta có thể tạo các ứng dụng Spring một cách nhanh chóng và cấu hình cũng đơn giản hơn.
 		    \item \textbf{Spring Cloud} là nền tảng khá mới mẻ trong gia đình Spring.io dùng để xây dựng microservice một cách nhanh chóng. Spring Cloud cung cấp các công cụ cho các developer để nhanh chóng xây dựng một số common patterns trong các hệ thống phân tán (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Chúng sẽ hoạt động tốt trong bất kỳ môi trường phân tán nào, bao gồm máy tính xách tay của chính developer, các data center hoặc trên cloud.
-		    \item Bản thân hệ sinh thái Spring không tự build hết tất cả các viên gạch cần để xây dựng ứng dụng Microservices. Thay vào đó, có một kho gạch dành cho Microservices được Netflix ban đầu phát triển trong nội bộ của họ để xây dựng dịch vụ xem phim trực tuyến nổi tiếng của họ và sau đó public ra dưới dạng open source với cái tên \textbf{Netflix OSS} (Open Source Software). Và Spring đơn giản chỉ làm nhiệm vụ wrap chúng lại và dùng trong hệ sinh thái của Spring (tất nhiên Spring nó còn wrap nhiều thằng khác nữa). Bằng cách kết hợp Spring Boot, Spring Cloud và Netflix OSS sẽ đủ cung cấp các công cụ và nguyên liệu cần thiết nhất để giúp bạn có thể nhanh chóng và dễ dàng xây dựng các Microservices của mình.
-		\end{itemize}
-		Công nghệ sử dụng cho Edge Server, Dynamic Routing and Load Balancer và Service Discovery
-		\begin{itemize}
-		    \item \textbf{Netflix Eureka} – Là một Service Discovery Server cho phép các dịch vụ microservices tự đăng ký mình vào danh sách các services hoạt động lúc khởi chạy. Server này sẽ chịu trách nhiệm lưu trữ và cung cấp thông tin của các service trong một hệ thống Microservice. Khi một service đăng ký thông tin với server, nó sẽ cung cấp các thông tin như host, port, trạng thái của nó. Và nó cũng thường xuyên gửi heartbeat message để thông báo tình trạng của mình cho server. Do đó, server này có thể dễ dàng cung cấp thông tin về các service khi chúng được gọi tới từ các service khác.
-		    \item \textbf{Netflix Ribbon} – Với chức năng Dynamic Routing và Load Balancing có thể được sử dụng bởi Service client để tra cứu dịch vụ lúc runtime. Ribbon sử dụng thông tin có sẵn trong Eureka để định vị các instance thích hợp. Nếu tìm thấy nhiều hơn một instance, Ribbon sẽ áp dụng cân bằng tải để phân phối các reuqest đến các instance rảnh việc nhất. Ribbon không chạy dưới dạng một dịch vụ riêng biệt mà thay vào đó nó là một thành phần được nhúng trong mỗi Service client.
-		    \item \textbf{Netflix Zuul} – Đóng vai trò như một Edge Server hoặc gatekeeper với thế giới bên ngoài, không cho phép bất kỳ yêu cầu bên ngoài trái phép nào đi qua. Các request đi tới services đều phải qua anh chàng Zuul này để check hàng trước. Zuul sử dụng Ribbon để tra cứu các dịch vụ sẵn có và định tuyến yêu cầu bên ngoài đến instance dịch vụ thích hợp. Trong bài đăng trên blog này, tôi sẽ chỉ sử dụng Zuul như một điểm vào (entry point).
-		\end{itemize}
-		Công nghệ sử dụng cho Circuit Breaker
-		\begin{itemize}
-		    \item \textbf{Netflix Hystrix} – Cung cấp khả năng ngắt mạch cho service consumer. Nếu một dịch vụ không đáp ứng (do timeout hoặc lỗi giao tiếp), Hystrix có thể chuyển hướng cuộc gọi đến phương thức dự phòng trong service consumer. Nếu một dịch vụ liên tục không hoạt động, Hystrix sẽ mở mạch và thực hiện fail fast (tức là gọi phương thức dự phòng mà không gọi đến service đó luôn) trên tất cả request tiếp theo cho đến khi dịch vụ “sống” trở lại. Để xác định khi nào một dịch vụ sống lại, lâu lâu nó sẽ thử bằng cách cho phép các request tới dịch vụ đó để xem nó sống lại hay chưa. Hystrix được cài đặt ở phía service consumber.
-		\end{itemize}
-		Công nghệ sử dụng cho Monitoring
-		\begin{itemize}
-		    \item \textbf{Netflix Hystrix dashboard và Netflix Turbine} –  Hystrix giúp kiểm soát sự tương tác giữa các dịch vụ bằng cách cung cấp khả năng chịu lỗi và khả năng chịu độ trễ. Nó cải thiện khả năng phục hồi tổng thể của hệ thống bằng cách cô lập các dịch vụ bị lỗi và ngăn chặn hiệu ứng phân tầng của các lỗi. Và Hystrix dashboard cung cấp trực quan tổng quát bộ ngắt mạch. Turbine là một công cụ mã nguồn mở của Netflix để tổng hợp nhiều luồng từ Hystrix vào một luồng duy nhất.
+		    \item \textbf{Spring Security} là một trong những core feature quan trọng của Spring Framework, nó giúp chúng ta phân quyền và xác thực người dùng trước khi cho phép họ truy cập vào các tài nguyên của chúng ta. 
 		\end{itemize}
 		Công nghệ sử dụng cho Secure API
 		\begin{itemize}
 		    \item \textbf{Json Web Token(JWT)} - Là 1 tiêu chuẩn mở (RFC 7519) định nghĩa cách thức truyền tin an toàn giữa các thành viên bằng 1 đối tượng JSON. Thông tin này có thể được xác thực và đánh dấu tin cậy nhờ nó có chứa chữ ký số (digital signature). Phần chữ ký của JWT sẽ được mã hóa lại bằng HMAC hoặc RSA. Sử dụng JWT là cách tốt để áp dụng cơ chế bảo mật đối với các dịch vụ API RESTful mà có thể được sử dụng để truy cập vào cơ sở dữ liệu.
 		\end{itemize}
-		Công nghệ sử dụng cho Central Configuration Server
-		\begin{itemize}
-		    \item \textbf{Spring Cloud Config} là một mô-đun của Spring Cloud cung cấp việc lưu trữ và phục vụ các cấu hình phân tán trên nhiều ứng dụng và trên các môi trường phát triển (dev, staging, product, ...).. Spring Cloud Config hoạt động theo mô hình kiến trúc client - server, bao gồm: Spring Cloud Config Server và Spring Cloud Config Client.
-		    \begin{itemize}
-		        \item \textbf{Spring Cloud Config Server}: Các property của các ứng dụng Spring (được lưu trong các property source như file properties hoặc file YAML) được tập trung trên một hệ thống backend: Git repository (mặc định), File System, Vault, JDBC, Redis... Nhiệm vụ của Spring Config Server là pull các property này về và dùng EnvironmentRepository để lưu trữ. EnvironmentRepository cung cấp các đối tượng Spring Environment.Sau đó cung cấp các property cho Config Client thông qua các HTTP resource-based API (HTTP Method là GET).
-		        \item \textbf{Spring Cloud Config Client}: Đây chính là các ứng dụng Spring đã tách biệt các property. Khi startup, Config Client sẽ đọc các property từ API của Config Server và khởi tạo đối tượng Environment với property source phù hợp.
-		    \end{itemize}
-		\end{itemize}
-		Công nghệ sử dụng cho Centralized Log Analysis
-		\begin{itemize}
-		    \item \textbf{Logstash} - Có thể thu thập các sự kiện nhật ký từ nhiều loại nguồn bằng cách sử dụng các plug-ins đầu vào, chuyển đổi nó sang định dạng bạn thích bằng cách sử dụng các plug-ins filter và codec và gửi nó đến một số điểm đến bằng các plug-ins đầu ra.
-		    \begin{itemize}
-		        \item \textbf{Input}: tiếp nhận/thu thập dữ liệu sự kiện log ở dạng thô từ các nguồn khác nhau như file, redis, rabbitmq, beats, syslog,….
-		        \item \textbf{Filter}: Sau khi tiếp nhận dữ liệu sẽ tiến hành thao tác dữ liệu sự kiện log (như thêm, xoá, thay thế,.. nội dung log) theo cấu hình của quản trị viên để xây dựng lại cấu trúc dữ liệu log event theo mong muốn.
-		        \item \textbf{Output}: Sau cùng sẽ thực hiện chuyển tiếp dữ liệu sự kiện log về các dịch vụ khác như Elasticsearch tiếp nhận lưu trữ log hoặc hiển thị log,..
-		    \end{itemize}
-		    \item \textbf{Elasticsearch} - Là một cơ sở dữ liệu tìm kiếm toàn văn bản được phân phối và có thể mở rộng, cho phép bạn lưu trữ và tìm kiếm khối lượng lớn các sự kiện nhật ký. Thay vì tìm kiếm trên file, trên các database như MySQL, Oracle, MongoDB… thì chuyển dữ liệu đó sang Elasticsearch và thực hiện tìm kiếm trên Elasticsearch sẽ mang lại hiệu quả rất lớn, đặc biệt là trong những trường hợp dữ liệu log lớn.
-		    \begin{itemize}
-		        \item Ưu điểm
-		        \begin{itemize}
-		            \item Tìm kiếm dữ liệu rất nhanh chóng, mạnh mẽ dựa trên Apache Lucene ( near-realtime searching)
-		            \item Có khả năng phân tích dữ liệu
-		            \item Khả năng mở rộng theo chiều ngang
-		            \item Hỗ trợ tìm kiếm mờ tức là từ khóa tìm kiếm có thể bị sai lỗi chính tả hay không đúng cú pháp thì vẫn có khả năng elasticsearch trả về kết quả tốt.
-		            \item Hỗ trợ Structured Query DSL (Domain-Specific Language ), cung cấp việc đặc tả những câu truy vấn phức tạp một cách cụ thể và rõ ràng bằng JSON.
-		            \item Hỗ trợ nhiều Elasticsearc client như Java, PhP, Javascript, Ruby, .NET, Python
-		        \end{itemize}
-		        \item Nhược điểm
-		        \begin{itemize}
-		            \item Trong elasticsearch không có khái niệm database transaction , tức là nó sẽ không đảm bảo được toàn vẹn dữ liệu trong các hoạt động Insert, Update, Delete.Tức khi chúng ta thực hiện thay đổi nhiều bản ghi nếu xảy ra lỗi thì sẽ làm cho logic của mình bị sai hay dẫn tới mất mát dữ liệu. Đây cũng là 1 phần khiến elasticsearch không nên là database chính.
-		            \item Không thích hợp với những hệ thống thường xuyên cập nhật dữ liệu. Sẽ rất tốn kém cho việc đánh index dữ liệu.
-		            \item Elasticsearch được thiết kế cho mục đích search, do vậy với những nhiệm vụ khác ngoài search như CRUD thì elastic kém thế hơn so với những database khác như Mongodb, Mysql ….
-		        \end{itemize}
-		    \end{itemize}
-		    \item \textbf{Kibana} - Cho phép bạn hình dung và phân tích các sự kiện nhật ký của bạn được lưu trữ trong Elasticsearch.
-		    \begin{itemize}
-		        \item Cung cấp biểu đồ tương tác: Kibana cung cấp các biểu đồ và báo cáo trực quan mà bạn có thể sử dụng để điều hướng tương tác thông qua một lượng lớn dữ liệu. Bạn có thể tự động kéo các cửa sổ thời gian, phóng to, thu nhỏ các tập hợp dữ liệu cụ thể và xem chi tiết các báo cáo để trích xuất thông tin chi tiết có thể hành động từ dữ liệu của bạn.
-		        \item Tập hợp và bộ lọc dựng sẵn: Sử dụng các tập hợp và bộ lọc dựng sẵn của Kibana, bạn có thể chạy nhiều loại phân tích như biểu đồ, truy vấn N hàng đầu và xu hướng.
-		        \item Bảng điều khiển dễ dàng truy cập: có thể dễ dàng thiết lập bảng điều khiển và báo cáo và chia sẻ chúng với những người khác. Chỉ cần một trình duyệt để xem và khám phá dữ liệu.
-		        \item Công cụ trình bày Canvas: Canvas kết hợp dữ liệu với màu sắc, hình dạng, và trí tưởng tượng để mang lại sự hiển thị dữ liệu động, đa trang, pixel hoàn hảo cho màn hình lớn và nhỏ, làm cho dữ liệu tuyệt vời hơn.
-		        \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/canvas.png}
-    			\centering
-    			\linebreak
-    			\caption{Canvas}
-		        \end{figure}\\
-		        \newpage
-		        \item Dev Tools: Chứa các công cụ phát triển giúp bạn tương tác với dữ liệu dễ dàng hơn\\
-		        \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/devtool.png}
-    			\centering
-    			\linebreak
-    			\caption{Dev Tool}
-		        \end{figure}\\
-		    \end{itemize}
         \subsection{Kiến trúc RESTful API}
 		    
 		    RESTful API là một tiêu chuẩn dùng trong việc thiết kế các API cho ứng dụng web để quản lý resource. RESTful là một trong những kiểu thiết kế API được sử dụng phổ biến ngày nay để cho các ứng dụng (web, mobile, web service...) khác nhau có thể giao tiếp với nhau.
@@ -437,4 +363,4 @@
             
             
             
-		\end{itemize}
+		
