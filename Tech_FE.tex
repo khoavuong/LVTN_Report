@@ -6,14 +6,14 @@
 	\subsection{ReactJS}
 	
 		\begin{figure}[!ht]
-			\includegraphics[width=0.5\textwidth]{/MPA.png}
+			\includegraphics[width=0.8\textwidth]{/MPA.png}
 			\centering
 			\linebreak
 			\caption{Luồng dữ liệu của các trang web MPA truyền thống}
 		\end{figure}
 	
 		\begin{figure}[!ht]
-			\includegraphics[width=0.5\textwidth]{/SPA.png}
+			\includegraphics[width=0.8\textwidth]{/SPA.png}
 			\centering
 			\linebreak
 			\caption{Luồng dữ liệu của các trang web SPA}
@@ -22,7 +22,7 @@
 		\textbf{ReacJS} được phát triển bởi Facebook là một thư viện rất phổ biến để phát triển các ứng dụng web SPA hiện nay. React Cho phép người lập trình có thể chia ứng dụng thành các component và tái sử dụng, nhờ vậy mà tiết kiệm được thời gian lập trình. Hơn nữa, cơ chế DOM ảo \textbf{(Virtual DOM)} mới chính là điểm đặc biệt hơn cả của thư viện ReactJS. Cập nhật cây DOM là một tác vụ khá tốn chi phí. Nếu như để lập trình một cách thông thường, lập trình viên tự quản lí DOM bằng các Native API của môi trường web thì sẽ dễ gây ra vấn đề về hiệu suất. Chính vì vậy ReactJS sẽ giúp ta cập nhật DOM bằng cách quản lí ngầm một cây DOM ảo và sẽ đối chiếu những thay đổi so với các phiên bản DOM ảo trước đó để cập nhật lên cây DOM thật, giúp ứng dụng web tăng hiệu suất. Chính vì những lí do trên mà nhóm quyết định sẽ sử dụng thư viện này để phát triển luận văn này.\\
 		
 		\begin{figure}[!ht]
-			\includegraphics[width=0.5\textwidth]{/ReactJS.jpg}
+			\includegraphics[width=0.8\textwidth]{/ReactJS.jpg}
 			\centering
 			\linebreak
 			\caption{ReactJS và những lợi ích khi sử dụng}
@@ -31,12 +31,69 @@
 		Bên cạnh đó, ReactJS cho phép người lập trình có thể viết bằng 2 ngôn ngữ: Javascript và Typescript. Javascript đã ra đời và được sử dụng từ rất lâu. Hiện nay, đây là ngôn ngữ được rất nhiều lập trình viên sử dụng, cả trong việc phát triển ứng dụng phía client-side lẫn phía server-side. JS là một ngôn ngữ prototype-based hỗ trợ cả lập trình hướng đối tượng và lập trình hàm, các tính năng được bảo trì và phát triển liên tục. Tuy vậy, quá linh động cũng là một điểm yếu của ngôn ngữ này. JS không kiểm tra ràng buộc kiểu khi chúng ta viết mã nguồn. Người lập trình có thể sử dụng một biến mà không cần khai báo kiểu, khiến cho việc truyền tham số hay khi tương tác các biến khác kiểu trở nên khó kiểm soát. Lấy ví dụ đơn giản như biểu thức "1" + 1 sẽ là hợp lệ và không bị bắt lỗi trong quá trình kiểm tra kiểu tĩnh khi chúng ta lập trình. Hay khi ta định nghĩa một hàm với các tham số cần truyền vào, do JS không hỗ trợ khai báo kiểu nên khi gọi hàm ta có thể truyền bất cứ tham số với bất cứ kiểu nào, làm cho hàm có thể thực thi ngoài ý muốn. Chính vì vậy, TypeScript ra đời để giải quyết vấn đề của JS kể trên. TypeScript yêu cầu người dùng định nghĩa kiểu rõ ràng cho các biến, kiểu trả về của hàm và bắt lỗi các biểu thức mà có sự tương tác của các biến không tương thích kiểu. Nhờ vậy, Sử dụng TS sẽ giúp cho mã nguồn của dự án dễ đọc, minh bạch, dễ bảo trì và phát triển hơn rất nhiều.
 		
 		\begin{figure}[!ht]
-			\includegraphics[width=0.6\textwidth]{/TypeScript.jpg}
+			\includegraphics[width=0.8\textwidth]{/TypeScript.jpg}
 			\centering
 			\linebreak
 			\caption{TypeScript là phiên bản mở rộng của JS có hỗ trợ kiểm tra kiểu tĩnh}
 		\end{figure}
-			
+	
+		
+		\subsection{Quản lý router với React Router}
+		
+		Như đã nói, trong luận văn lần này, nhóm sẽ xây dựng hệ thống vận chuyển hàng hóa liên tỉnh theo
+		mô hình Single Page Application. Nhưng để đạt được điều đó với việc dùng React
+		làm framework phát triển, thì nhóm phải cần một công cụ vừa tích hợp được với React,
+		vừa tận dụng và thao tác được HTML5 Routing - yếu tố chính để làm một trang web mang
+		tính "SPAable". Và công cụ thích hợp nhất không ai khác chính là React Router.
+		
+		
+		React Router và định tuyến động, phía máy khách, cho phép nhóm xây dựng Single Page App với điều hướng mà không cần làm mới trang khi người dùng điều hướng. React Router sử dụng cấu trúc thành phần để gọi các thành phần, hiển thị thông tin phù hợp.
+		
+		Bằng cách ngăn chặn làm mới trang và sử dụng Router hoặc Link, việc xuất hiện màn hình trắng hoặc trang trống sẽ được ngăn chặn. Đây là một cách ngày càng phổ biến để có trải nghiệm người dùng liền mạch hơn. React router cũng cho phép người dùng sử dụng chức năng trình duyệt như nút quay lại và trang làm mới trong khi duy trì giao diện chính xác của ứng dụng.
+		
+		\subsection{Quản lý state với Redux}
+		
+		Thông thường ứng dụng React sẽ quản lý các state trong mỗi components, để chia sẽ state thì phải truyền từ component cha xuống component con hoặc cần sử dụng đến context vì vậy nó chỉ phù hợp cho các ứng dụng nhỏ, có ít state. Nhưng khi ứng dụng lớn lên và có nhiều state thì việc sử dụng context sẽ khá vất vả, rất khó phát triển và bảo trì. Redux ra đời giúp chúng ta tạo ra một STORE để lưu toàn bộ data vào 1 nơi và cung cấp cho toàn bộ ứng dụng.
+		
+		\newpage
+		
+		\begin{figure}[!ht]
+			\includegraphics[width=0.8\textwidth]{Images/redux.jpeg}
+			\centering
+			\linebreak
+			\caption{Redux}
+		\end{figure}
+	
+	\begin{figure}[!ht]
+		\includegraphics[width=0.8\textwidth]{Images/flowredux.png}
+		\centering
+		\linebreak
+		\caption{Flow redux}
+	\end{figure}
+
+		\newpage
+	
+		Redux bao gồm 3 thành phần chính:
+		
+		\begin{itemize}
+			\item \textbf{Store}: Nơi lưu trữ tất cả state của ứng dụng. Ở đây ta có thể get, update, delete thông qua Action.
+			\item \textbf{Action}: Là các hành động, event mà chúng ta tạo ra để thay đối state.
+			\item \textbf{Reducer}: là 1 function nhận đầu vào là state và các mô tả về event để trả về state tiếp theo.
+		\end{itemize}
+	
+	
+		
+		Flow hoạt động của Redux như sau: 
+		
+		\begin{itemize}
+			\item Bước 1: Trên Component của người dùng xảy ra các sự kiện như người dùng click vào 1 element, tạo, update, xóa data.
+			\item Bước 2: Action bắt đươc sự kiện trên component của người dùng, thực hiện tạo một hành động trong đó có type và payload.
+			\item Bước 3: Action sẽ được gửi đến Reducer. Reducer sẽ dựa vào type của Action để biết và lấy data ở trong State rồi thực hiện update data đó.
+			\item Bước 4: Sau khi state được thay đổi thì component chứa state đó sẽ được render lại.
+		\end{itemize}
+	
+		Hệ thống vận chuyển hàng hóa liên tỉnh mà nhóm xây dựng gồm rất nhiều tính năng và giao diện khác nhau. Vì thế nếu không sử dụng Redux sẽ dẫn đến việc khó quản lý các state sau này. Đến một lúc nào đó thì việc mở rộng sẽ trở nên khó khăn và có thể phải đập đi xây lại từ đầu nên nhóm quyết định sử dụng Redux để quản lý state của các component trong hệ thống.
+
 	
         		
         \subsection{Continuous integration / Continuous deployment (CI/CD)}
