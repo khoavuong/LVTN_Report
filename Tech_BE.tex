@@ -46,18 +46,14 @@
 	        \item \textbf{Central Configuration Server.} - Thay vì cấu hình cục bộ cho mỗi đơn vị triển khai (tức là microservice), chúng ta cần quản lý cấu hình tập trung. Chúng ta cũng cần một configuration API để các microservices có thể sử dụng để lấy thông tin cấu hình.
 	        \item \textbf{Centralized Log Analysis} - Để có thể theo dõi messages và phát hiện khi chúng bị kẹt (stuck), chúng ta cần một chức năng phân tích log tập trung có khả năng tiếp cận với máy chủ và thu thập các tệp log mà mỗi services microservice tạo ra. Chức năng phân tích log lưu trữ thông tin log này trong cơ sở dữ liệu trung tâm và cung cấp khả năng tìm kiếm và dashboard. Lưu ý : Để có thể tìm thấy các messages liên quan, điều quan trọng là tất cả các microservices phải sử dụng id đồng nhất trong các log message.
 		\end{itemize}
-		Mô hình minh họa\\
 	
-		
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 			\includegraphics[width=0.8\textwidth]{Images/model-microservice.png}
 			\centering
 			\linebreak
 			\caption{Mô hình Microservices}
-		\end{figure}
-	
-		
-		\newpage
+		\end{figure}		
+
 		\subsection{Công nghệ tổng quan}
 		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ SPRING SECURITY
 		\begin{itemize}
@@ -71,11 +67,12 @@
 		\end{itemize}
         \subsection{Kiến trúc RESTful API}
 		    
-		    RESTful API là một tiêu chuẩn dùng trong việc thiết kế các API cho ứng dụng web để quản lý resource. RESTful là một trong những kiểu thiết kế API được sử dụng phổ biến ngày nay để cho các ứng dụng (web, mobile, web service...) khác nhau có thể giao tiếp với nhau.
+		    RESTful API là một tiêu chuẩn dùng trong việc thiết kế các API cho ứng dụng web để quản lý resource. RESTful là một trong những kiểu thiết kế API được sử dụng phổ biến ngày nay để cho các ứng dụng (web, mobile, web service...) khác nhau có thể giao tiếp với nhau.\\
 		    
-		    Khi làm việc với server sẽ gồm 4 hoạt động thiết yếu đó là: lấy dữ liệu, tạo mới, cập nhật, xóa dữ liệu.
+		    Khi làm việc với server sẽ gồm 4 hoạt động thiết yếu đó là: lấy dữ liệu, tạo mới, cập nhật, xóa dữ liệu.\\
 		    
 		    REST hoạt động chủ yếu dựa vào giao thức HTTP. Mỗi trong 4 hoạt động cơ bản trên sẽ sử dụng những phương thức HTTP riêng (HTTP method):
+		    
 		    \begin{itemize}
 		        \item POST (CREATE) : Tạo mới một tài nguyên.
 		        \item GET (READ) : Trả về một tài nguyên hoặc một danh sách tài nguyên.
@@ -84,7 +81,8 @@
 		    \end{itemize}
 		    REST là một kiến trúc thống nhất giúp thiết kế các website để có thể dễ dàng quản lý các tài nguyên. Nó không phải là một quy luật buộc bạn phải tuân theo mà đơn giản là một kiến trúc được đề xuất ra và kiến trúc này hiện đang được sử dụng rất phổ biến vì tính đơn giản, dễ hiểu và rất ưu việt của nó. Với các ứng dụng web được thiết kế sử dụng RESTful, ban có thể dễ dàng biết được URL và HTTP method để quản lý một resource
 		    
-		    \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/restful.jpeg}
+		    \begin{figure}[H]   			
+		    	\includegraphics[width=0.8\textwidth]{Images/restful.jpeg}
 		    	\centering
 		    	\linebreak
 		    	\caption{RESTFul API}
@@ -110,7 +108,7 @@
             
             MySQL là hệ quản trị cơ sở dữ liệu tự do nguồn mở phổ biến nhất thế giới và được các nhà phát triển rất ưa chuộng trong quá trình phát triển ứng dụng. Vì MySQL là cơ sở dữ liệu tốc độ cao, ổn định và dễ sử dụng, có tính khả chuyển, hoạt động trên nhiều hệ điều hành cung cấp một hệ thống lớn các hàm tiện ích rất mạnh. Với tốc độ và tính bảo mật cao, MySQL rất thích hợp cho các ứng dụng có truy cập CSDL trên internet.
             
-            \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/mysqlintro.png}
+            \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/mysqlintro.png}
             	\centering
             	\linebreak
             	\caption{Mysql}
@@ -132,11 +130,12 @@
             \end{itemize}	
             \subsection{Cassandra}
             
-            Ngày nay, các dịch vụ trên Internet phải xử lí khối lượng dữ liệu rất lớn. Hầu hết dữ liệu sẽ được lưu trữ phân tán trên nhiều máy chủ khác nhau. Vì vậy, các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) tỏ ra không còn phù hợp với các dịch vụ như thế này nữa. Người ta bắt đầu nghĩ tới việc phát triển các DBMS mới phù hợp để quản lý các khối lượng dữ liệu phân tán này. Các DBMS này thường được gọi là NoSQL. Một đại diện nổi bật của các NoSQL là Cassandra.
+            Ngày nay, các dịch vụ trên Internet phải xử lí khối lượng dữ liệu rất lớn. Hầu hết dữ liệu sẽ được lưu trữ phân tán trên nhiều máy chủ khác nhau. Vì vậy, các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) tỏ ra không còn phù hợp với các dịch vụ như thế này nữa. Người ta bắt đầu nghĩ tới việc phát triển các DBMS mới phù hợp để quản lý các khối lượng dữ liệu phân tán này. Các DBMS này thường được gọi là NoSQL. Một đại diện nổi bật của các NoSQL là Cassandra.\\
             
-            Cassandra ban đầu được tạo ra bởi Facebook. Sau đó nó đã được tặng cho Quỹ Apache và tháng 2 năm 2010 và được nâng cấp lên thành dự án hàng đầu của Apache. Cassandra là một cơ sở dữ liệu phân tán kết hợp mô hình dữ liệu của Google Bigtable với thiết kế hệ thống phân tán như bản sao của Amazon Dynamo.
+            Cassandra ban đầu được tạo ra bởi Facebook. Sau đó nó đã được tặng cho Quỹ Apache và tháng 2 năm 2010 và được nâng cấp lên thành dự án hàng đầu của Apache. Cassandra là một cơ sở dữ liệu phân tán kết hợp mô hình dữ liệu của Google Bigtable với thiết kế hệ thống phân tán như bản sao của Amazon Dynamo.\\
             
-            \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/cassandra.png}
+            \begin{figure}[H]   			
+            	\includegraphics[width=0.8\textwidth]{Images/cassandra.png}
             	\centering
             	\linebreak
             	\caption{Cassandra}
@@ -167,7 +166,14 @@
             \end{itemize}
             \subsection{Redis}
             
-            Ngày nay việc tăng tốc truy vấn để đáp ứng request một cách nhanh chóng đang dần trở nên phổ biến. Mỗi khi muốn truy xuất lấy dữ liệu từ Database thì ta phải xuống ổ cứng, mà tốc độ đọc/ghi dữ liệu từ ổ cứng chậm hơn rất nhiều so với RAM (khoảng 200 lần). Vì thế người ta nghĩ ra cách lưu dữ liệu thường xuyên truy xuất lên RAM để có thể phản hồi request của client với tốc độ nhanh nhất. Từ đó, Redis ra đời và được biết đến như là 1 cache database rất phổ biến trên thế giới.
+            Ngày nay việc tăng tốc truy vấn để đáp ứng request một cách nhanh chóng đang dần trở nên phổ biến. Mỗi khi muốn truy xuất lấy dữ liệu từ Database thì ta phải xuống ổ cứng, mà tốc độ đọc/ghi dữ liệu từ ổ cứng chậm hơn rất nhiều so với RAM (khoảng 200 lần). Vì thế người ta nghĩ ra cách lưu dữ liệu thường xuyên truy xuất lên RAM để có thể phản hồi request của client với tốc độ nhanh nhất. Từ đó, Redis ra đời và được biết đến như là 1 cache database rất phổ biến trên thế giới.\\
+            
+            \begin{figure}[H]   			
+            	\includegraphics[width=0.8\textwidth]{Images/redis.png}
+            	\centering
+            	\linebreak
+            	\caption{Redis}
+            \end{figure}
             
             
             \textbf{Đặc điểm}
@@ -179,15 +185,8 @@
                 \item Hỗ trợ cơ chế Pub/Sub messaging.
                 \item Hỗ trợ cơ chế Persistence giúp bảo vệ khỏi mất mát dữ liệu khi có sự cố xảy ra
             \end{itemize}
-        
-	        \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/redis.png}
-	        	\centering
-	        	\linebreak
-	        	\caption{Redis}
-	        \end{figure}
-        	
             
-            Nhờ đặc điểm giúp giảm thời gian truy vấn, nên Redis có tác dụng rất mạnh mẽ trong việc sử dụng làm cache có các ứng dụng web.
+            Nhờ đặc điểm giúp giảm thời gian truy vấn, nên Redis có tác dụng rất mạnh mẽ trong việc sử dụng làm cache có các ứng dụng web.\\ 
             
             \textbf{Ưu điểm}
             
@@ -208,7 +207,7 @@
                 \item Cache Invalidation: Khó khăn khi loại bỏ đi dữ liệu không còn được sử dụng trong Redis. Thông thường người ta thường đặt Time to live cho mỗi dữ liệu cache tùy theo tần số thay đổi, tần suất truy vấn và mức độ quan trọng của dữ liệu.
             \end{itemize}
             
-            \textbf{Kết luận}
+            \textbf{Kết luận}\\
             
             Ở đây nhóm sẽ sử dụng Redis cho mục đích cache là chủ yếu. Bởi vì có một số thông tin thường xuyên được request nhiều lần. Nếu để trong database được lưu ở ổ cứng thì dẫn tới việc làm tăng thời gian truy xuất, có thể dẫn tới chết database. Ngoài ra do Redis hỗ trợ thêm cơ chế Persistence để định kỳ sao lưu dữ liệu lên ổ cứng nên có thể phần nào đảm bảo dữ liệu không bị mất mát khi có sự cố xảy ra.
             
@@ -216,9 +215,7 @@
             
             Message queue là một kiến trúc cung cấp giao tiếp không đồng bộ. Ý nghĩa của queue ở đây chính là 1 hàng đợi chứa message chờ để được xử lý tuần tự theo cơ chế vào trước thì ra trước (FIFO - First In First Out). Một message là các dữ liệu cần vận chuyển giữa người gửi và người nhận. Ta có thể hiểu đơn giản việc sử dụng message queue cũng giống như việc ta đi gửi thư vậy. Lúc đến bưu điện ta chỉ việc bỏ thư vào hòm mà không cần quan tâm lúc nào thư sẽ được gửi đi mà chỉ biết là nó chắc chắn sẽ được xử lý. Đây là một ví dụ về việc giao tiếp bất đồng bộ.
             
-            \newpage
-            
-             \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/message.png}
+             \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/message.png}
 			\centering
 			\linebreak
 			\caption{Active MQ}
@@ -238,17 +235,16 @@
             \begin{itemize}
                 \item Point-to-point: Tức là message chỉ được consumer bởi 1 thành phần duy nhất
                 
-                \newpage
-                
-                \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/PTP.png}
-        		\centering
-        		\linebreak
-        		\caption{Point-to-point}
+                \begin{figure}[H]   			
+                	\includegraphics[width=0.8\textwidth]{Images/PTP.png}
+	        		\centering
+	        		\linebreak
+	        		\caption{Point-to-point}
                 \end{figure}
                 
                 \item Publisher-Subcriber: Ở đây ta có thể có nhiều consumer cùng consume 1 message giống nhau khi chúng cùng subcriber vào 1 topic.
                 
-                \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/PS.png}
+                \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/PS.png}
         		\centering
         		\linebreak
         		\caption{Publisher-Subcriber}
@@ -273,27 +269,28 @@
                 \item Monitor Queue: Ta cần phải theo dõi queue để biết được tính trạng hiện tại, queue có đầy hay không, có bị crash không để đưa ra phương án xử lý.
             \end{itemize}
             
-            \textbf{Kết luận}
+            \textbf{Kết luận}\\
             
             Mặc dù message queue rất phù hợp để giao tiếp giữa các service trong hệ thống microservice. Nhưng ở đây nhóm chỉ sử dụng message để hiện thực cơ chế bất đồng bộ khi xử lý request tại một service cụ thế. Ví dụ như: Sau khi xử lý request của client ta cần vào Database để cập nhật lại status của đơn hàng nhưng việc truy xuất vào Database ngay thời điểm đó là không cần thiết. Ta có thể đưa message vào queue và sau đó trả kết quả về cho client ngay lập tức. Điều đó giúp ta tránh được việc truy xuất Database quá lâu sẽ ảnh hưởng đến trải nghiệm của người dùng.
             
             \subsection{Kafka}
             
-            Kafka là dự án mã nguồn mở, đã được đóng gói hoàn chỉnh, khả năng chịu lỗi cao và là hệ thống nhắn tin nhanh. Vì tính đáng tin cậy của nó, kafka đang dần được thay thế cho hệ thống nhắn tin truyền thống. Nó được sử dụng cho các hệ thống nhắn tin thông thường trong các ngữ cảnh khác nhau. Đây là hệ quả khi khả năng mở rộng ngang và chuyển giao dữ liệu đáng tin cậy là những yêu cầu quan trọng nhất.
+            Kafka là dự án mã nguồn mở, đã được đóng gói hoàn chỉnh, khả năng chịu lỗi cao và là hệ thống nhắn tin nhanh. Vì tính đáng tin cậy của nó, kafka đang dần được thay thế cho hệ thống nhắn tin truyền thống. Nó được sử dụng cho các hệ thống nhắn tin thông thường trong các ngữ cảnh khác nhau. Đây là hệ quả khi khả năng mở rộng ngang và chuyển giao dữ liệu đáng tin cậy là những yêu cầu quan trọng nhất.\\
             
             Để có thể hiểu rõ vai trò của Kafka ta có thể xem ảnh sau
             
-            \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/Kafka1.png}
-    		\centering
-    		\linebreak
-    		\caption{Vai trò Kafka}
+            \begin{figure}[H]   			
+            	\includegraphics[width=0.8\textwidth]{Images/Kafka1.png}
+    			\centering
+    			\linebreak
+    			\caption{Vai trò Kafka}
             \end{figure}
             
-            Thông thường việc giao tiếp giữa các thành phần trong hệ thống diễn ra hết sức phức tạp. Điều này làm tăng chi phí giám sát và làm giảm hiệu suất của hệ thống.
+            Thông thường việc giao tiếp giữa các thành phần trong hệ thống diễn ra hết sức phức tạp. Điều này làm tăng chi phí giám sát và làm giảm hiệu suất của hệ thống.\\
             
             Và từ đó Kafka ra đời giúp chúng ta đơn giản đi việc giao tiếp giữa các thành phần trong hệ thống với nhau.
             
-             \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/Kafka3.png}
+             \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/Kafka3.png}
     		\centering
     		\linebreak
     		\caption{Communicate giữa các hệ thống}
@@ -301,7 +298,7 @@
             
             \textbf{Kiến trúc}
             
-             \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/Kafka2.png}
+             \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/Kafka2.png}
     		\centering
     		\linebreak
     		\caption{Cấu trúc Kafka}
@@ -315,41 +312,35 @@
             \end{itemize}
             
     
-          	\textbf{Kết luận}: Tại sao lại sử dụng Kafka và không sử dụng Message Queue truyền thống
+          	\textbf{Kết luận}: Tại sao lại sử dụng Kafka và không sử dụng Message Queue truyền thống? \\
             
             Như nhóm đã trình bày ở phần trước thì Message Queue truyền thống sẽ đảm nhận nhiệm vụ xử lý bất đồng bộ trong từng service. Còn kafka sẽ là thành phần trung gian để gửi message từ service này đến service khác. Bởi vì kafka hoạt động rất nhanh do nó sử dụng cơ chế ZeroCopy, dữ liệu được sắp xếp theo khối, nén dữ liệu và giảm độ trễ I/O. Ngoài ra kafka rất dễ mở rộng khi lượng message cần trao đổi tăng lên và có cơ chế sao chép message ra nhiều partition để làm giảm rủi ro mất mát message trong quá trình xử lý.
             
             \subsection{Docker}
             
-            Docker là nền tảng cung cấp cho các công cụ, service để các developers, adminsystems có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.
+            Docker là nền tảng cung cấp cho các công cụ, service để các developers, adminsystems có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.\\
             
-            \begin{figure}[!ht]   			\includegraphics[width=0.8\textwidth]{Images/docker.png}
-    		\centering
-    		\linebreak
-    		\caption{Giới thiệu về Docker}
-            \end{figure}
-            
-            Ứng dụng Docker chạy trong vùng chứa (container) có thể được sử dụng trên bất kỳ hệ thống nào: máy tính xách tay của nhà phát triển, hệ thống trên cơ sở hoặc trong hệ thống đám mây. Và là một công cụ tạo môi trường được "đóng gói" (còn gọi là Container) trên máy tính mà không làm tác động tới môi trường hiện tại của máy, môi trường trong Docker sẽ chạy độc lập.
+            Ứng dụng Docker chạy trong vùng chứa (container) có thể được sử dụng trên bất kỳ hệ thống nào: máy tính xách tay của nhà phát triển, hệ thống trên cơ sở hoặc trong hệ thống đám mây. Và là một công cụ tạo môi trường được "đóng gói" (còn gọi là Container) trên máy tính mà không làm tác động tới môi trường hiện tại của máy, môi trường trong Docker sẽ chạy độc lập.\\
             
             Do nhóm viết ứng dụng theo kiến trúc Microservice vì thế có rất nhiều cơ sở hạ tầng phải deploy như: Cassandra, Kafka, Redis, Mysql, ActiveMQ, ... Ngoài ra còn rất nhiều service mà nhóm đã viết. Cho nên việc deploy và quản lý trên server vật lý hay virtual machine đều gặp rất nhiều khó khăn. Vì thế nhóm đã tìm hiểu và sử dụng Docker để đơn giản hóa quá trình deploy cơ sở hạ tầng và quản lý tài nguyên của mỗi service sao cho hiệu quả và tiết kiệm nhất. Đặc biệt việc sử dụng \textbf{Docker Compose} giúp chúng ta khởi tạo và quản lý các containers rất dễ dàng chi thông qua 1 dòng lệnh
+            
+			 \begin{figure}[H]
+            	\includegraphics[width=0.8\textwidth]{Images/docker.png}
+            	\centering
+            	\linebreak
+            	\caption{Giới thiệu về Docker}
+            \end{figure}
             
             
             \subsection{NGINX}
             
-            NGINX là một web server mạnh mẽ và sử dụng kiến trúc đơn luồng, hướng sự kiện vì thế nó hiệu quả hơn Apache server nếu được cấu hình chính xác. Nó cũng có thể làm những thứ quan trọng khác, chẳng hạn như load balancing, HTTP caching, hay sử dụng như một reverse proxy.
+            NGINX là một web server mạnh mẽ và sử dụng kiến trúc đơn luồng, hướng sự kiện vì thế nó hiệu quả hơn Apache server nếu được cấu hình chính xác. Nó cũng có thể làm những thứ quan trọng khác, chẳng hạn như load balancing, HTTP caching, hay sử dụng như một reverse proxy.\\
             
-            NGINX được xây dựng để cung cấp việc sử dụng bộ nhớ thấp và đồng thời cao. Thay vì tạo các quy trình mới cho mỗi yêu cầu web, NGINX sử dụng cách tiếp cận theo hướng sự kiện, không đồng bộ trong đó các yêu cầu được xử lý trong một luồng.
+            NGINX được xây dựng để cung cấp việc sử dụng bộ nhớ thấp và đồng thời cao. Thay vì tạo các quy trình mới cho mỗi yêu cầu web, NGINX sử dụng cách tiếp cận theo hướng sự kiện, không đồng bộ trong đó các yêu cầu được xử lý trong một luồng.\\
             
-            Reverse proxy là một proxy server mà khi đứng trước client, chúng hoạt động giống như những server bình thường. Reverse proxy chuyển tiếp request đến một hoặc nhiều server thật, kết quả sau đó trả về cho client như thể là chúng được trả về từ reverse proxy, khiến cho client không biết về những server thật nói trên. Reverse proxy được cài đặt trong một private network của một hoặc nhiều server, và tất cả lưu lượng truy cập đều phải đi qua proxy này. 
+            Reverse proxy là một proxy server mà khi đứng trước client, chúng hoạt động giống như những server bình thường. Reverse proxy chuyển tiếp request đến một hoặc nhiều server thật, kết quả sau đó trả về cho client như thể là chúng được trả về từ reverse proxy, khiến cho client không biết về những server thật nói trên. Reverse proxy được cài đặt trong một private network của một hoặc nhiều server, và tất cả lưu lượng truy cập đều phải đi qua proxy này.\\
             
-             \begin{figure}[!ht]   			
-             \includegraphics[width=0.8\textwidth]{Images/reverseproxy.png}
-    		\centering
-    		\linebreak
-    		\caption{Reverse Proxy}
-            \end{figure}
-            
-            Nhờ vào reverse proxy nhóm có thẻ:
+            Nhờ vào reverse proxy nhóm có thể:
             
             \begin{itemize}
                 \item Che giấu được thông tin các service đươc deploy bên trong private network
@@ -357,6 +348,13 @@
                 \item Phân chia tải cho các service bên trong.
                 \item Thiêt lập cấu hình HTTPS
             \end{itemize}
+        
+	        \begin{figure}[H]  			
+	        	\includegraphics[width=0.8\textwidth]{Images/reverseproxy.png}
+	        	\centering
+	        	\linebreak
+	        	\caption{Reverse Proxy}
+	        \end{figure}
           
             
             

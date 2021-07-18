@@ -1,27 +1,25 @@
 \section{Front-end}
 	\subsection{SPA}
-	
 		 Web sẽ thiết kế theo kiểu Single Page Application (SPA) thay vì theo kiểu truyền thống là Server side rendering. Ưu điểm của cách thiết kế này là web sẽ có trải nghiệm như khi dùng ứng dụng trên điện thoại hoặc máy tính. Mỗi lần thực hiện một thao tác hay chuyển trang trên web thì trình duyệt sẽ không phải load lại trang nữa. Việc này được thực hiện bằng cách sử dụng AJAX để lấy dữ liệu một cách bất đồng bộ từ phía server mỗi khi có một event do người dùng thực hiện trên trình duyệt. Sau đó, ta sẽ sử dụng dữ liệu lấy được (Thường là dưới dạng JSON) để đổ giao diện lên trình duyệt hiển thị cho người dùng.
+		 
+		 \begin{figure}[H]
+		 	\includegraphics[width=0.8\textwidth]{/MPA.png}
+		 	\centering
+		 	\linebreak
+		 	\caption{Luồng dữ liệu của các trang web MPA truyền thống}
+		 \end{figure}
+		 
+		 \begin{figure}[H]
+		 	\includegraphics[width=0.8\textwidth]{/SPA.png}
+		 	\centering
+		 	\linebreak
+		 	\caption{Luồng dữ liệu của các trang web SPA}
+		 \end{figure}
     
 	\subsection{ReactJS}
-	
-		\begin{figure}[!ht]
-			\includegraphics[width=0.8\textwidth]{/MPA.png}
-			\centering
-			\linebreak
-			\caption{Luồng dữ liệu của các trang web MPA truyền thống}
-		\end{figure}
-	
-		\begin{figure}[!ht]
-			\includegraphics[width=0.8\textwidth]{/SPA.png}
-			\centering
-			\linebreak
-			\caption{Luồng dữ liệu của các trang web SPA}
-		\end{figure}
-	
 		\textbf{ReacJS} được phát triển bởi Facebook là một thư viện rất phổ biến để phát triển các ứng dụng web SPA hiện nay. React Cho phép người lập trình có thể chia ứng dụng thành các component và tái sử dụng, nhờ vậy mà tiết kiệm được thời gian lập trình. Hơn nữa, cơ chế DOM ảo \textbf{(Virtual DOM)} mới chính là điểm đặc biệt hơn cả của thư viện ReactJS. Cập nhật cây DOM là một tác vụ khá tốn chi phí. Nếu như để lập trình một cách thông thường, lập trình viên tự quản lí DOM bằng các Native API của môi trường web thì sẽ dễ gây ra vấn đề về hiệu suất. Chính vì vậy ReactJS sẽ giúp ta cập nhật DOM bằng cách quản lí ngầm một cây DOM ảo và sẽ đối chiếu những thay đổi so với các phiên bản DOM ảo trước đó để cập nhật lên cây DOM thật, giúp ứng dụng web tăng hiệu suất. Chính vì những lí do trên mà nhóm quyết định sẽ sử dụng thư viện này để phát triển luận văn này.\\
 		
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 			\includegraphics[width=0.8\textwidth]{/ReactJS.jpg}
 			\centering
 			\linebreak
@@ -30,7 +28,7 @@
 		
 		Bên cạnh đó, ReactJS cho phép người lập trình có thể viết bằng 2 ngôn ngữ: Javascript và Typescript. Javascript đã ra đời và được sử dụng từ rất lâu. Hiện nay, đây là ngôn ngữ được rất nhiều lập trình viên sử dụng, cả trong việc phát triển ứng dụng phía client-side lẫn phía server-side. JS là một ngôn ngữ prototype-based hỗ trợ cả lập trình hướng đối tượng và lập trình hàm, các tính năng được bảo trì và phát triển liên tục. Tuy vậy, quá linh động cũng là một điểm yếu của ngôn ngữ này. JS không kiểm tra ràng buộc kiểu khi chúng ta viết mã nguồn. Người lập trình có thể sử dụng một biến mà không cần khai báo kiểu, khiến cho việc truyền tham số hay khi tương tác các biến khác kiểu trở nên khó kiểm soát. Lấy ví dụ đơn giản như biểu thức "1" + 1 sẽ là hợp lệ và không bị bắt lỗi trong quá trình kiểm tra kiểu tĩnh khi chúng ta lập trình. Hay khi ta định nghĩa một hàm với các tham số cần truyền vào, do JS không hỗ trợ khai báo kiểu nên khi gọi hàm ta có thể truyền bất cứ tham số với bất cứ kiểu nào, làm cho hàm có thể thực thi ngoài ý muốn. Chính vì vậy, TypeScript ra đời để giải quyết vấn đề của JS kể trên. TypeScript yêu cầu người dùng định nghĩa kiểu rõ ràng cho các biến, kiểu trả về của hàm và bắt lỗi các biểu thức mà có sự tương tác của các biến không tương thích kiểu. Nhờ vậy, Sử dụng TS sẽ giúp cho mã nguồn của dự án dễ đọc, minh bạch, dễ bảo trì và phát triển hơn rất nhiều.
 		
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 			\includegraphics[width=0.8\textwidth]{/TypeScript.jpg}
 			\centering
 			\linebreak
@@ -42,7 +40,7 @@
 		
 		Cụ thể, CI/CD giúp chúng ta chỉ phải code, chia branch đẩy lên git. Các công đoạn như unit test, deployment sẽ được gitlab-runner thực hiện một cách tự động mỗi khi có thay đổi mã nguồn. Bất kì ứng dụng được phát triển hiện nay đều cần phải qua khâu Unit Test do chính người lập trình viết trước khi được chuyển qua cho bộ phận kiểm thử phần mềm. Khi ta đẩy mã nguồn lên git mà quên chạy lệnh để kiểm thử unit test ở dưới máy local thì gitlab-runner sẽ giúp nhóm lập trình chạy các test case đó và sẽ thông báo trên giao diện git nếu có test case bị fail. Sau giai đoạn chạy các unit test và đã qua hết các test case thì tất nhiên, ứng dụng phải được deploy lên các môi trường (staging, production, etc). Việc phải SSH vào server host ứng dụng, sau đó tải mã nguồn mới nhất về, build ứng dụng ra các file tối ưu để chạy là khá tốn thời gian. Các thao tác trên thực chất cũng chỉ là chạy các câu lệnh trên terminal, vậy tại sao không để hệ thống tự động chạy những câu lệnh đó? Ta chỉ cần liệt kê các câu lệnh của một hành động cần phải thực hiện theo đúng thứ tự và hệ thống CI/CD của gitlab sẽ tự động chạy các câu lệnh đó cho chúng ta.
 		
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 1			\includegraphics[width=1\textwidth]{/cicd.png}
 			\centering
 			\linebreak
@@ -52,7 +50,7 @@
 		\subsection{Những thư viện nổi bật giúp hiện thực chức năng hệ thống}
 			Một số lập trình viên rất thích việc xây dựng mọi thứ từ đầu và hạn chế sử dụng thư viện càng nhiều càng tốt. Tuy vậy, có những tính năng đã được một số thư viện hỗ trợ đầy đủ và đã được kiểm thử qua hàng ngàn người dùng. Khi đó, ta nên sử dụng thư viện để tiết kiệm thời gian phát triển cũng như có thể sử dụng ngay lập tức tính năng chất lượng đã qua kiểm thử. Nhóm sẽ liệt kê một số thư viện nổi bật (Ngoài thư viện chính React) mà nhóm đã dùng để hiện thực một vài chức năng của hệ thống: \\
 			
-			Nhóm sẽ giới thiệu một số thư viện được áp dụng trong việc viết code phía client mà nhóm thấy nổi bật để trình bày:\\
+			Nhóm sẽ giới thiệu một số thư viện được áp dụng trong việc viết code phía client mà nhóm thấy nổi bật để trình bày:
 			
 			\begin{itemize}
 				\item \textbf{chart.js (version 2.9.4):} Dùng để hiện thực chức năng tạo biểu đồ thống kê của admin.
@@ -169,7 +167,7 @@
 			 		\includegraphics[width=0.8\textwidth]{/FE_unit_test/result.png}
 			 		\centering
 			 		\caption{Kết quả chạy 2 test case}
-			 	\end{figure}s
+			 	\end{figure}
 			 	
 			 	\subsection{Tổng kết}
 			 	Trên đây là những công nghệ nhóm đã dùng để hiện thực tương đối hoàn chỉnh phần front-end của hệ thống. Một hệ thống Front-end hoàn chỉnh không những chỉ cần những thành phần để hệ thống có thể chạy được mà cần phải có hệ thống track lỗi, thống kê truy cập vào website và đảm bảo lỗi thông qua unit test.

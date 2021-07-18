@@ -71,7 +71,7 @@
 
 \subsection{Kiến trúc hệ thống}
 	
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 			\includegraphics[width=1\textwidth]{Images/SystemArchitecture.jpg}
 			\centering
 			\linebreak
@@ -140,7 +140,7 @@
 \newpage
 \subsection{Thiết kế và đặc tả Use Case}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\includegraphics[width=1\textwidth]{/UseCase.jpg}
 	\centering
 	\linebreak
@@ -186,7 +186,7 @@
 				
 			
 			
-				\begin{table}[!htp]
+				\begin{table}[H]
 					\centering\begin{tabular}{|c|m{25em}|}
 						\hline 
 						Use case name & Tạo đơn hàng\\ 
@@ -211,14 +211,10 @@
 					\caption{Tạo đơn hàng}
 				\end{table}
 			
-			
-			\newpage
-			
-			
 			\item \textbf{Xem đơn hàng được nhận}: Người nhận có thể nhập số điện thoại để xem các đơn hàng được nhận, các đơn hàng sẽ được chia theo trạng thái đã định nghĩa ở trên và người gửi có thể xem list các đơn hàng lọc theo trạng thái đó. 
 			
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xem đơn hàng được nhận\\ 
@@ -245,7 +241,7 @@
 		
 		\item \textbf{Xem thông tin đơn hàng:} Khách hàng có thể xem thông tin đơn hàng theo các trạng thái khác nhau, theo mã đơn hàng hoặc theo khoảng thời gian nào đó.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xem thông tin đơn hàng\\ 
@@ -268,11 +264,9 @@
 				\caption{Xem thông tin đơn hàng}
 			\end{table}
 			
-			\newpage
-			
 			\item \textbf{Chỉnh sửa đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), người gửi có thể chỉnh sửa thông tin đơn hàng (Thông tin như trong mục tạo đơn, sẽ có giới hạn thông tin được chỉnh sửa).
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Chỉnh sửa đơn hàng\\ 
@@ -300,7 +294,7 @@
 			\item \textbf{Hủy đơn hàng:} Nếu vẫn đang trong quá trình bàn giao và xác nhận(trong trạng thái \textbf{Chờ bàn giao}), thì người gửi có thể hủy đơn hàng nếu muốn.
 			
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Hủy đơn hàng\\ 
@@ -323,13 +317,10 @@
 				\end{tabular}
 				\caption{Hủy đơn hàng}
 			\end{table}
-		
-			\newpage
-			
 			
 			\item \textbf{Gửi yêu cầu hỗ trợ:} Trong quá trinh vận chuyển nếu có thắc mắc nào thì khách hàng có thể gửi yêu cầu để quản lý hỗ trợ.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Gửi yêu cầu hỗ trợ\\ 
@@ -356,8 +347,7 @@
 		
 			\item \textbf{Xem phản hồi hỗ trợ}: Sau khi yêu cầu hỗ trợ được phản hồi bởi quản lý thì khách hàng có thể xem thông tin phản hồi đó.
 			
-			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xem phản hồi hỗ trợ\\ 
@@ -380,13 +370,10 @@
 				\end{tabular}
 				\caption{Xem phản hồi hỗ trợ}
 			\end{table}
-		
-		\newpage
-		
 			
 			\item \textbf{Xem thông báo}: Mỗi khi trạng thái đơn hàng thay đổi thì khách hàng đều nhận được email thông báo để khách hàng có thể nắm bắt đươc tình trạng của đơn hàng. Ngoài ra môt số chức năng cần phải nhập OTP để xác thực khách hàng thì cũng được gửi thông qua email.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xem thông báo\\ 
@@ -412,7 +399,7 @@
 		
 			\item \textbf{Xem nợ công}: Sau khi đơn hàng được xác nhận là hoàn thành thì sẽ có thống kê về nợ công để khách hàng dễ dàng quan sát và thanh toán.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xem nợ công\\ 
@@ -436,11 +423,9 @@
 				\caption{Xem nợ công}
 			\end{table}
 		
-		\newpage
-		
 			\item \textbf{Thanh toán}: Sau khi xem xét nợ công của các đơn hàng thì khách hàng có thể tiến hành thanh toán chi phí cho doanh nghiệp. Khách hàng có thể thanh toán từng đơn hàng hoặc chọn nhiều đơn hàng cùng một lúc.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Thanh toán\\ 
@@ -468,7 +453,7 @@
 		
 			\item \textbf{Chỉnh sửa thông tin cá nhân}: Khách hàng có thể thay đổi một số thông tin cá nhân khi cần thiết.
 			
-				\begin{table}[!htp]
+				\begin{table}[H]
 					\centering\begin{tabular}{|c|m{25em}|}
 						\hline 
 						Use case name & Chỉnh sửa thông tin cá nhân\\ 
@@ -493,8 +478,6 @@
 					\caption{Chỉnh sửa thông tin cá nhân}
 				\end{table}
 			
-				\newpage
-			
 		\end{itemize}
 	
 	
@@ -505,7 +488,7 @@
 		
 		\item \textbf{Báo cáo vấn đề}: Trong quá trình vận chuyển có thể xảy ra các trường hợp ngoài ý muốn như mất hàng, chậm trễ việc chuyển hàng thì Tài xế có thể báo cáo vấn đề lên đê Quản lý có thể giải quyết kịp thời.
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
 				\hline 
 				Use case name & Báo cáo vấn đề\\ 
@@ -535,7 +518,7 @@
 		
 		\item \textbf{Xem danh sách đơn hàng}: Tài xế có thể xem danh sách đơn hàng cần lấy, danh sách đơn hàng đã giao, đã hoàn thành, đã hủy,...
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
 				\hline 
 				Use case name & Xem danh sách đơn hàng\\ 
@@ -558,12 +541,9 @@
 			\caption{Xem danh sách đơn hàng}
 		\end{table}
 	
-	\newpage
-	
-	
 		\item \textbf{Xác nhận đơn hàng}: Mỗi khi giao nhận hàng thì tài xế có nhiệm vụ phải kiểm tra kĩ tình trạng và số lượng của kiện hàng. Sau đó cần phải xác nhận lại với hệ thống và phải chịu hoàn toàn trách nhiệm nếu đơn hàng có sai sót về tình trạng và số lượng.
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
 				\hline 
 				Use case name & Xác nhận đơn hàng\\ 
@@ -590,14 +570,12 @@
 		
 	\end{itemize}
 	
-		
-	
 	\item \textbf{Use case cho Thủ kho}
 	
 	\begin{itemize}
 		\item \textbf{Nhập kho}: Sau khi hàng được vận chuyển về kho thì thủ kho chịu trách nhiệm kiểm tra lại tình trạng và số lượng của đơn hàng. Nếu không có vấn đề gì xảy ra thì thủ kho nhập hàng vào kho để lưu trữ và chờ phân phối cho tài xế.
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
 				\hline 
 				Use case name & Nhập kho\\ 
@@ -623,11 +601,9 @@
 			\caption{Nhập kho}
 		\end{table}
 	
-	\newpage
-	
 		\item \textbf{Xuất kho}: Sau khi đơn hàng đươc phân phối cho tài xế. Thì tài xế đến kho nhận hàng và tiếp tục vận chuyển. Khi xuất hàng thủ kho có trách nhiệm kiểm tra hàng hóa về số lượng và tình trạng một lần nữa trước khi bàn giao cho Tài xế.
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
 				\hline 
 				Use case name & Xuất kho\\ 
@@ -661,8 +637,6 @@
 		
 	\end{itemize}
 		
-		
-		
 		\item \textbf{Use case cho Quản lý}
 		
 		\begin{itemize}
@@ -670,7 +644,7 @@
 			
 			\item \textbf{Tạo tài xế}: Mỗi khi tài xế mới nhận việc làm thì quản lý có trách nhiệm tạo tài xế và chỉ định kho hoạt động cho tài xế.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Tạo tài xế\\ 
@@ -696,7 +670,7 @@
 		
 			\item \textbf{Phản hồi yêu cầu hỗ trợ}: Sau khi nhận được yêu cầu hỗ trợ từ khách hàng thì quản lý có trách nhiệm phản hồi, giải đáp các yêu cầu, thắc mắc của khách hàng.
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Phản hồi yêu cầu hỗ trợ\\ 
@@ -720,11 +694,9 @@
 				\caption{Phản hồi yêu cầu hỗ trợ}
 			\end{table}
 		
-			\newpage
-		
 			\item \textbf{Xử lý sự cố}: Sau khi nhận đươc thông tin có sự cố từ phía Tài xế thì Quản lý có trách nhiệm giải quyết các vấn đề. 
 			
-			\begin{table}[!htp]
+			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
 					\hline 
 					Use case name & Xử lý sự cố\\ 
@@ -751,13 +723,11 @@
 			
 		\end{itemize}
 	\end{itemize}
-	
-
     
 	
 	\subsection{Thiết kế cơ sở dữ liệu}
 	
-		\begin{figure}[!ht]
+		\begin{figure}[H]
 			\includegraphics[angle=90, width=15cm, height=20cm]{Images/ERD.jpg}
 			\centering
 			\linebreak
@@ -773,7 +743,7 @@
 	\begin{itemize}
 		\item \textbf{Order}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				orderId & Mã đơn hàng\\
@@ -826,7 +796,7 @@
 	
 		\item \textbf{SubOrder}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				subOrderId & Mã kiện hàng\\
@@ -877,7 +847,7 @@
 	
 		\item \textbf{ImportInfo}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã nhập kho\\
@@ -909,7 +879,7 @@
 	
 		\item \textbf{ExportInfo}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã xuất kho\\
@@ -939,7 +909,7 @@
 	
 		\item \textbf{SupportRequest}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã yêu cầu\\
@@ -962,7 +932,7 @@
 	
 		\item \textbf{StatisticFee}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				date & Ngày tháng năm theo format yyMMđd\\
@@ -976,7 +946,7 @@
 	
 		\item \textbf{StatisticTrans}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				date & Ngày tháng năm theo format yyMMđd\\
@@ -995,7 +965,7 @@
 	
 		\item \textbf{Driver}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã tài xế\\
@@ -1012,7 +982,7 @@
 	
 		\item \textbf{Role}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				userId & Mã user\\
@@ -1025,7 +995,7 @@
 	
 		\item \textbf{Stocker}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã thủ kho\\
@@ -1038,7 +1008,7 @@
 	
 		\item \textbf{User}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã user\\
@@ -1061,7 +1031,7 @@
 	
 		\item \textbf{Vehicle}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã phương tiện\\
@@ -1080,7 +1050,7 @@
 	
 		\item \textbf{Warehouse}
 		
-		\begin{table}[!htp]
+		\begin{table}[H]
 			\centering\begin{tabular}{|l|m{30em}|}
 				\hline 
 				id & Mã kho\\
