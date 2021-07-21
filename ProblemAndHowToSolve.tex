@@ -200,16 +200,38 @@
 	  
 	  \section{Bài toán bảo mật các service trong private network, cấu hình SSL, cân bằng tải}
 	  
-	  
 	  Thông thường sau khi deploy thì các service được gọi thống qua \textbf{IP:port/service-name/...}, điều này có nghĩa là service sẽ được public ra bên ngoài. Điều này có thê gặp một số rủi ro về vấn đề an ninh và bảo mật. Vì thế nhóm đã sử dụng NGINX như là một \textbf{Reverse Proxy} để tăng cường bảo mật, cũng như cân bằng tải.\\ 
 	  
 	  
-	  \begin{figure}
+	  \begin{figure}[H]
 	  	\centering
-	  	\includegraphics[width=0.8\linewidth]{Images/NGINXconfig}
+	  	\includegraphics[width=0.7\linewidth]{Images/NGINXconfig}
 	  	\linebreak
 	  	\caption{Cấu hình của NGINX}
 	  \end{figure}
   	
 		Như trên file đã cấu hình thì server Frond end có thể gửi request xuống server Back end thông qua domain là: \textbf{dungdang.codes} ở port 80 cho HTTP và 443 cho HTTPS. Đối với những request có domain là: https://dungdang.codes/order-management/... sẽ được route vào service đươc deploy ở port 8080 còn https://dungdang.codes/support-service/... thì sẽ được route vào service deploy ở port 7070. Điều này đã giúp che giấu và bảo mật các services chạy trong private network.
 		
+		  \section{Bài toán gợi ý địa điểm khi người dùng nhập địa chỉ}
+		  
+		  Khi điền địa chỉ muốn gửi trong giao diện tạo đơn hàng, hệ thống sẽ tự động gợi ý địa điểm cho người dùng khi người dùng nhập vài từ trong địa chỉ. Điều này được thực hiện nhờ sử dụng API \textbf{Places Autocomplete} mà Google cung cấp. Cụ thể, nhóm đã đăng ký một tài khoản trên Google Cloud Platform, kích hoạt dịch vụ \textbf{Maps JavaScript API} và tiếp tục làm theo hướng dẫn để lấy được một api key giúp cho ta có thể gọi và sử dụng api của Google. Việc sau đó là chỉ cần gọi API trên ở phía client-side code. Ví dụ cho việc gợi ý địa điểm trong ứng dụng như sau:
+		  
+		  \begin{figure}[H]
+		  	\centering
+		  	\includegraphics[width=1\linewidth]{Images/FE_Problems/places_autocomplete}
+		  	\linebreak
+		  	\caption{Giao diện gợi ý địa điểm khi người dùng nhập địa chỉ}
+		  \end{figure}
+		
+			Từ địa chỉ gợi ý mà người dùng chọn, nhóm có thể xác định được thành phố người dùng muốn gửi đến là ở đâu để từ đó tiếp tục thực hiện quy trình vận chuyển liên tỉnh.
+			
+			\section{Bài toán giảm thời gian load trang web lần đầu tiên}
+			
+			Như đã trình bày ở phần công nghệ, nhóm sử dụng dịch vụ của gitlab pages để host và serve các static files (HTML, CSS, JS, image vv...) khi người dùng truy cập vào tên miền của trang web. Tuy vậy, gitlab pages không tự động compress (nén) các static files theo định dạng gzip cho người dùng. Chính vì thế nhóm đã tự nén các file lại theo định dạng gzip khi build code để giúp tiết kiệm băng thông cũng như giúp thời gian load trang web trở nên nhanh hơn khi người dùng truy cập.\\
+			
+			Cơ chế hoạt động cơ bản của gzip trong giao tiếp giữa máy khách và máy chủ:
+			\begin{itemize}
+				\item Bước 1: Trình duyệt gửi một header request đến server (máy chủ) để thông báo rằng nó chấp nhận file được nén. Header này sẽ có dạng như sau: \textbf{Accept-Encoding: gzip}.
+				\item Bước 2: Server gửi phản hồi đồng ý và truyền file dữ liệu đã được nén cho trình duyệt với tín hiệu: \textbf{Content-Encoding: gzip}
+			\end{itemize}
+			
