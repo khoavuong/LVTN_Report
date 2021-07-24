@@ -154,29 +154,24 @@
 		\begin{itemize}
 			\item \textbf{Tạo đơn hàng:} Người gửi cần điền những thông tin sau: 
 			\begin{itemize}
-				\item Bên gửi:
+				\item Bên gửi: Hệ thống sẽ tự động nhập thông tin khi người gửi đăng nhập bao gồm:
 				\begin{itemize}
 					\item Tên người gửi
 					\item Số điện thoại
-					\item Địa chỉ, chia làm 3 phần gồm Số địa chỉ + tên đường, Quận - Huyện, Phường - Xã. Quận - Huyện và Phường - Xã được nhập bằng cách chọn trong một dropdown có sẵn.
+					\item Địa chỉ, chia làm 4 phần gồm Số địa chỉ + tên đường, Phường - Xã, Quận - Huyện, Thành phố - Tỉnh. 
 				\end{itemize}
 				\item Bên nhận:
 				\begin{itemize}
 					\item Tên người nhận
 					\item Số điện thoại
-					\item Địa chỉ, tương tự như bên gửi.
+					\item Địa chỉ, tương tự như bên gửi. Khi người gửi nhập địa chỉ hệ thống sẽ tự động lấy chính xác địa chỉ thông qua Google Map API.
 				\end{itemize}
 				\item Thông tin về món hàng muốn gửi:
 				\begin{itemize}
-					\item Tên sản phẩm + số lượng (Mặc định là 1). Có thể thêm nhiều sản phẩm và có thể chỉnh sửa số lượng của từng sản phẩm đã thêm.
+					\item Loại hàng hóa
 					\item Khối lượng (Để tính phí vận chuyển). Nhân viên đến lấy hàng sẽ tiến hành xác nhận bằng cách đo lại và sẽ yêu cầu khách hàng cập nhật lại khối lượng nếu như khối lượng đã nhập trước đó là không chính xác.
+					\item Giá trị hàng hóa (VND): Giá trị ước tính của hàng hóa để đền bù khi gặp sự cố.
 					
-				\end{itemize}
-				\item Lựa chọn cho bên nhận:
-				\begin{itemize}
-					\item Không cho xem hàng.
-					\item Cho xem hàng nhưng không cho thử.
-					\item Cho thử hàng.
 				\end{itemize}
 				\item Lựa chọn tính phí cho bên gửi hoặc bên nhận 
 				\item Lựa chon gửi hàng/nhận hàng tại kho sẽ không tính phí nội tỉnh(phí liên tỉnh luôn có ). Ngược lại sẽ tính phí nội tỉnh (gửi và nhận giống nhau). 
