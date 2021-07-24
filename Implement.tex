@@ -125,8 +125,7 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 			\centering
 			\caption{Giao diện list yêu cầu của người gửi (Có yêu cầu)}
 		\end{figure}
-		Các yêu cầu đã tạo có thể được lọc theo những tiêu chí: Mã yêu cầu, trạng thái (Gồm 4 trạng thái yêu cầu đã nêu trong phần trước), thời gian tạo đơn hàng.
-		
+	
 		\item \textbf{Xem danh sách các kiện hàng}
 		\begin{figure}[H]
 			\includegraphics[width=1\textwidth]{/sender/sender_suborders.png}
@@ -142,7 +141,37 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 			\caption{Giao diện chỉnh sửa thông tin của người gửi}
 		\end{figure}
 		
+		\item \textbf{Thanh toán}
 		
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{/sender/sender_payment_1.png}
+			\centering
+			\caption{Giao diện chọn những đơn hàng đã giao cần thanh toán}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{/sender/sender_payment_2.png}
+			\centering
+			\caption{Giao diện chọn phương thức thanh toán}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{/sender/sender_payment_3.png}
+			\centering
+			\caption{Giao diện xác nhận lại tổng số tiền và phương thức thanh toán}
+		\end{figure}
+	
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{/sender/sender_payment_4.png}
+			\centering
+			\caption{Giao diện hệ thống thanh toán trung gian ZaloPay}
+		\end{figure}
+	
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{/sender/sender_notify.png}
+			\centering
+			\caption{Mail thông báo tình trạng đơn hàng của hệ thống}
+		\end{figure}
 	\end{itemize}
 
 
@@ -162,7 +191,7 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 	\end{figure}
 	
 	
-	\item \textbf{Xem danh sách đơn hàng}
+	\item \textbf{Xem đơn hàng đang đến lấy}
 	\begin{figure}[H]
 		\includegraphics[width=1\textwidth]{/driver/driver_current_order.png}
 		\centering
@@ -177,7 +206,7 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 
 
 	
-	\item \textbf{Xem danh sách các kiện hàng}
+	\item \textbf{Xem danh sách các kiện hàng trong xe}
 	\begin{figure}[H]
 		\includegraphics[width=1\textwidth]{/driver/driver_intruck.png}
 		\centering
@@ -205,7 +234,7 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 
 \subsection{Chức năng dành cho thủ kho}
 \begin{itemize}
-	\item \textbf{Nhập hàng}
+		\item \textbf{Nhập kho}
 	\begin{figure}[H]
 		\includegraphics[width=1\textwidth]{/stockkeeper/stock_import_driver.png}
 		\centering
@@ -227,19 +256,13 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 	\begin{figure}[H]
 		\includegraphics[width=1\textwidth]{/stockkeeper/stock_import_driver_prompt.png}
 		\centering
-		\caption{Xác nhận nhập hàng vào kho}
+		\caption{Xác nhận nhập hàng trong xe tài xế vào kho}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\includegraphics[width=1\textwidth]{/stockkeeper/stock_import_driver_pdf.png}
 		\centering
 		\caption{Nhập hàng thành công và cho thủ kho có thể tài phiếu nhập kho}
-	\end{figure}
-
-	\begin{figure}[H]
-		\includegraphics[width=1\textwidth]{/stockkeeper/stock_history_detail.png}
-		\centering
-		\caption{Thông tin chi tiết của một lần nhập/xuất đơn hàng (Cho phép tải pdf về)}
 	\end{figure}
 	
 	\begin{figure}[H]
@@ -260,6 +283,12 @@ ra trong các phần trước, nhóm đã hoàn thành một hệ thống vận 
 		\includegraphics[width=1\textwidth]{/stockkeeper/stock_history.png}
 		\centering
 		\caption{Lịch sử nhập/xuất kho}
+	\end{figure}
+
+	\begin{figure}[H]
+		\includegraphics[width=1\textwidth]{/stockkeeper/stock_history_detail.png}
+		\centering
+		\caption{Thông tin chi tiết của một lần nhập/xuất đơn hàng (Cho phép tải pdf về)}
 	\end{figure}
 	
 	Chức năng xuất kho có giao diện và tính năng tương tự lúc nhập kho.
