@@ -1,6 +1,6 @@
 \section{Back-end}
         \subsection{Giới thiệu kiến trúc Microservices}
-        Trước khi Microservices xuất hiện, các ứng dụng thường phát triển theo mô hình Monolithic architecture (Kiến trúc một khối). Có nghĩa là tất cả các module (view, business, database) đều được gộp trong một project, một ứng dụng được phát triển theo mô hình kiến trúc một khối thường được phân chia làm nhiều module. Nhưng khi được đóng gói và cài đặt sẽ thành một khối (monolithic). Lợi ích của mô hình kiến trúc một khối đó là dễ dàng phát triển và triển khai. Nhưng bên cạnh đó nó cũng có nhiều hạn chế ví dụ như khó khăn trong việc bảo trì, tính linh hoạt và khả năng mở rộng kém, đặc biệt với những ứng dụng doanh nghiệp có quy mô lớn. Đó chính là lí do ra đời của kiến trúc Microservices. Với lý do đó nhóm sẽ chọn phát triển hệ thống theo kiến trúc Microservices.
+        Trước khi Microservices \cite{Microservices} xuất hiện, các ứng dụng thường phát triển theo mô hình Monolithic architecture (Kiến trúc một khối). Có nghĩa là tất cả các module (view, business, database) đều được gộp trong một project, một ứng dụng được phát triển theo mô hình kiến trúc một khối thường được phân chia làm nhiều module. Nhưng khi được đóng gói và cài đặt sẽ thành một khối (monolithic). Lợi ích của mô hình kiến trúc một khối đó là dễ dàng phát triển và triển khai. Nhưng bên cạnh đó nó cũng có nhiều hạn chế ví dụ như khó khăn trong việc bảo trì, tính linh hoạt và khả năng mở rộng kém, đặc biệt với những ứng dụng doanh nghiệp có quy mô lớn. Đó chính là lí do ra đời của kiến trúc Microservices. Với lý do đó nhóm sẽ chọn phát triển hệ thống theo kiến trúc Microservices.
         \begin{itemize}
             \item Những đặc điểm của Microservices
             \begin{itemize}
@@ -28,42 +28,16 @@
             \end{itemize}
             \item Với những ưu điểm và nhược điểm đã được nói ở trên nên nhóm đã quyết định sử dụng kiến trúc Microservices để xây dựng hệ thống của nhóm.
         \end{itemize}
-		\subsection{Kiến trúc Microservicces}
-		Các thành phần chính dự kiến xây dựng hệ thống trong Microservices
-		\begin{itemize}
-		    \item \textbf{Edge Server} - Để đưa các API services ra bên ngoài và để ngăn chặn truy cập trái phép vào các microservices nội bộ, chúng ta cần một edge server nơi tất cả request bên ngoài đi qua. Một edge server có thể tái sử dụng khả năng định tuyến động và cân bằng tải dựa trên service discovery được mô tả ở trên. Edge server sẽ hoạt động như một proxy ngược chủ động mà không cần cập nhật thủ công khi hệ thống nội bộ thay đổi.
-		    \item \textbf{Dynamic Routing and Load Balancer} - Với chức năng service discovery, các thành phần định tuyến có thể sử dụng discovery API để tra cứu nơi mà microservice được yêu cầu được triển khai và các thành phần cân bằng tải có thể quyết định định tuyến yêu cầu tới instance nào nếu nhiều instance được triển khai cho một service được yêu cầu.
-		    \item \textbf{Service Discovery} - Thay vì theo dõi thủ công những microservices nào được triển khai hiện tại và trên máy chủ và cổng nào, chúng ta cần chức năng Service Discovery cho phép microservices tự đăng ký khi khởi động thông qua API.
-		    \item \textbf{Circuit Breaker} - Để tránh chuỗi sự cố, cần phải áp dụng Circuit Breaker pattern. Đây là một pattern dùng để ngắt một quá trình xử lý khi hệ thống gặp sự cố, để đảm bảo số lượng message bị lỗi không tăng cao, làm cho việc khắc phục trở nên khó khăn, cũng như có thể làm cho hệ thống bị xụp đổ hàng loạt do ảnh hưởng lẫn nhau.
-		    \item \textbf{Monitoring} - Vì đã có circuit breakers, chúng ta có thể bắt đầu theo dõi trạng thái của chúng và thu thập số liệu thống kê thời gian chạy từ chúng để có được một bức tranh về tình trạng sức khỏe của hệ thống.
-	        \item \textbf{Secure API} - Để bảo vệ các API services được expose ra bên ngoài sử dụng OAuth 2.0, quy trình của OAuth 2.0 có thể như sau:
-	        \begin{itemize}
-	            \item Một component mới có thể đóng vai trò như một máy chủ ủy quyền (OAuth Authorization Server)
-	            \item Các API services sẽ đóng vai trò như các máy chủ tài nguyên (OAuth Resource Server)
-	            \item Các Client bên ngoài gọi đến API services với tư cách là OAuth Clients
-	            \item Edge server sẽ làm việc như một OAuth Token Relay: nó sẽ hoạt động như một OAuth Resource Serve, Nó sẽ chuyển các OAuth Access Tokens có trong request bên ngoài đến các API services
-	        \end{itemize}
-	        \item \textbf{Central Configuration Server.} - Thay vì cấu hình cục bộ cho mỗi đơn vị triển khai (tức là microservice), chúng ta cần quản lý cấu hình tập trung. Chúng ta cũng cần một configuration API để các microservices có thể sử dụng để lấy thông tin cấu hình.
-	        \item \textbf{Centralized Log Analysis} - Để có thể theo dõi messages và phát hiện khi chúng bị kẹt (stuck), chúng ta cần một chức năng phân tích log tập trung có khả năng tiếp cận với máy chủ và thu thập các tệp log mà mỗi services microservice tạo ra. Chức năng phân tích log lưu trữ thông tin log này trong cơ sở dữ liệu trung tâm và cung cấp khả năng tìm kiếm và dashboard. Lưu ý : Để có thể tìm thấy các messages liên quan, điều quan trọng là tất cả các microservices phải sử dụng id đồng nhất trong các log message.
-		\end{itemize}
-	
-		\begin{figure}[H]
-			\includegraphics[width=0.8\textwidth]{Images/model-microservice.png}
-			\centering
-			\linebreak
-			\caption{Mô hình Microservices}
-		\end{figure}		
-
 		\subsection{Công nghệ tổng quan}
 		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ SPRING SECURITY
 		\begin{itemize}
-		    \item \textbf{Spring Boot} là một dự án nổi bật trong hệ sinh thái Spring Framework. Nếu như trước đây, công đoạn khởi tạo một dự án Spring khá vất vả từ việc khai báo các dependency trong file pom.xml cho đến cấu hình bằng XML hoặc annotation phức tạp, thì giờ đây với Spring Boot, chúng ta có thể tạo các ứng dụng Spring một cách nhanh chóng và cấu hình cũng đơn giản hơn.
-		    \item \textbf{Spring Cloud} là nền tảng khá mới mẻ trong gia đình Spring.io dùng để xây dựng microservice một cách nhanh chóng. Spring Cloud cung cấp các công cụ cho các lập trình viên để nhanh chóng xây dựng một số common patterns trong các hệ thống phân tán (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Chúng sẽ hoạt động tốt trong bất kỳ môi trường phân tán nào, bao gồm máy tính xách tay của chính lập trình viên, các data center hoặc trên cloud.
+		    \item \textbf{Spring Boot} \cite{Spring} là một dự án nổi bật trong hệ sinh thái Spring Framework. Nếu như trước đây, công đoạn khởi tạo một dự án Spring khá vất vả từ việc khai báo các dependency trong file pom.xml cho đến cấu hình bằng XML hoặc annotation phức tạp, thì giờ đây với Spring Boot, chúng ta có thể tạo các ứng dụng Spring một cách nhanh chóng và cấu hình cũng đơn giản hơn.
+		    \item \textbf{Spring Cloud} \cite{Spring} là nền tảng khá mới mẻ trong gia đình Spring.io dùng để xây dựng microservice một cách nhanh chóng. Spring Cloud cung cấp các công cụ cho các lập trình viên để nhanh chóng xây dựng một số common patterns trong các hệ thống phân tán (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Chúng sẽ hoạt động tốt trong bất kỳ môi trường phân tán nào, bao gồm máy tính xách tay của chính lập trình viên, các data center hoặc trên cloud.
 		    \item \textbf{Spring Security} là một trong những core feature quan trọng của Spring Framework, nó giúp chúng ta phân quyền và xác thực người dùng trước khi cho phép họ truy cập vào các tài nguyên của chúng ta. 
 		\end{itemize}
 		Công nghệ sử dụng cho Secure API
 		\begin{itemize}
-		    \item \textbf{Json Web Token(JWT)} - Là 1 tiêu chuẩn mở (RFC 7519) định nghĩa cách thức truyền tin an toàn giữa các thành viên bằng 1 đối tượng JSON. Thông tin này có thể được xác thực và đánh dấu tin cậy nhờ nó có chứa chữ ký số (digital signature). Phần chữ ký của JWT sẽ được mã hóa lại bằng HMAC hoặc RSA. Sử dụng JWT là cách tốt để áp dụng cơ chế bảo mật đối với các dịch vụ API RESTful mà có thể được sử dụng để truy cập vào cơ sở dữ liệu.
+		    \item \textbf{Json Web Token(JWT)} \cite{JWT}- Là 1 tiêu chuẩn mở (RFC 7519) định nghĩa cách thức truyền tin an toàn giữa các thành viên bằng 1 đối tượng JSON. Thông tin này có thể được xác thực và đánh dấu tin cậy nhờ nó có chứa chữ ký số (digital signature). Phần chữ ký của JWT sẽ được mã hóa lại bằng HMAC hoặc RSA. Sử dụng JWT là cách tốt để áp dụng cơ chế bảo mật đối với các dịch vụ API RESTful mà có thể được sử dụng để truy cập vào cơ sở dữ liệu.
 		\end{itemize}
         \subsection{Kiến trúc RESTful API}
 		    
