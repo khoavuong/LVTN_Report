@@ -1,7 +1,7 @@
 \chapter{Bài toán và giải pháp}\label{chap:ProblemAndSolve}
 		Sau khi phân tích, nghiên cứu các hệ thống và sản phẩm khác thì nhóm đã liệt kê ra một số bài toán cần phải giải quyết. Sau đây là phần trình bày của nhóm.
 		
-		\section{Bài toán xác thực user}
+		\section{Bài toán xác thực người dùng}
 		Như chúng ta đã biết thì HTTP là 1 giao thức Stateless, nghĩa là khi Client gửi dữ liệu lên Server, Server thực thi xong và trả kết quả về cho Client thì quan hệ giữa Client và Server sẽ bị cắt đứt, Server sẽ không lưu lại bất cứ dữ liệu trạng thái gì của Client. Nói một cách dễ hiểu hơn là khi ta đăng nhập vào MyBK và sau đó di chuyển sang trang Thông tin Sinh viên thì chúng ta phải đăng nhập lại vì Server không lưu giữ bất kì thông tin gì của chúng ta. Để giải quyết vấn đề này thì Session/Cookies ra đời.
 	
 		\begin{figure}[H]
@@ -11,7 +11,7 @@
 			\caption{Xác thực dựa trên Session và Cookies\cite{sessioncookies}}
 		\end{figure}
 		
-		Đầu tiên user nhập thông tin tài khoản của mình. Sau khi kiểm tra đúng thông tin đăng nhập thì Server sẽ tạo ra 1 sessionID, lưu lại vào Database và trả về cho Client. Sau đó mỗi request gửi lên thì Client sẽ chèn sessionId vào Cookies và gửi lên cho Server từ đó Server kiểm tra và biết được chính xác Client đó là ai.\\
+		Đầu tiên người dùng nhập thông tin tài khoản của mình. Sau khi kiểm tra đúng thông tin đăng nhập thì Server sẽ tạo ra 1 sessionID, lưu lại vào Database và trả về cho Client. Sau đó mỗi request gửi lên thì Client sẽ chèn sessionId vào Cookies và gửi lên cho Server từ đó Server kiểm tra và biết được chính xác Client đó là ai.\\
 		
 		Đối với hệ thống Micro Service thì việc xác thực theo cách này có 1 vấn đề đó là cần phải có 1 nơi để lưu trữ thông tin về session, ngoài ra cần phải xử lý các session đã hết hạn. Việc này có thể là giảm hiệu năng của 1 hệ thống Micro Service.\\
 		
@@ -32,23 +32,23 @@
 		
 		
 		\section{Bài toán xác thực giữa các service}
-		Do các service đươc deploy trên môi trường mạng vì thế có thể tiểm ẩn nhiều rủi ro bảo mật khi có sự giao tiếp giữa các service với nhau. Một kẻ tấn công nào đó có thể giả danh và gửi các request lên cho service của hệ thống xử lý. Do đó kẻ tấn công có thể lấy được các thông tin nhạy cảm của user (như số điện thọai, tên, địa chỉ, ngày tháng năm sinh, ...). Đây là một điều rất cấm kỵ khi chúng ta phải có nghĩa vụ bảo mật các thông tin nhạy cảm cho user.\\
+		Do các service đươc deploy trên môi trường mạng vì thế có thể tiểm ẩn nhiều rủi ro bảo mật khi có sự giao tiếp giữa các service với nhau. Một kẻ tấn công nào đó có thể giả danh và gửi các request lên cho service của hệ thống xử lý. Do đó kẻ tấn công có thể lấy được các thông tin nhạy cảm của người dùng (như số điện thọai, tên, địa chỉ, ngày tháng năm sinh, ...). Đây là một điều rất cấm kỵ khi chúng ta phải có nghĩa vụ bảo mật các thông tin nhạy cảm cho người dùng.\\
 		
 		Sau khi tìm hiểu và so sánh các phương pháp thì nhóm sử dụng phương pháp tạo chữ ký số để xác thực request giữa các service với nhau. Khi service A muốn gọi service B thì service A phải có key của service B, Service A sẽ gửi thêm 1 trường thông tin là \textbf{sig = SHA256(data + key)}, service B khi nhận request thì sẽ tạo sig dựa vào key của mình và so sánh 2 sig đó có giống nhau không. Nếu giống thì mới tiếp tục thực hiện request của Service A, còn nếu không thì sẽ trả về lỗi cho service A.
 		
 		
-		\section{Bài toán nhận nhiều Request của User}
-		Thông thường 1 request của User sẽ được xử lý như sau: 
+		\section{Bài toán nhận nhiều Request của người dùng}
+		Thông thường 1 request của người dùng sẽ được xử lý như sau: 
 		
 		    \begin{itemize}
-                \item User gửi Request lên Server
+                \item Người dùng gửi Request lên Server
                 \item Server xử lý
-                \item User nhận Response về từ Server 
+                \item Người dùng nhận Response về từ Server 
             \end{itemize}
         
-        Trong quá trình chờ Server xử lý thì User sẽ phải chờ đợi và nếu quá trình xử lý diễn ra lâu (bởi vì Server phải lưu thông tin vào database hay phải gọi Server khác,...) chính điều này sẽ ảnh hưởng đến trải nghiệm của User.\\
+        Trong quá trình chờ Server xử lý thì người dùng sẽ phải chờ đợi và nếu quá trình xử lý diễn ra lâu (bởi vì Server phải lưu thông tin vào database hay phải gọi Server khác,...) chính điều này sẽ ảnh hưởng đến trải nghiệm của người dùng.\\
         
-        Ngoài ra, trong những khoảng thời gian diễn ra các chương trình khuyến mãi giảm chi phí vận chuyển hoặc trong thời gian dịch bệnh thì nhu cầu vận chuyển hàng hóa để đáp ứng như cầu tiêu thụ của người dân. Do đó có thể trong 1 khoảng thời gian ngắn lượng Request đến hệ thống tăng cao. Nếu vẫn xử lý với cơ chế như bình thường thì hệ thống sẽ chết hoặc có thể không nhận đươc Request của User nữa. Điều này cũng ảnh hưởng nghiêm trọng đến trải nghiệm của User.\\
+        Ngoài ra, trong những khoảng thời gian diễn ra các chương trình khuyến mãi giảm chi phí vận chuyển hoặc trong thời gian dịch bệnh thì nhu cầu vận chuyển hàng hóa để đáp ứng như cầu tiêu thụ của người dân. Do đó có thể trong 1 khoảng thời gian ngắn lượng Request đến hệ thống tăng cao. Nếu vẫn xử lý với cơ chế như bình thường thì hệ thống sẽ chết hoặc có thể không nhận đươc Request của người dùng nữa. Điều này cũng ảnh hưởng nghiêm trọng đến trải nghiệm của người dùng.\\
         
         Sau khi tìm hiểu và phân tích thì nhóm hiện thực chức năng tạo đơn hàng bằng cơ chế bất đồng bộ như sau:\\
         
@@ -59,22 +59,22 @@
 			\caption{Quá trình tạo đơn hàng}
 		\end{figure}
         
-        Ở đây nhóm sử dụng MessageQueue(ActiveMQ) để hiện thực cơ chế bất đồng bộ. Sau khi user thực hiện tạo đơn hàng thì hệ thống sẽ lưu thông tin đơn hàng đó vào Cache, sau khi đã lưu thông tin đơn hàng vào Cache thì ta ngay lập tức phản hồi về cho User là đơn hàng đang được xử lý. Tiếp theo ta push message tạo đơn hàng đó vào MessageQueue, và sau đó đơn hàng sẽ được consume và tiếp tục xử lý.\\
+        Ở đây nhóm sử dụng MessageQueue(ActiveMQ) để hiện thực cơ chế bất đồng bộ. Sau khi người dùng thực hiện tạo đơn hàng thì hệ thống sẽ lưu thông tin đơn hàng đó vào Cache, sau khi đã lưu thông tin đơn hàng vào Cache thì ta ngay lập tức phản hồi về cho người dùng là đơn hàng đang được xử lý. Tiếp theo ta push message tạo đơn hàng đó vào MessageQueue, và sau đó đơn hàng sẽ được consume và tiếp tục xử lý.\\
         
-        Việc sử dụng MessageQueue làm tách rời quá trình xử lý, Producer (service push message) chỉ cần đẩy message lên mà không cần quan tâm là message đó đã được xử lý hay không và Consumer (service consume message) chỉ cần lấy message và xử lý. Các mesage sẽ được lưu trữ trong Queue và chỉ mất đi khi đươc consume, điều này đảm bảo tất cả các message đề đươc xử lý duy nhất 1 lần và tất cả message sẽ không mất đi ngày cả khi OrderService bị chết do sự cố nào đó. Và đặc biệt lợi ích cuối cùng đó là trải nghiệm của User, User sẽ nhận phản hồi gần như lập tức sau khi tạo đơn hàng (mặc dù đơn hàng vẫn đang tiếp tục đươc xử lý) mà không cần phải chờ đợi các bước xử lý mất thời gian ở phía sau. 
+        Việc sử dụng MessageQueue làm tách rời quá trình xử lý, Producer (service push message) chỉ cần đẩy message lên mà không cần quan tâm là message đó đã được xử lý hay không và Consumer (service consume message) chỉ cần lấy message và xử lý. Các mesage sẽ được lưu trữ trong Queue và chỉ mất đi khi đươc consume, điều này đảm bảo tất cả các message đề đươc xử lý duy nhất 1 lần và tất cả message sẽ không mất đi ngày cả khi OrderService bị chết do sự cố nào đó. Và đặc biệt lợi ích cuối cùng đó là trải nghiệm của người dùng, người dùng sẽ nhận phản hồi gần như lập tức sau khi tạo đơn hàng (mặc dù đơn hàng vẫn đang tiếp tục đươc xử lý) mà không cần phải chờ đợi các bước xử lý mất thời gian ở phía sau. 
 	
-		\section{Bài toán giảm thời gian xử lý khi User truy xuất thông tin}
-		    Trong quá trình sử dụng ứng dụng thì việc lấy và hiện thị thông tin ra cho User diễn ra rất thường xuyên. Thông thường quá trình đó diễn ra như sau:
+		\section{Bài toán giảm thời gian xử lý khi người dùng truy xuất thông tin}
+		    Trong quá trình sử dụng ứng dụng thì việc lấy và hiện thị thông tin ra cho người dùng diễn ra rất thường xuyên. Thông thường quá trình đó diễn ra như sau:
 		    \begin{itemize}
-                \item User gửi Request lấy thông tin lên Server
+                \item Người dùng gửi Request lấy thông tin lên Server
                 \item Server truy xuất vào Database
-                \item User nhận Response về từ Server 
+                \item Người dùng nhận Response về từ Server 
             \end{itemize}
             
             
             Ở đây viêc truy xuất vào Database thường xuyên có thể làm giảm thời gian phản hồi do phải thực thi nhiều I/O operation. \\
             
-            Vì thế, sau khi tìm hiểu và nghiên cứu thì nhóm sẽ sử dụng Cache để lưu lại các thông tin mà user thường xuyên truy xuất trong memory. Do thông tin được lưu trữ trong memory nên việc truy xuất và lấy các thông tin đó đươc thực hiện rất nhanh (gấp 500 lần so với thông tin lấy từ Database). Có rất nhiều chiến lược Cache có thể sử dụng nhưng nhóm sử dụng chiến lược Cache Aside để phù hợp với nhu cầu của ứng dụng:
+            Vì thế, sau khi tìm hiểu và nghiên cứu thì nhóm sẽ sử dụng Cache để lưu lại các thông tin mà người dùng thường xuyên truy xuất trong memory. Do thông tin được lưu trữ trong memory nên việc truy xuất và lấy các thông tin đó đươc thực hiện rất nhanh (gấp 500 lần so với thông tin lấy từ Database). Có rất nhiều chiến lược Cache có thể sử dụng nhưng nhóm sử dụng chiến lược Cache Aside để phù hợp với nhu cầu của ứng dụng:
             
             \begin{figure}[H]
 			\includegraphics[width=1\textwidth]{Images/problem2.png}
@@ -83,12 +83,12 @@
 			\caption{Chiến lươc Cache Aside\cite{cachestrategy}}
 	       	\end{figure}
 	       	
-	        Đầu tiên khi muốn lấy thông tin nào đó thì ta tiến hành tìm trong Cache. Nếu trong Cache có thông tin cần tìm kiếm thì lập tức trả thông tin đó về cho User, nếu không tìm thấy trong Cache thì ta tiến hành tìm kiếm trong Database, sau đó lưu thông tin đó vào Cache rồi mới trả về cho User.\\
+	        Đầu tiên khi muốn lấy thông tin nào đó thì ta tiến hành tìm trong Cache. Nếu trong Cache có thông tin cần tìm kiếm thì lập tức trả thông tin đó về cho người dùng, nếu không tìm thấy trong Cache thì ta tiến hành tìm kiếm trong Database, sau đó lưu thông tin đó vào Cache rồi mới trả về cho người dùng.\\
 	        
 	        Việc sử dụng Cache đem lại hiệu quả nhưng cũng có 1 số điểm cần lưu ý như:
 	         \begin{itemize}
-                \item Thứ nhất là \textbf{Stale Cache}: Có nghĩa là dữ liệu trong Database và trong Cache không nhất quán với nhau dẫn đến trả về các thông tin cũ cho User. Nhóm giải quyết vấn đề này bằng cách mỗi khi cập nhật lại thông tin trong Database thì đều cập nhật luôn thông tin trong Cache. Việc này có thể làm tốn thêm nhiều chi phí nhưng nhóm chỉ lưu các thông tin mà User thường xuyên truy xuât nên chi phí sẽ giảm bớt và rất xứng đáng so với hiệu quả to lớn mà Cache mang lại.
-                \item Thứ hai là \textbf{Invalidate Cache}: Có nghĩa là nếu để Cache quá lâu trong memory thì sẽ gây tiêu tốn dung lượng, còn nếu để Cache quá nhanh thì sẽ không có hiệu quả do cứ phải truy xuất Database nhiều. Trong quá trình tìm hiểu và thử nghiệm thì nhóm đã thiết lập thời gian tồn tại trong memory là 30 ngày. Là con số có thể chấp nhận đươc đối với mỗi đơn hàng mà User tạo ra.
+                \item Thứ nhất là \textbf{Stale Cache}: Có nghĩa là dữ liệu trong Database và trong Cache không nhất quán với nhau dẫn đến trả về các thông tin cũ cho người dùng. Nhóm giải quyết vấn đề này bằng cách mỗi khi cập nhật lại thông tin trong Database thì đều cập nhật luôn thông tin trong Cache. Việc này có thể làm tốn thêm nhiều chi phí nhưng nhóm chỉ lưu các thông tin mà người dùng thường xuyên truy xuât nên chi phí sẽ giảm bớt và rất xứng đáng so với hiệu quả to lớn mà Cache mang lại.
+                \item Thứ hai là \textbf{Invalidate Cache}: Có nghĩa là nếu để Cache quá lâu trong memory thì sẽ gây tiêu tốn dung lượng, còn nếu để Cache quá nhanh thì sẽ không có hiệu quả do cứ phải truy xuất Database nhiều. Trong quá trình tìm hiểu và thử nghiệm thì nhóm đã thiết lập thời gian tồn tại trong memory là 30 ngày. Là con số có thể chấp nhận đươc đối với mỗi đơn hàng mà người dùng tạo ra.
             \end{itemize}
             
         
@@ -111,11 +111,11 @@
 		    Ở hệ thống vận chuyển liên tỉnh mà nhóm đang làm thì sẽ có 3 giai đoạn phân phối: Đầu tiên là phân phối đơn hàng cho tài xế đi lấy, tiếp theo là phân phối đơn hàng cho tài xế liên tỉnh, cúôi cùng là phân phôi đơn hàng cho tài xế đi giao.
 		    
 		     \begin{itemize}
-                \item \textbf{Phân phối đơn hàng cho tài xế đi lấy:} Sau khi đơn hàng được tạo ra bởi user thì sẽ có 2 cách để nhận hàng. Thứ nhất là user sẽ trưc tiếp đem hàng đến kho, thứ hai là hệ thống sẽ gán đơn đó cho tài xế và tài xế sẽ đi lấy hàng. Ở đây chúng ta nói về cách thứ hai. Sau khi đơn hàng được tạo ra thì hệ thống sẽ xác định được con đường ngắn nhất giữa 2 kho là kho nguồn và kho đích. Tài xế đi lấy sẽ là nhân viên ở kho nguồn. Hệ thống sẽ ngẫu nhiên thông báo cho một số tài xế ở kho nguồn là có đơn cần lấy. Tài xế nào đống ý nhận đơn trước thì sẽ được ưu tiên đi lấy hàng trước.\\
+                \item \textbf{Phân phối đơn hàng cho tài xế đi lấy:} Sau khi đơn hàng được tạo ra bởi người dùng thì sẽ có 2 cách để nhận hàng. Thứ nhất là người dùng sẽ trưc tiếp đem hàng đến kho, thứ hai là hệ thống sẽ gán đơn đó cho tài xế và tài xế sẽ đi lấy hàng. Ở đây chúng ta nói về cách thứ hai. Sau khi đơn hàng được tạo ra thì hệ thống sẽ xác định được con đường ngắn nhất giữa 2 kho là kho nguồn và kho đích. Tài xế đi lấy sẽ là nhân viên ở kho nguồn. Hệ thống sẽ ngẫu nhiên thông báo cho một số tài xế ở kho nguồn là có đơn cần lấy. Tài xế nào đống ý nhận đơn trước thì sẽ được ưu tiên đi lấy hàng trước.\\
                 
                 Do hàng vận chuyển liên tỉnh, có thể số lượng sẽ rất lớn vì vậy nếu tài xế đầu tiên không lây hết thì hệ thống sẽ tự động thông báo cho các tài xế tiếp theo. Cứ như vậy đến khi hàng được lấy hết và chở về kho nguồn.\\
                 
-                Ở đây hệ thống sẽ thông báo cho một số tài xế của kho nguồn nhằm hạn chế việc tài xế được thông báo nhưng đang bận và chưa thể vận chuyển hàng về kho ngay lập tức được. Điều đó có thể làm chậm trễ thời gian giao vận mà user mong muốn gây ảnh hưởng đến trải nghiệm của user.
+                Ở đây hệ thống sẽ thông báo cho một số tài xế của kho nguồn nhằm hạn chế việc tài xế được thông báo nhưng đang bận và chưa thể vận chuyển hàng về kho ngay lập tức được. Điều đó có thể làm chậm trễ thời gian giao vận mà người dùng mong muốn gây ảnh hưởng đến trải nghiệm của người dùng.
             
                 \item \textbf{Phân phối đơn hàng cho tài xế  liên tỉnh:} Sau khi đơn hàng được vận chuyển đến kho nguồn thì việc tiếp theo hệ thống sẽ gán đơn hàng đó cho tài xế liên tỉnh để vận hàng hàng đến kho đích.\\
                 
@@ -129,9 +129,9 @@
             
             
             \section{Bài toán lưu trữ và truy xuất dữ liệu thống kê}
-                Trong quá trình hoạt động và vận hành của hệ thống thì user thường xuyên xem lại những lịch sử mua hàng hay quản lý cần thống kê lượng tiền, lượng giao dịch xảy ra trong một khoảng thời gian nào đó.\\
+                Trong quá trình hoạt động và vận hành của hệ thống thì người dùng thường xuyên xem lại những lịch sử mua hàng hay quản lý cần thống kê lượng tiền, lượng giao dịch xảy ra trong một khoảng thời gian nào đó.\\
                 
-                Thông thường chúng ta sẽ lưu hết vào Database rồi query SELECT COUNT(*) WHERE STARTDATE<=Date AND Date<=ENDDATE. Việc query như vậy vào Database sẽ được xử lý rất lâu cho nên sẽ làm giảm trải nghiệm của user.\\
+                Thông thường chúng ta sẽ lưu hết vào Database rồi query SELECT COUNT(*) WHERE STARTDATE<=Date AND Date<=ENDDATE. Việc query như vậy vào Database sẽ được xử lý rất lâu cho nên sẽ làm giảm trải nghiệm của người dùng.\\
                 
                 Sau khi tìm hiểu và nghiên cứu thì nhóm sử dụng cấu trúc dữ liệu \textbf{HyperLoglog}\cite{hyperloglog} được hỗ trợ bởi Redis nhằm lưu trữ dữ liệu thống kế để mỗi khi cần chúng ta có thể truy xuất trong nháy mắt.\\
                 
@@ -144,7 +144,7 @@
 			    \caption{Ví dụ về HyperLoglog}
 	       	    \end{figure}
 	       	
-	       	    Trong đoạn code trên ta lưu thông tin của số giao dịch thành công trong 1 ngày. Khi có yêu cầu lấy thông tin về số giao dịch thành công trong một khoảng thời gian nào đó thì ta chỉ cần gọi hàm như ví dụ để lấy. Do các thông tin này được lưu trên memory nên việc xử lý rất nhanh đảm bảo trải nghiệm tốt cho user.
+	       	    Trong đoạn code trên ta lưu thông tin của số giao dịch thành công trong 1 ngày. Khi có yêu cầu lấy thông tin về số giao dịch thành công trong một khoảng thời gian nào đó thì ta chỉ cần gọi hàm như ví dụ để lấy. Do các thông tin này được lưu trên memory nên việc xử lý rất nhanh đảm bảo trải nghiệm tốt cho người dùng.
 		  
 		  \section{Bài toán triển khai các services và cơ sở hạ tầng}
 		 

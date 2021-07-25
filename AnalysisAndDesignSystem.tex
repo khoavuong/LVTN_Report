@@ -11,7 +11,9 @@
 				        \item Hủy đơn hàng: Trong khoảng thời gian đơn hàng được xác nhận bởi tài xế thì đơn hàng có thể bị hủy. Chú ý rằng sau khi đơn hàng đã được xác nhận thì người dùng không thể hủy.
 				        \item Xem danh sách các đơn hàng: Người dùng có thể dễ dàng xem thông tin đơn hàng. Danh sách đơn hàng có thể được lọc theo trạng thái, theo mã đơn hàng hoặc theo từng khoảng thời gian khác nhau nhanh chóng.
 				        \item Xem nợ công và thanh toán: Người dùng có thể xem các đơn hàng đã hoàn tất và tiến hành thanh toán trung gian qua Ví điện tử hoăc thẻ ngân hàng.
-				        \item Nhận thông báo: Sau khi đơn hàng được xác nhận bởi tài xế, thì người dùng sẽ liên tục nhận được thông báo mỗi khi chuyển trạng thái của đơn hàng. Điều này giúp cho người dùng có thể theo dõi đơn hàng chặt chẽ và dễ dàng dự báo thời gian nhận hàng của mình.
+
+				        \item Nhận thông báo: Sau khi đơn hàng được xác nhận bởi tài xế, thì ngươi dùng sẽ liên tục nhận được thông báo mỗi khi chuyển trạng thái của đơn hàng. Điều này giúp cho người dùng có thể theo dõi đơn hàng chặt chẽ và dễ dàng dự báo thời gian nhận hàng của mình.
+
 				        \item Tìm kiếm đơn hàng: Đối với người nhận không phải là người dùng của hệ thống thì vẫn có thể dễ dàng xem thông tin các đơn hàng thông qua số điện thoại của mình hoặc theo dõi yêu cầu thông qua mã yêu cầu.
 				        \item Yêu cầu hỗ trợ: Khi có các vấn đề thắc mắc thì người dùng có thể gửi yêu cầu để quản lý trực tiếp phản hồi. Danh sách các yêu cầu có thể được lọc theo mã yêu cầu, ngày, tháng, năm.
 				        
@@ -87,13 +89,13 @@
 			\end{itemize}
 			\item \textbf{Order Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm tạo, xử lý, lưu trữ các thông tin về đơn hàng cho User.
+				\item Service chịu trách nhiệm tạo, xử lý, lưu trữ các thông tin về đơn hàng cho người dùng.
 				\item Ngoài ra service còn chịu trách nhiệm phân phối các đơn hàng đến tài xế
 				\item Đây là service chịu tải khá lớn trong hệ thống vì nhóm sử dụng kết hợp các giải pháp sau nhằm tăng hiệu suất cho service: 
 					\begin{itemize}
 						\item Sử dụng Message Queue để hiện thực cơ chế bất đồng bộ cho các tác vụ: Tạo đơn hàng, ghi dữ liệu vào Database.
 						\item Sử dụng Kafka để gửi message cho service khác
-						\item Trong quá trinh xử lý thì dữ liệu của đơn hàng được lưu trên Cache. Đến khi nào có \textbf{trạng thái cuối} thì đơn hàng mới được lưu vào Database. Bởi vì đơn hàng đươc lấy và thay đổi trạng thái rất nhiều lần trong quá trình xử lý, nếu ghi vào Database (thực hiện nhiều I/O operations) sau mỗi lần xử lý như vậy thì sẽ làm giảm performance rất nhiều. Việc xử lý dữ liệu trên Cache cũng có thể gặp rủi ro như Cache Server sập thì dữ liệu có thể mất hết, nhưng rất may Redis có hỗ trợ cơ chế Persistence (định kỳ sao lưu dữ liệu) nên rủi ro này có thể chấp nhận được.
+						\item Trong quá trinh xử lý thì dữ liệu của đơn hàng được lưu trên Cache. Đến khi nào có \textbf{trạng thái cuối} thì đơn hàng mới được lưu vào Database. Bởi vì đơn hàng đươc lấy và thay đổi trạng thái rất nhiều lần trong quá trình xử lý, nếu ghi vào Database (thực hiện nhiều I/O operations) sau mỗi lần xử lý như vậy thì sẽ làm giảm hiệu năng của hệ thống rất nhiều. Việc xử lý dữ liệu trên Cache cũng có thể gặp rủi ro như Cache Server sập thì dữ liệu có thể mất hết, nhưng rất may Redis có hỗ trợ cơ chế Persistence (định kỳ sao lưu dữ liệu) nên rủi ro này có thể chấp nhận được.
 					\end{itemize}
 				\item Mỗi khi đơn hàng thay đổi trạng thái hoăc tài xế đươc phân phối đơn thì service sẽ produce message vào \textbf{Kafka Broker} để \textbf{Notify Service} consume và tiếp tục xử lý
 			\end{itemize}
@@ -110,12 +112,12 @@
 			\end{itemize}
 			\item \textbf{Fee Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm hiện thực giải thuật, công thức để tính toán các khoản phí phát sinh cho khách hàng.
-				\item Database lưu thông tin về phí của mỗi đơn hàng để các user có thể đối soát.
+				\item Service chịu trách nhiệm hiện thực giải thuât, công thức để tính toán các khoản phí phát sinh cho khách hàng.
+				\item Database lưu thông tin về phí của mỗi đơn hàng để người dùng có thể đối soát.
 			\end{itemize}
 			\item \textbf{Payment Service}
 			\begin{itemize}
-				\item Service này sẽ liên kết với 1 bên thứ 3 như: ngân hàng, ví điện từ, .... để thực hiện chức năng thanh toán cho các user.
+				\item Service này sẽ liên kết với 1 bên thứ 3 như: ngân hàng, ví điện từ, .... để thực hiện chức năng thanh toán cho người dùng.
 			\end{itemize}
 			\item \textbf{Reverse Proxy}
 			\begin{itemize}
@@ -130,7 +132,7 @@
 				\begin{itemize}
 					\item \textbf{MySQL}: Hệ thống sử dụng MySql để lưu các thông tin ít được truy xuất như log, cấu hình service,...
 					\item \textbf{Cassandra}: Với khả năng đọc/ghi có tốc độ nhanh cùng với đó là khả năng chịu lỗi cao hệ thống sử dụng Cassandra để lưu các thông tin về Order, Hóa đơn nhập/xuất kho,...
-					\item \textbf{Redis}: Với Redis thì dữ liệu được lưu trữ trong memory vì thế giúp cho service truy xuất thông tin rất nhanh chóng. Hệ thống sẽ lưu các thông tin thường xuyên được truy xuất bởi user như thông tin về yêu cầu, đơn hàng,... Ngoài ra còn tận dụng cấu trúc dữ liệu đa dạng trong Redis để giải quyết một số bài toán phức tạp. 
+					\item \textbf{Redis}: Với Redis thì dữ liệu được lưu trữ trong memory vì thế giúp cho service truy xuất thông tin rất nhanh chóng. Hệ thống sẽ lưu các thông tin thường xuyên được truy xuất bởi người dùng như thông tin về yêu cầu, đơn hàng,... Ngoài ra còn tận dụng cấu trúc dữ liệu đa dạng trong Redis để giải quyết một số bài toán phức tạp. 
 				\end{itemize}
 		
 		\end{itemize}
