@@ -7,12 +7,12 @@
 					\begin{itemize}
 				        \item Đăng kí, đăng nhập đổi mật khẩu cho người dùng.
 				        \item Chỉnh sửa thông tin cá nhân: Người dùng có thể dễ dàng thay đổi thông tin cá nhân của mình.
-				        \item Tạo đơn hàng: Lúc tạo đơn hàng người dùng có thể tự đến gửi hàng trực tiếp tại kho hoặc người dùng chọn option có tài xế đến lấy, phí vận chuyển có thể là người gửi thanh toán hoặc người nhận thanh toán.
+				        \item Tạo đơn hàng: Lúc tạo đơn hàng người dùng có thể tự đến gửi hàng trực tiếp tại kho hoặc người dùng lựa chọn có tài xế đến lấy, phí vận chuyển có thể là người gửi thanh toán hoặc người nhận thanh toán.
 				        \item Hủy đơn hàng: Trong khoảng thời gian đơn hàng được xác nhận bởi tài xế thì đơn hàng có thể bị hủy. Chú ý rằng sau khi đơn hàng đã được xác nhận thì người dùng không thể hủy.
 				        \item Xem danh sách các đơn hàng: Người dùng có thể dễ dàng xem thông tin đơn hàng. Danh sách đơn hàng có thể được lọc theo trạng thái, theo mã đơn hàng hoặc theo từng khoảng thời gian khác nhau nhanh chóng.
 				        \item Xem nợ công và thanh toán: Người dùng có thể xem các đơn hàng đã hoàn tất và tiến hành thanh toán trung gian qua Ví điện tử hoăc thẻ ngân hàng.
-				        \item Nhận thông báo: Sau khi đơn hàng được xác nhận bởi tài xế, thì ngươi dùng sẽ liên tục nhận được thông báo mỗi khi chuyển trạng thái của đơn hàng. Điều này giúp cho người dùng có thể theo dõi đơn hàng chặt chẽ và dễ dàng dự báo thời gian nhận hàng của mình.
-				        \item Tìm kiếm đơn hàng: Đối với người nhận không phải là user của hệ thống thì vẫn có thể dễ dàng xem thông tin các đơn hàng thông qua số điện thoại của mình hoặc theo dõi yêu cầu thông qua mã yêu cầu.
+				        \item Nhận thông báo: Sau khi đơn hàng được xác nhận bởi tài xế, thì người dùng sẽ liên tục nhận được thông báo mỗi khi chuyển trạng thái của đơn hàng. Điều này giúp cho người dùng có thể theo dõi đơn hàng chặt chẽ và dễ dàng dự báo thời gian nhận hàng của mình.
+				        \item Tìm kiếm đơn hàng: Đối với người nhận không phải là người dùng của hệ thống thì vẫn có thể dễ dàng xem thông tin các đơn hàng thông qua số điện thoại của mình hoặc theo dõi yêu cầu thông qua mã yêu cầu.
 				        \item Yêu cầu hỗ trợ: Khi có các vấn đề thắc mắc thì người dùng có thể gửi yêu cầu để quản lý trực tiếp phản hồi. Danh sách các yêu cầu có thể được lọc theo mã yêu cầu, ngày, tháng, năm.
 				        
 				    \end{itemize}
@@ -32,7 +32,7 @@
 	                
 				\item Đối với thủ kho
 			    	\begin{itemize}
-			    	    \item Chinh sửa thông tin cá nhân thủ kho.
+			    	    \item Chỉnh sửa thông tin cá nhân thủ kho.
 	                    \item Nhập kho: Sau khi đơn hàng vận chuyển đến kho thì thủ kho có trách nhiệm xác nhận đơn hàng đúng về số lượng và đảm bảo chất lượng nguyên vẹn. Sau khi xác nhận thì tiến hành nhập kho để lưu trữ và phân phối tiếp tục cho tài xế.
 	                    \item Xuất kho: Sau khi đơn hàng đã phân phối cho tài xế thì thủ kho có trách nhiệm kiểm tra hàng một lần nữa và bàn giao cho tài xế. 
 	                    \item Xuất hóa đơn: Trong quá trình nhập kho và xuất kho thì thủ kho có thể xuất hóa đơn để xác nhận đã nhập hàng hoặc bàn giao hàng hóa cho tài xế.
@@ -110,7 +110,7 @@
 			\end{itemize}
 			\item \textbf{Fee Service}
 			\begin{itemize}
-				\item Service chịu trách nhiệm hiện thực giải thuât, công thức để tính toán các khoản phí phát sinh cho khách hàng.
+				\item Service chịu trách nhiệm hiện thực giải thuật, công thức để tính toán các khoản phí phát sinh cho khách hàng.
 				\item Database lưu thông tin về phí của mỗi đơn hàng để các user có thể đối soát.
 			\end{itemize}
 			\item \textbf{Payment Service}
@@ -267,7 +267,7 @@
 					\hline 
 					Actor & Người gửi \\ 
 					\hline
-					Description & Người gửi có thể hủy nếu đơn hàng chưa đươc bàn giao cho tài xế. \\
+					Description & Người gửi có thể hủy nếu đơn hàng chưa được bàn giao cho tài xế. \\
 					\hline 
 					Preconditions & Người gửi đã đăng nhập vào hệ thống \\
 					\hline
@@ -328,7 +328,7 @@
 					\hline
 					Normal Flow & \begin{enumerate}
 						\item Ở trang chủ nhấn "Yêu cầu hỗ trợ". Mặc định sẽ hiển thị ra thông tin các yêu cầu và phản hồi của quản lý (nếu yêu cầu đã đươc xử lý)
-						\item Khách hàng có thẻ lọc yêu cầu theo: Mã yêu cầu, ngày tháng.
+						\item Khách hàng có thể lọc yêu cầu theo: Mã yêu cầu, ngày tháng.
 				
 					\end{enumerate}
 					\\
@@ -337,7 +337,7 @@
 				\caption{Xem phản hồi hỗ trợ}
 			\end{table}
 			
-			\item \textbf{Xem thông báo}: Mỗi khi trạng thái đơn hàng thay đổi thì khách hàng đều nhận được email thông báo để khách hàng có thể nắm bắt đươc tình trạng của đơn hàng. Ngoài ra môt số chức năng cần phải nhập OTP để xác thực khách hàng thì cũng được gửi thông qua email.
+			\item \textbf{Xem thông báo}: Mỗi khi trạng thái đơn hàng thay đổi thì khách hàng đều nhận được email thông báo để khách hàng có thể nắm bắt được tình trạng của đơn hàng. Ngoài ra một số chức năng cần phải nhập OTP để xác thực khách hàng thì cũng được gửi thông qua email.
 			
 			\begin{table}[H]
 				\centering\begin{tabular}{|c|m{25em}|}
@@ -566,7 +566,7 @@
 			\caption{Nhập kho}
 		\end{table}
 	
-		\item \textbf{Xuất kho}: Sau khi đơn hàng đươc phân phối cho tài xế. Thì tài xế đến kho nhận hàng và tiếp tục vận chuyển. Khi xuất hàng thủ kho có trách nhiệm kiểm tra hàng hóa về số lượng và tình trạng một lần nữa trước khi bàn giao cho Tài xế.
+		\item \textbf{Xuất kho}: Sau khi đơn hàng được phân phối cho tài xế. Thì tài xế đến kho nhận hàng và tiếp tục vận chuyển. Khi xuất hàng thủ kho có trách nhiệm kiểm tra hàng hóa về số lượng và tình trạng một lần nữa trước khi bàn giao cho Tài xế.
 		
 		\begin{table}[H]
 			\centering\begin{tabular}{|c|m{25em}|}
