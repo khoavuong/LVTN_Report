@@ -8,7 +8,7 @@
 			\includegraphics[width=0.8\textwidth]{Images/session-cookies.png}
 			\centering
 			\linebreak
-			\caption{Xác thực dựa trên Session và Cookies}
+			\caption{Xác thực dựa trên Session và Cookies\cite{sessioncookies}}
 		\end{figure}
 		
 		Đầu tiên user nhập thông tin tài khoản của mình. Sau khi kiểm tra đúng thông tin đăng nhập thì Server sẽ tạo ra 1 sessionID, lưu lại vào Database và trả về cho Client. Sau đó mỗi request gửi lên thì Client sẽ chèn sessionId vào Cookies và gửi lên cho Server từ đó Server kiểm tra và biết được chính xác Client đó là ai.\\
@@ -21,7 +21,7 @@
 			\includegraphics[width=1\textwidth]{Images/authbasedtoken.jpg}
 			\centering
 			\linebreak
-			\caption{Xác thực dựa trên token}
+			\caption{Xác thực dựa trên token\cite{jwtpic}}
 		\end{figure}
 		
 		\begin{itemize}
@@ -80,7 +80,7 @@
 			\includegraphics[width=1\textwidth]{Images/problem2.png}
 			\centering
 			\linebreak
-			\caption{Chiến lươc Cache Aside}
+			\caption{Chiến lươc Cache Aside\cite{cachestrategy}}
 	       	\end{figure}
 	       	
 	        Đầu tiên khi muốn lấy thông tin nào đó thì ta tiến hành tìm trong Cache. Nếu trong Cache có thông tin cần tìm kiếm thì lập tức trả thông tin đó về cho User, nếu không tìm thấy trong Cache thì ta tiến hành tìm kiếm trong Database, sau đó lưu thông tin đó vào Cache rồi mới trả về cho User.\\
@@ -133,7 +133,7 @@
                 
                 Thông thường chúng ta sẽ lưu hết vào Database rồi query SELECT COUNT(*) WHERE STARTDATE<=Date AND Date<=ENDDATE. Việc query như vậy vào Database sẽ được xử lý rất lâu cho nên sẽ làm giảm trải nghiệm của user.\\
                 
-                Sau khi tìm hiểu và nghiên cứu thì nhóm sử dụng cấu trúc dữ liệu \textbf{HyperLoglog} được hỗ trợ bởi Redis nhằm lưu trữ dữ liệu thống kế để mỗi khi cần chúng ta có thể truy xuất trong nháy mắt.\\
+                Sau khi tìm hiểu và nghiên cứu thì nhóm sử dụng cấu trúc dữ liệu \textbf{HyperLoglog}\cite{hyperloglog} được hỗ trợ bởi Redis nhằm lưu trữ dữ liệu thống kế để mỗi khi cần chúng ta có thể truy xuất trong nháy mắt.\\
                 
                 \textbf{HyperLoglog} giúp chúng ta tính gần đúng các giá trị khác nhau trong tập hợp, thuật toán này có độ chính xác cao mà vẫn giữ được dung lượng dữ liệu rất bé, hỗ trợ nhiều thao tác liên quan tới việc đếm 1 phần tử trong 1 hoặc nhiều tập hợp. Và quan trọng nhất là nó rất nhanh nêu chúng ta tổ chức dữ liệu một cách hợp lý.\\
                 
