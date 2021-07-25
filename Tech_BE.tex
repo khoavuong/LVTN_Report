@@ -13,7 +13,7 @@
                 \item \textbf{Agility} - Microservice hỗ trợ phát triển theo mô hình Agile.
             \end{itemize}
             \item Ưu điểm\\\\
-            Kiến trúc Microservices được sinh ra để khắc phục những hạn chế của kiến trúc một khối. Kiến trúc Microservices giúp đơn giản hóa hệ thống, chia nhỏ hệ thống ra làm nhiều service nhỏ lẽ dể dàng quản lý và triển khai từng phần so với kiến trúc nguyên khối. Phân tách rõ ràng giữa các service nhỏ. Cho phép việc mỗi service được phát triển độc lập. Cũng như cho phép lập trình viên có thể tự do chọn lựa technology stack cho mỗi service mình phát triển. mỗi service có thể được triển khai một cách độc lập (VD: Mỗi service có thể được đóng gói vào một docker container độc lập, giúp giảm tối đa thời gian deploy). Nó cũng cho phép mỗi service có thể được scale một cách độc lập với nhau. Việc scale có thể được thực hiện dễ dàng bằng cách tăng số instance cho mỗi service rồi phân tải bằng load balancer.
+            Kiến trúc Microservices được sinh ra để khắc phục những hạn chế của kiến trúc một khối. Kiến trúc Microservices giúp đơn giản hóa hệ thống, chia nhỏ hệ thống ra làm nhiều service nhỏ lẽ dễ dàng quản lý và triển khai từng phần so với kiến trúc nguyên khối. Phân tách rõ ràng giữa các service nhỏ. Cho phép việc mỗi service được phát triển độc lập. Cũng như cho phép lập trình viên có thể tự do chọn lựa công nghệ và ngôn ngữ cho mỗi service mình phát triển. Mỗi service có thể được triển khai một cách độc lập (VD: Mỗi service có thể được đóng gói vào một docker container độc lập, giúp giảm tối đa thời gian deploy). Nó cũng cho phép mỗi service có thể được mở rộng một cách độc lập với nhau. Việc mở rộng có thể được thực hiện dễ dàng bằng cách tăng số instance cho mỗi service rồi phân tải bằng load balancer.
             \begin{itemize}
                 \item \textbf{Independent Development} - Tất cả các service có thể được phát triển dễ dàng dựa trên chức năng cá nhân của từng service. Có thể chia nhỏ để phát triển độc lập.
                 \item \textbf{Independent Deployment} - Có thể được triển khai riêng lẻ trong bất kỳ ứng dụng nào.
@@ -38,10 +38,10 @@
 		    \item \textbf{Monitoring} - Vì đã có circuit breakers, chúng ta có thể bắt đầu theo dõi trạng thái của chúng và thu thập số liệu thống kê thời gian chạy từ chúng để có được một bức tranh về tình trạng sức khỏe của hệ thống.
 	        \item \textbf{Secure API} - Để bảo vệ các API services được expose ra bên ngoài sử dụng OAuth 2.0, quy trình của OAuth 2.0 có thể như sau:
 	        \begin{itemize}
-	            \item Một component mới có thể đóng vai trò như một Máy chủ ủy quyền (OAuth Authorization Server)
-	            \item Các API services sẽ đóng vai trò như các Máy chủ tài nguyên (OAuth Resource Server)
+	            \item Một component mới có thể đóng vai trò như một máy chủ ủy quyền (OAuth Authorization Server)
+	            \item Các API services sẽ đóng vai trò như các máy chủ tài nguyên (OAuth Resource Server)
 	            \item Các Client bên ngoài gọi đến API services với tư cách là OAuth Clients
-	            \item Edge server sẽ làm việc như một OAuth Token Relay: nó sẽ hoạt động như một OAuth Resource Serve, Nó sẽ chuyển các OAuth Access Tokens có trong request bên ngoài đến các API servicesr
+	            \item Edge server sẽ làm việc như một OAuth Token Relay: nó sẽ hoạt động như một OAuth Resource Serve, Nó sẽ chuyển các OAuth Access Tokens có trong request bên ngoài đến các API services
 	        \end{itemize}
 	        \item \textbf{Central Configuration Server.} - Thay vì cấu hình cục bộ cho mỗi đơn vị triển khai (tức là microservice), chúng ta cần quản lý cấu hình tập trung. Chúng ta cũng cần một configuration API để các microservices có thể sử dụng để lấy thông tin cấu hình.
 	        \item \textbf{Centralized Log Analysis} - Để có thể theo dõi messages và phát hiện khi chúng bị kẹt (stuck), chúng ta cần một chức năng phân tích log tập trung có khả năng tiếp cận với máy chủ và thu thập các tệp log mà mỗi services microservice tạo ra. Chức năng phân tích log lưu trữ thông tin log này trong cơ sở dữ liệu trung tâm và cung cấp khả năng tìm kiếm và dashboard. Lưu ý : Để có thể tìm thấy các messages liên quan, điều quan trọng là tất cả các microservices phải sử dụng id đồng nhất trong các log message.
@@ -58,7 +58,7 @@
 		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ SPRING SECURITY
 		\begin{itemize}
 		    \item \textbf{Spring Boot} là một dự án nổi bật trong hệ sinh thái Spring Framework. Nếu như trước đây, công đoạn khởi tạo một dự án Spring khá vất vả từ việc khai báo các dependency trong file pom.xml cho đến cấu hình bằng XML hoặc annotation phức tạp, thì giờ đây với Spring Boot, chúng ta có thể tạo các ứng dụng Spring một cách nhanh chóng và cấu hình cũng đơn giản hơn.
-		    \item \textbf{Spring Cloud} là nền tảng khá mới mẻ trong gia đình Spring.io dùng để xây dựng microservice một cách nhanh chóng. Spring Cloud cung cấp các công cụ cho các developer để nhanh chóng xây dựng một số common patterns trong các hệ thống phân tán (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Chúng sẽ hoạt động tốt trong bất kỳ môi trường phân tán nào, bao gồm máy tính xách tay của chính developer, các data center hoặc trên cloud.
+		    \item \textbf{Spring Cloud} là nền tảng khá mới mẻ trong gia đình Spring.io dùng để xây dựng microservice một cách nhanh chóng. Spring Cloud cung cấp các công cụ cho các lập trình viên để nhanh chóng xây dựng một số common patterns trong các hệ thống phân tán (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Chúng sẽ hoạt động tốt trong bất kỳ môi trường phân tán nào, bao gồm máy tính xách tay của chính lập trình viên, các data center hoặc trên cloud.
 		    \item \textbf{Spring Security} là một trong những core feature quan trọng của Spring Framework, nó giúp chúng ta phân quyền và xác thực người dùng trước khi cho phép họ truy cập vào các tài nguyên của chúng ta. 
 		\end{itemize}
 		Công nghệ sử dụng cho Secure API
@@ -67,7 +67,7 @@
 		\end{itemize}
         \subsection{Kiến trúc RESTful API}
 		    
-		    RESTful API là một tiêu chuẩn dùng trong việc thiết kế các API cho ứng dụng web để quản lý resource. RESTful là một trong những kiểu thiết kế API được sử dụng phổ biến ngày nay để cho các ứng dụng (web, mobile, web service...) khác nhau có thể giao tiếp với nhau.\\
+		    RESTful API là một tiêu chuẩn dùng trong việc thiết kế các API cho ứng dụng web để quản lý tài nguyên. RESTful là một trong những kiểu thiết kế API được sử dụng phổ biến ngày nay để cho các ứng dụng (web, mobile, web service...) khác nhau có thể giao tiếp với nhau.\\
 		    
 		    Khi làm việc với server sẽ gồm 4 hoạt động thiết yếu đó là: lấy dữ liệu, tạo mới, cập nhật, xóa dữ liệu.\\
 		    
@@ -79,7 +79,7 @@
 		        \item PUT (UPDATE) : Cập nhật, thay thế thông tin cho tài nguyên.
 		        \item DELETE (DELETE) : Xóa một tài nguyên.
 		    \end{itemize}
-		    REST là một kiến trúc thống nhất giúp thiết kế các website để có thể dễ dàng quản lý các tài nguyên. Nó không phải là một quy luật buộc bạn phải tuân theo mà đơn giản là một kiến trúc được đề xuất ra và kiến trúc này hiện đang được sử dụng rất phổ biến vì tính đơn giản, dễ hiểu và rất ưu việt của nó. Với các ứng dụng web được thiết kế sử dụng RESTful, ban có thể dễ dàng biết được URL và HTTP method để quản lý một resource
+		    REST là một kiến trúc thống nhất giúp thiết kế các website để có thể dễ dàng quản lý các tài nguyên. Nó không phải là một quy luật buộc phải tuân theo mà đơn giản là một kiến trúc được đề xuất ra và kiến trúc này hiện đang được sử dụng rất phổ biến vì tính đơn giản, dễ hiểu và rất ưu việt của nó. Với các ứng dụng web được thiết kế sử dụng RESTful, có thể dễ dàng biết được URL và HTTP method để quản lý một tài nguyên.
 		    
 		    \begin{figure}[H]   			
 		    	\includegraphics[width=0.8\textwidth]{Images/restful.jpeg}
@@ -101,12 +101,12 @@
 		    \textbf{Nhược điểm}
 		    
 	        \begin{itemize}
-	            \item REST Chỉ hoạt động trên các giao thức HTTP.
+	            \item REST chỉ hoạt động trên các giao thức HTTP.
 	        \end{itemize}
 	 
             \subsection{MySQL}
             
-            MySQL là hệ quản trị cơ sở dữ liệu tự do nguồn mở phổ biến nhất thế giới và được các nhà phát triển rất ưa chuộng trong quá trình phát triển ứng dụng. Vì MySQL là cơ sở dữ liệu tốc độ cao, ổn định và dễ sử dụng, có tính khả chuyển, hoạt động trên nhiều hệ điều hành cung cấp một hệ thống lớn các hàm tiện ích rất mạnh. Với tốc độ và tính bảo mật cao, MySQL rất thích hợp cho các ứng dụng có truy cập CSDL trên internet.
+            MySQL là hệ quản trị cơ sở dữ liệu tự do nguồn mở phổ biến nhất thế giới và được các nhà phát triển rất ưa chuộng trong quá trình phát triển ứng dụng. Vì MySQL là cơ sở dữ liệu tốc độ cao, ổn định và dễ sử dụng, có tính khả chuyển, hoạt động trên nhiều hệ điều hành cung cấp một hệ thống lớn các hàm tiện ích rất mạnh. Với tốc độ và tính bảo mật cao, MySQL rất thích hợp cho các ứng dụng có truy cập cơ sở dữ liệu trên internet.
             
             \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/mysqlintro.png}
             	\centering
@@ -118,7 +118,7 @@
             
             \begin{itemize}
                 \item \textbf{Dễ sử dụng}: MySQL là cơ sở dữ liệu tốc độ cao, ổn định, dễ sử dụng và hoạt động trên nhiều hệ điều hành.
-                \item \textbf{Độ bảo mật cao}:  MySQL rất thích hợp cho các ứng dụng có truy cập CSDL trên Internet khi sở hữu nhiều nhiều tính năng bảo mật thậm chí là ở cấp cao.
+                \item \textbf{Độ bảo mật cao}:  MySQL rất thích hợp cho các ứng dụng có truy cập cơ sở dữ liệu trên Internet khi sở hữu nhiều nhiều tính năng bảo mật thậm chí là ở cấp cao.
                 \item \textbf{Đa tính năng}: MySQL hỗ trợ rất nhiều chức năng SQL được mong chờ từ một hệ quản trị cơ sở dữ liệu quan hệ cả trực tiếp lẫn gián tiếp.
                 \item \textbf{Khả năng mở rộng và mạnh mẽ}: MySQL có thể xử lý rất nhiều dữ liệu và hơn thế nữa nó có thể được mở rộng nếu cần thiết.
             \end{itemize}
@@ -144,7 +144,7 @@
             \textbf{Ưu điểm}
             
             \begin{itemize}
-                \item Khả năng chịu lỗi cao: Do dữ liệu khi lưu vào cassandra sẽ được nhân bản và lưu trữ trên các node khác nhau. Vì thế nếu có 1 node nào đó chứa dữ liệu cần đọc down thì hệ thống có thể điều phối để đọc dữ liệu đó ở node khác.
+                \item Khả năng chịu lỗi cao: Do dữ liệu khi lưu vào cassandra sẽ được nhân bản và lưu trữ trên các node khác nhau. Vì thế nếu có 1 node nào đó chứa dữ liệu cần đọc thì hệ thống có thể điều phối để đọc dữ liệu đó ở node khác.
                 \item Kiến trúc không có SPOF (Single Point Of Failure): Bởi vì trong Cassandra không có node chính. Các node kết hợp với nhau tạo thành 1 Ring. Và các node đều có vai trò như nhau. Cho nên hệ thống sẽ không dừng lại khi một hoặc một số node cho phép trong mạng down.
                 \item Hỗ trợ nhiều ngôn ngữ khác nhau: Do cassandra thu thập dữ liệu bằng một framework có tên là Thrift và Thrift có một cơ chế để giao tiếp với các ngôn ngữ khác nhau.
                 \item Dễ dàng scale và mở rộng: Cassandra có hệ thống cluster bao gồm nhiều node được kết nối với nhau tạo thành Ring. Vì thế để mở rộng khả năng lưu trữ và xử lý thì ra chỉ việc thêm node vào mà không ảnh hưởng đến các node khác trong mạng do Cassandra sử dụng một thuật toán có tên là Consistency Hashing để phân chia dữ liệu đến các node trong Ring.
@@ -161,7 +161,7 @@
             \textbf{Kết luận}
             
             \begin{itemize}
-                \item Sau quá trình tìm hiểu và thử nghiệm thì nhóm nhận thấy một số điều. Đối với MySQL thì có một số ưu điểm như: dễ sử dụng, hỗ trợ transaction, hỗ trợ ràng buộc nghiêm ngặt, … nhưng nhóm cũng nhận thấy một nhược điểm rất lớn đó là khó scale. Đối với lương dữ liệu còn ít thì việc thực thi các câu truy vấn trong MySQL diễn ra rất trơn tru nhưng khi dữ liệu càng phình to ra thì việc query trở nên nặng nề và rất chậm. Vì thế nhóm sẽ sử dụng MySQL để lưu các config ít thay đổi trong hệ thống. Ví dụ như: path, port của service khác, mã lỗi, …
+                \item Sau quá trình tìm hiểu và thử nghiệm thì nhóm nhận thấy một số điều. Đối với MySQL thì có một số ưu điểm như: dễ sử dụng, hỗ trợ transaction, hỗ trợ ràng buộc nghiêm ngặt, … nhưng nhóm cũng nhận thấy một nhược điểm rất lớn đó là khó mở rộng. Đối với lương dữ liệu còn ít thì việc thực thi các câu truy vấn trong MySQL diễn ra rất trơn tru nhưng khi dữ liệu càng phình to ra thì việc truy vấn trở nên nặng nề và rất chậm. Vì thế nhóm sẽ sử dụng MySQL để lưu các thiết lập ít thay đổi trong hệ thống. Ví dụ như: path, port của service khác, mã lỗi, …
                 \item Ngoài ra với những ưu điểm của Cassandra thì nhóm sẽ sử dụng để lưu trữ các dữ liệu về business, các dữ liệu về log, dữ liệu về người dùng, … để có thể đảm bảo tính chịu lỗi và sẵn sàng.
             \end{itemize}
             \subsection{Redis}
@@ -179,11 +179,11 @@
             \textbf{Đặc điểm}
             
             \begin{itemize}
-                \item Là cơ sở dữ liệu NoSQL, lưu trữ dữ liệu dưới dạng KEY-VALUE
+                \item Là cơ sở dữ liệu NoSQL, lưu trữ dữ liệu dưới dạng KEY-VALUE.
                 \item Lưu trữ dữ liệu trên RAM, giúp việc truy xuất dữ liệu cực kì nhanh chóng.
                 \item Hỗ trợ nhiều cấu trúc dữ liệu cơ bản như Hash, List, Set, Sorted Set, String,....
                 \item Hỗ trợ cơ chế Pub/Sub messaging.
-                \item Hỗ trợ cơ chế Persistence giúp bảo vệ khỏi mất mát dữ liệu khi có sự cố xảy ra
+                \item Hỗ trợ cơ chế Persistence giúp bảo vệ khỏi mất mát dữ liệu khi có sự cố xảy ra.
             \end{itemize}
             
             Nhờ đặc điểm giúp giảm thời gian truy vấn, nên Redis có tác dụng rất mạnh mẽ trong việc sử dụng làm cache có các ứng dụng web.\\ 
@@ -203,7 +203,7 @@
             \begin{itemize}
                 \item Do Redis lưu trữ dữ liệu trong RAM nên phần nào vẫn có nguy cơ mất mát dữ liệu.
                 \item Mỗi lần chỉnh sửa hay thêm dữ liệu thì ta đồng thời phải thêm/sửa vào cả database và Redis nên có thể mang đến một số phức tạp.
-                \item Key trong Redis có giới hạn: Vì thế trong quá trình lưu trữ nếu không cẩn thận có thể gây chết server Redis
+                \item Key trong Redis có giới hạn: Vì thế trong quá trình lưu trữ nếu không cẩn thận có thể gây chết server Redis.
                 \item Cache Invalidation: Khó khăn khi loại bỏ đi dữ liệu không còn được sử dụng trong Redis. Thông thường người ta thường đặt Time to live cho mỗi dữ liệu cache tùy theo tần số thay đổi, tần suất truy vấn và mức độ quan trọng của dữ liệu.
             \end{itemize}
             
@@ -233,7 +233,7 @@
             \textbf{Phân loại}
             
             \begin{itemize}
-                \item Point-to-point: Tức là message chỉ được consumer bởi 1 thành phần duy nhất
+                \item Point-to-point: Tức là message chỉ được consume bởi 1 thành phần duy nhất
                 
                 \begin{figure}[H]   			
                 	\includegraphics[width=0.8\textwidth]{Images/PTP.png}
@@ -266,7 +266,7 @@
             \begin{itemize}
                 \item Làm phức tạp hệ thống: Khi thêm 1 thành phần thì ta phải chấp nhận việc xử lý phức tạp và có thể xảy ra sai sót trong quá trình xử lý.
                 \item Producer và Consumer phải thống nhất về format của message: Mặc dù cả producer và consumer không quan tâm đến nhau (chỉ cần gửi message vào queue rồi thằng kia tới lấy) nhưng cả 2 cần có chung 1 format message để có thể dễ dàng xử lý sau khi consume.
-                \item Monitor Queue: Ta cần phải theo dõi queue để biết được tính trạng hiện tại, queue có đầy hay không, có bị crash không để đưa ra phương án xử lý.
+                \item Monitor Queue: Ta cần phải theo dõi queue để biết được tình trạng hiện tại, queue có đầy hay không, có bị crash không để đưa ra phương án xử lý.
             \end{itemize}
             
             \textbf{Kết luận}\\
@@ -318,7 +318,7 @@
             
             \subsection{Docker}
             
-            Docker là nền tảng cung cấp cho các công cụ, service để các developers, adminsystems có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.\\
+            Docker là nền tảng cung cấp cho các công cụ, service để các lập trình viên, quản lý hệ thống có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.\\
             
             Ứng dụng Docker chạy trong vùng chứa (container) có thể được sử dụng trên bất kỳ hệ thống nào: máy tính xách tay của nhà phát triển, hệ thống trên cơ sở hoặc trong hệ thống đám mây. Và là một công cụ tạo môi trường được "đóng gói" (còn gọi là Container) trên máy tính mà không làm tác động tới môi trường hiện tại của máy, môi trường trong Docker sẽ chạy độc lập.\\
             
@@ -343,10 +343,10 @@
             Nhờ vào reverse proxy nhóm có thể:
             
             \begin{itemize}
-                \item Che giấu được thông tin các service đươc deploy bên trong private network
-                \item Tăng khả năng xử lý nhiều request dống thời
+                \item Che giấu được thông tin các service được deploy bên trong private network.
+                \item Tăng khả năng xử lý nhiều request dống thời.
                 \item Phân chia tải cho các service bên trong.
-                \item Thiêt lập cấu hình HTTPS
+                \item Thiêt lập cấu hình HTTPS.
             \end{itemize}
         
 	        \begin{figure}[H]  			
