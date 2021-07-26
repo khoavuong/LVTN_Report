@@ -8,7 +8,7 @@
 			\includegraphics[width=0.8\textwidth]{Images/session-cookies.png}
 			\centering
 			\linebreak
-			\caption{Xác thực dựa trên Session và Cookies\cite{sessioncookies}}
+			\caption{Xác thực dựa trên Session và Cookies \cite{sessioncookies}}
 		\end{figure}
 		
 		Đầu tiên người dùng nhập thông tin tài khoản của mình. Sau khi kiểm tra đúng thông tin đăng nhập thì Server sẽ tạo ra 1 sessionID, lưu lại vào Database và trả về cho Client. Sau đó mỗi request gửi lên thì Client sẽ chèn sessionId vào Cookies và gửi lên cho Server từ đó Server kiểm tra và biết được chính xác Client đó là ai.\\
