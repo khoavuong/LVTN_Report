@@ -12,7 +12,7 @@
                 \item \textbf{Decentralized Governance} - Không có mẫu chuẩn hóa hoặc bất kỳ mẫu công nghệ nào. Được tự do lựa chọn các công cụ hữu ích tốt nhất để có thể giải quyết vấn đề.
                 \item \textbf{Agility} - Microservice hỗ trợ phát triển theo mô hình Agile.
             \end{itemize}
-            \item Ưu điểm\\\\
+            \item \textbf{Ưu điểm}\\\\
             Kiến trúc Microservices được sinh ra để khắc phục những hạn chế của kiến trúc một khối. Kiến trúc Microservices giúp đơn giản hóa hệ thống, chia nhỏ hệ thống ra làm nhiều service nhỏ lẽ dễ dàng quản lý và triển khai từng phần so với kiến trúc nguyên khối. Phân tách rõ ràng giữa các service nhỏ. Cho phép việc mỗi service được phát triển độc lập. Cũng như cho phép lập trình viên có thể tự do chọn lựa công nghệ và ngôn ngữ cho mỗi service mình phát triển. Mỗi service có thể được triển khai một cách độc lập (VD: Mỗi service có thể được đóng gói vào một docker container độc lập, giúp giảm tối đa thời gian deploy). Nó cũng cho phép mỗi service có thể được mở rộng một cách độc lập với nhau. Việc mở rộng có thể được thực hiện dễ dàng bằng cách tăng số instance cho mỗi service rồi phân tải bằng load balancer.
             \begin{itemize}
                 \item \textbf{Independent Development} - Tất cả các service có thể được phát triển dễ dàng dựa trên chức năng cá nhân của từng service. Có thể chia nhỏ để phát triển độc lập.
@@ -20,13 +20,13 @@
                 \item \textbf{Fault Isolation} - Khi một service của ứng dụng không hoạt động, hệ thống vẫn tiếp tục hoạt động.
                 \item \textbf{Mixed Technology Stack} - Các ngôn ngữ và công nghệ khác nhau có thể được sử dụng để xây dựng các service khác nhau của cùng một ứng dụng.
             \end{itemize}
-            \item Nhược điểm
+            \item \textbf{Nhược điểm}
             \begin{itemize}
                 \item Kiến trúc Microservices đang là một xu hướng, nhưng nó cũng có nhược điểm của nó. Microservice khuyến khích làm nhỏ gọn các service, nhưng khi chia nhỏ sẽ dẫn đến những thứ vụn vặt, khó kiểm soát. Hơn nữa chính từ đặc tính phân tán khiến cho các lập trình viên phải lựa chọn cách thức giao tiếp phù hợp khi xử lí request giữa các service.
-                \item Hơn nữa việc quản lí nhiều database, và transaction giữa các service trong một hệ thống phân tán cũng là một khó khăn không nhỏ. Hay khi thực hiện test một service, bạn cũng cần test các service có liên quan.
+                \item Hơn nữa việc quản lí nhiều database, và transaction giữa các service trong một hệ thống phân tán cũng là một khó khăn không nhỏ. Hay khi thực hiện test một service thì cũng cần test các service có liên quan.
                 \item Triển khai microservice cũng sẽ phức tạp hơn so với ứng dụng kiến trúc một khối, cần sự phối hợp giữa nhiều service, điều này không đơn giản như việc triển khai WAR trong một ứng dụng kiến trúc một khối.
             \end{itemize}
-            \item Với những ưu điểm và nhược điểm đã được nói ở trên nên nhóm đã quyết định sử dụng kiến trúc Microservices để xây dựng hệ thống của nhóm.
+            \item \textbf{Kết luận}: Với những ưu điểm và nhược điểm đã được nói ở trên nên nhóm đã quyết định sử dụng kiến trúc Microservices để xây dựng hệ thống của nhóm.
         \end{itemize}
 		\subsection{Công nghệ tổng quan}
 		Công nghệ nền tảng dự kiến sử dụng của nhóm: SPRING BOOT, SPRING CLOUD VÀ SPRING SECURITY
@@ -119,9 +119,9 @@
             
             \begin{itemize}
                 \item Khả năng chịu lỗi cao: Do dữ liệu khi lưu vào cassandra sẽ được nhân bản và lưu trữ trên các node khác nhau. Vì thế nếu có 1 node nào đó chứa dữ liệu cần đọc thì hệ thống có thể điều phối để đọc dữ liệu đó ở node khác.
-                \item Kiến trúc không có SPOF (Single Point Of Failure): Bởi vì trong Cassandra không có node chính. Các node kết hợp với nhau tạo thành 1 Ring. Và các node đều có vai trò như nhau. Cho nên hệ thống sẽ không dừng lại khi một hoặc một số node cho phép trong mạng down.
+                \item Kiến trúc không có SPOF (Single Point Of Failure): Bởi vì trong Cassandra không có node chính. Các node kết hợp với nhau tạo thành 1 Ring. Và các node đều có vai trò như nhau. Cho nên hệ thống sẽ không dừng lại khi một hoặc một số node cho phép trong mạng có vấn đề.
                 \item Hỗ trợ nhiều ngôn ngữ khác nhau: Do cassandra thu thập dữ liệu bằng một framework có tên là Thrift và Thrift có một cơ chế để giao tiếp với các ngôn ngữ khác nhau.
-                \item Dễ dàng scale và mở rộng: Cassandra có hệ thống cluster bao gồm nhiều node được kết nối với nhau tạo thành Ring. Vì thế để mở rộng khả năng lưu trữ và xử lý thì ra chỉ việc thêm node vào mà không ảnh hưởng đến các node khác trong mạng do Cassandra sử dụng một thuật toán có tên là Consistency Hashing để phân chia dữ liệu đến các node trong Ring.
+                \item Dễ dàng scale và mở rộng: Cassandra có hệ thống cluster bao gồm nhiều node được kết nối với nhau tạo thành Ring. Vì thế để mở rộng khả năng lưu trữ và xử lý thì ta chỉ việc thêm node vào mà không ảnh hưởng đến các node khác trong mạng do Cassandra sử dụng một thuật toán có tên là Consistency Hashing để phân chia dữ liệu đến các node trong Ring.
                 \item Tốc độ đọc/ghi nhanh: Do Cassandra không có ràng buộc giữa các table như RDBMS nên việc truy xuất cực kì nhanh.
             \end{itemize}
             
@@ -140,7 +140,7 @@
             \end{itemize}
             \subsection{Redis}
             
-            Ngày nay việc tăng tốc truy vấn để đáp ứng request một cách nhanh chóng đang dần trở nên phổ biến. Mỗi khi muốn truy xuất lấy dữ liệu từ Database thì ta phải xuống ổ cứng, mà tốc độ đọc/ghi dữ liệu từ ổ cứng chậm hơn rất nhiều so với RAM (khoảng 200 lần). Vì thế người ta nghĩ ra cách lưu dữ liệu thường xuyên truy xuất lên RAM để có thể phản hồi request của client với tốc độ nhanh nhất. Từ đó, Redis ra đời và được biết đến như là 1 cache database rất phổ biến trên thế giới.\\
+            Ngày nay việc tăng tốc truy vấn để đáp ứng request một cách nhanh chóng đang dần trở nên quan trọng. Mỗi khi muốn truy xuất lấy dữ liệu từ Database thì ta phải xuống ổ cứng, mà tốc độ đọc/ghi dữ liệu từ ổ cứng chậm hơn rất nhiều so với RAM (khoảng 200 lần). Vì thế người ta nghĩ ra cách lưu dữ liệu thường xuyên truy xuất lên RAM để có thể phản hồi yêu cầu của người dùng với tốc độ nhanh nhất. Từ đó, Redis ra đời và được biết đến như là 1 cache database rất phổ biến trên thế giới.\\
             
             \begin{figure}[H]   			
             	\includegraphics[width=0.8\textwidth]{Images/redis.png}
@@ -160,7 +160,7 @@
                 \item Hỗ trợ cơ chế Persistence giúp bảo vệ khỏi mất mát dữ liệu khi có sự cố xảy ra.
             \end{itemize}
             
-            Nhờ đặc điểm giúp giảm thời gian truy vấn, nên Redis có tác dụng rất mạnh mẽ trong việc sử dụng làm cache có các ứng dụng web.\\ 
+            Nhờ đặc điểm giúp giảm thời gian truy vấn, nên Redis có tác dụng rất mạnh mẽ trong việc sử dụng để cache dữ liệu thường xuyên được truy xuất của các ứng dụng web.\\ 
             
             \textbf{Ưu điểm}
             
@@ -183,7 +183,7 @@
             
             \textbf{Kết luận}\\
             
-            Ở đây nhóm sẽ sử dụng Redis cho mục đích cache là chủ yếu. Bởi vì có một số thông tin thường xuyên được request nhiều lần. Nếu để trong database được lưu ở ổ cứng thì dẫn tới việc làm tăng thời gian truy xuất, có thể dẫn tới chết database. Ngoài ra do Redis hỗ trợ thêm cơ chế \textbf{Persistence} để định kỳ sao lưu dữ liệu lên ổ cứng nên có thể phần nào đảm bảo dữ liệu không bị mất mát khi có sự cố xảy ra.
+            Ở đây nhóm sẽ sử dụng Redis cho mục đích cache là chủ yếu. Bởi vì có một số thông tin thường xuyên được truy xuất nhiều lần. Nếu để trong database được lưu ở ổ cứng thì dẫn tới việc làm tăng thời gian truy xuất, có thể dẫn tới chết database. Ngoài ra do Redis hỗ trợ thêm cơ chế \textbf{Persistence} để định kỳ sao lưu dữ liệu lên ổ cứng nên có thể phần nào đảm bảo dữ liệu không bị mất mát khi có sự cố xảy ra.
             
             \subsection{ActiveMQ}
             
@@ -230,7 +230,7 @@
             
             \begin{itemize}
                 \item Đảm bảo 1 message chỉ được xử lý đúng 1 lần duy nhất: Mỗi khi consumer lấy được message thì nó sẽ gửi 1 ACK về cho Broker, sau khi nhận được tín hiệu ACK thì Broker sẽ tiến hành xóa message đó đi để tránh việc 1 message được xử lý 2 lần.
-                \item Nhắn tin không đồng bộ: Phù hợp với những việc không cần phải xử lý ngay lập tức. Lúc đó ta cứ đưa message vào queue rồi đi xử lý các công việc tiếp theo. Nhằm giảm response time đối với client.
+                \item Nhắn tin không đồng bộ: Phù hợp với những việc không cần phải xử lý ngay lập tức. Lúc đó ta cứ đưa message vào queue rồi đi xử lý các công việc tiếp theo. Nhằm giảm thời gian phản hồi đối với người dùng.
                 \item Tăng khả năng sẵn sàng: Giả sử ta có 2 service và lúc đó 1 trong 2 service đang trong trạng thái không hoạt động. Thì lúc đó hệ thống vẫn có thể hoạt động bình thường. Ta giữ các message trong queue đến khi service hoạt động lại thì nó consume message và tiếp tục công việc xử lý của nó
                 \item Dễ dàng mở rộng: Mỗi khi lượng request tăng cao. Producer bắn message nhanh hơn tốc độ xử lý cả consumer thì lúc này ta chỉ đơn giản là thêm consumer vào để tăng tốc độ xử lý. Chú ý: Lúc này ta cần set tất cả các consumer chung 1 group-id để tránh việc 1 message có thể được xử lý nhiều lần.
             \end{itemize}
@@ -245,7 +245,7 @@
             
             \textbf{Kết luận}\\
             
-            Mặc dù message queue rất phù hợp để giao tiếp giữa các service trong hệ thống microservice. Nhưng ở đây nhóm chỉ sử dụng message để hiện thực cơ chế bất đồng bộ khi xử lý request tại một service cụ thế. Ví dụ như: Sau khi xử lý request của client ta cần vào Database để cập nhật lại status của đơn hàng nhưng việc truy xuất vào Database ngay thời điểm đó là không cần thiết. Ta có thể đưa message vào queue và sau đó trả kết quả về cho client ngay lập tức. Điều đó giúp ta tránh được việc truy xuất Database quá lâu sẽ ảnh hưởng đến trải nghiệm của người dùng.
+            Mặc dù message queue rất phù hợp để giao tiếp giữa các service trong hệ thống microservice. Nhưng ở đây nhóm chỉ sử dụng message để hiện thực cơ chế bất đồng bộ khi xử lý request tại một service cụ thế. Ví dụ như: Sau khi xử lý request của người dùng ta cần vào Database để cập nhật lại status của đơn hàng nhưng việc truy xuất vào Database ngay thời điểm đó là không cần thiết. Ta có thể đưa message vào queue và sau đó trả kết quả về cho client ngay lập tức. Điều đó giúp ta tránh được việc truy xuất Database quá lâu sẽ ảnh hưởng đến trải nghiệm của người dùng.
             
             \subsection{Kafka}
             
@@ -267,7 +267,7 @@
              \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/Kafka3.png}
     		\centering
     		\linebreak
-    		\caption{Communicate giữa các hệ thống}
+    		\caption{Giao tiếp giữa các hệ thống}
             \end{figure}
             
             \textbf{Kiến trúc}
@@ -275,7 +275,7 @@
              \begin{figure}[H]   			\includegraphics[width=0.8\textwidth]{Images/Kafka2.png}
     		\centering
     		\linebreak
-    		\caption{Cấu trúc Kafka}
+    		\caption{Kiến trúc của Kafka}
             \end{figure}
             
             \begin{itemize}
@@ -292,11 +292,11 @@
             
             \subsection{Docker}
             
-            Docker\cite{docker} là nền tảng cung cấp cho các công cụ, service để các lập trình viên, quản lý hệ thống có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để building, deploy và run các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy app thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.\\
+            Docker\cite{docker} là nền tảng cung cấp cho các công cụ, service để các lập trình viên, quản lý hệ thống có thể phát triển, thực thi, chạy các ứng dụng với containers. Hay nói một cách khác nó là một nền tảng để cung cấp cách để xây dựng, triển khai và chạy các ứng dụng một cách dễ dàng trên nền tảng ảo hóa - \textbf{"Build once, run anywhere"}. Hay nói một cách dễ hiểu như sau: Khi chúng ta muốn chạy ứng dụng thì chúng ta phải thiết lập môi trường chạy cho nó. Thay vì chúng ta sẽ đi cài môi trường chạy cho nó thì chúng ta sẽ chạy docker.\\
             
             Ứng dụng Docker chạy trong vùng chứa (container) có thể được sử dụng trên bất kỳ hệ thống nào: máy tính xách tay của nhà phát triển, hệ thống trên cơ sở hoặc trong hệ thống đám mây. Và là một công cụ tạo môi trường được "đóng gói" (còn gọi là Container) trên máy tính mà không làm tác động tới môi trường hiện tại của máy, môi trường trong Docker sẽ chạy độc lập.\\
             
-            Do nhóm viết ứng dụng theo kiến trúc Microservice vì thế có rất nhiều cơ sở hạ tầng phải deploy như: Cassandra, Kafka, Redis, Mysql, ActiveMQ, ... Ngoài ra còn rất nhiều service mà nhóm đã viết. Cho nên việc deploy và quản lý trên server vật lý hay virtual machine đều gặp rất nhiều khó khăn. Vì thế nhóm đã tìm hiểu và sử dụng Docker để đơn giản hóa quá trình deploy cơ sở hạ tầng và quản lý tài nguyên của mỗi service sao cho hiệu quả và tiết kiệm nhất. Đặc biệt việc sử dụng \textbf{Docker Compose} giúp chúng ta khởi tạo và quản lý các containers rất dễ dàng chi thông qua 1 dòng lệnh
+            \textbf{Kết luận}: Do nhóm viết ứng dụng theo kiến trúc Microservice vì thế có rất nhiều cơ sở hạ tầng phải deploy như: Cassandra, Kafka, Redis, Mysql, ActiveMQ, ... Ngoài ra còn rất nhiều service mà nhóm đã viết. Cho nên việc triển khai và quản lý trên server vật lý hay virtual machine đều gặp rất nhiều khó khăn. Vì thế nhóm đã tìm hiểu và sử dụng Docker để đơn giản hóa quá trình triển khai cơ sở hạ tầng và quản lý tài nguyên của mỗi service sao cho hiệu quả và tiết kiệm nhất. Đặc biệt việc sử dụng \textbf{Docker Compose} giúp chúng ta khởi tạo và quản lý các containers rất dễ dàng chi thông qua 1 dòng lệnh.
             
 			 \begin{figure}[H]
             	\includegraphics[width=0.8\textwidth]{Images/docker.png}
@@ -312,15 +312,15 @@
             
             NGINX được xây dựng để cung cấp việc sử dụng bộ nhớ thấp và đồng thời cao. Thay vì tạo các quy trình mới cho mỗi yêu cầu web, NGINX sử dụng cách tiếp cận theo hướng sự kiện, không đồng bộ trong đó các yêu cầu được xử lý trong một luồng.\\
             
-            Reverse proxy là một proxy server mà khi đứng trước client, chúng hoạt động giống như những server bình thường. Reverse proxy chuyển tiếp request đến một hoặc nhiều server thật, kết quả sau đó trả về cho client như thể là chúng được trả về từ reverse proxy, khiến cho client không biết về những server thật nói trên. Reverse proxy được cài đặt trong một private network của một hoặc nhiều server, và tất cả lưu lượng truy cập đều phải đi qua proxy này.\\
+            Reverse proxy là một proxy server mà khi đứng trước client, chúng hoạt động giống như những server bình thường. Reverse proxy chuyển tiếp yêu cầu đến một hoặc nhiều server thật, kết quả sau đó trả về cho client như thể là chúng được trả về từ reverse proxy, khiến cho client không biết về những server thật nói trên. Reverse proxy được cài đặt trong một private network của một hoặc nhiều server, và tất cả lưu lượng truy cập đều phải đi qua proxy này.\\
             
             Nhờ vào reverse proxy nhóm có thể:
             
             \begin{itemize}
-                \item Che giấu được thông tin các service được deploy bên trong private network.
-                \item Tăng khả năng xử lý nhiều request dống thời.
+                \item Che giấu được thông tin các service được triển khai bên trong private network.
+                \item Tăng khả năng xử lý nhiều request đồng thời.
                 \item Phân chia tải cho các service bên trong.
-                \item Thiêt lập cấu hình HTTPS.
+                \item Thiết lập cấu hình HTTPS.
             \end{itemize}
         
 	        \begin{figure}[H]  			

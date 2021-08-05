@@ -10,7 +10,7 @@
 				        \item \textbf{Tạo đơn hàng}: Lúc tạo đơn hàng người dùng có thể tự đến gửi hàng trực tiếp tại kho hoặc người dùng lựa chọn có tài xế đến lấy, phí vận chuyển có thể là người gửi thanh toán hoặc người nhận thanh toán.
 				        \item \textbf{Hủy đơn hàng}: Trong khoảng thời gian đơn hàng được xác nhận bởi tài xế thì đơn hàng có thể bị hủy. Chú ý rằng sau khi đơn hàng đã được xác nhận thì người dùng không thể hủy.
 				        \item \textbf{Xem danh sách các đơn hàng}: Người dùng có thể dễ dàng xem thông tin đơn hàng. Danh sách đơn hàng có thể được lọc theo trạng thái, theo mã đơn hàng hoặc theo từng khoảng thời gian khác nhau nhanh chóng.
-				        \item \textbf{Xem nợ công và thanh toán}: Người dùng có thể xem các đơn hàng đã hoàn tất và tiến hành thanh toán trung gian qua Ví điện tử hoăc thẻ ngân hàng.
+				        \item \textbf{Xem nợ công và thanh toán}: Người dùng có thể xem các đơn hàng đã hoàn tất và tiến hành thanh toán trung gian qua Ví điện tử hoặc thẻ ngân hàng.
 
 				        \item \textbf{Nhận thông báo}: Sau khi đơn hàng được xác nhận bởi tài xế, thì ngươi dùng sẽ liên tục nhận được thông báo mỗi khi chuyển trạng thái của đơn hàng. Điều này giúp cho người dùng có thể theo dõi đơn hàng chặt chẽ và dễ dàng dự báo thời gian nhận hàng của mình.
 
@@ -28,7 +28,7 @@
 	                    \item \textbf{Xem danh sách kiện hàng cần giao}: Tài xế có thể xem thông tin chi tiết về các đơn hàng mà mình cần giao.
 	                    \item \textbf{Xác nhận đơn hàng với người dùng}: Trong quá trình giao nhận hàng giữa tài xế và người dùng (người nhận, người gửi) thì tài xế đều phải xác nhận đơn hàng.
 	                    \item \textbf{Báo cáo vấn đề}: Trong quá trình vận chuyển có thể xảy ra các vấn đề ngoài ý muốn như: làm thất lạc hàng, gặp sự cố ngoài ý muốn không thể đảm bảo thời gian giao hàng,... thì tài xế có thể báo cáo lên để quản lý có thể giải quyết.
-	                    \item \textbf{Nhận thông báo}: Mỗi khi đơn hàng được gán cho tài xế thì sẽ có mail thông báo cho tài xế. Việc nay giúp tài xế nắm thông tin đơn hàng, đảm bảo việc giao nhận diễn ra kịp thời.
+	                    \item \textbf{Nhận thông báo}: Mỗi khi đơn hàng được gán cho tài xế thì sẽ có mail thông báo cho tài xế. Việc này giúp tài xế nắm thông tin đơn hàng, đảm bảo việc giao nhận diễn ra kịp thời.
 	                \end{itemize}
 	                
 	                
@@ -56,10 +56,10 @@
     \subsection{Yêu cầu hệ thống}
     Hệ thống vận chuyển hàng hóa liên tỉnh cần đáp ứng một số yêu cầu về hệ thống như sau:
         \begin{itemize}
-            \item Thời gian xử lý mỗi request từ người dùng không quá 1 giây.
-            \item Hệ thống gửi thông báo cho người dùng hoặc tài xế  không quá 5 giây.
+            \item Thời gian xử lý mỗi request từ người dùng không quá 200 ms trong điều kiện bình thường và 2s trong điều kiện tải cao.
+            \item Hệ thống gửi thông báo cho người dùng hoặc tài xế  không quá 2s.
             \item Hệ thống có thể chịu tải 100 yêu cầu mỗi giây.
-            \item Thời gian tải hóa đơn nhập hàng/xuất hàng không quá 2 giây.
+            \item Thời gian tải hóa đơn nhập hàng/xuất hàng không quá 1s trong điều kiện bình thường và 5s trong điều kiện tải cao.
             \item Hệ thống cần mã hóa thông tin giao tiếp giữa máy khách và máy chủ.
             \item Hệ thống phải được thiết kế để khi có nhu cầu mở rộng, thêm tính năng mới phải dễ dàng.
             \item Hệ thống cần xuất thống kê về số lượng đơn hàng được vận chuyển thành công, thất bại, doanh thu vào ngày cuối cùng trong tháng.
@@ -84,8 +84,8 @@
 			\item \textbf{User Service}
 			\begin{itemize}
 				\item Service chịu trách nhiệm quản lý user trong hệ thống. Ở đây sẽ lưu trữ Database của user.
-				\item Mỗi khi user login vào hệ thống thì sẽ vào Service này để authen: Ban đầu user được yêu cầu sẽ nhập username và password, Sau khi authen là đúng user đó thì hệ thống sẽ sinh ra JWT (Json Web Token) để gửi trả về cho user. Sau này cứ mỗi request lên hệ thống thì user sẽ gửi kèm theo JWT để hệ thống có thể authen và author.
-				\item User có thể get thông tin để có thể xem và chỉnh sửa
+				\item Mỗi khi người dùng đăng nhập vào hệ thống thì sẽ vào service này để xác thực: Ban đầu người dùng được yêu cầu sẽ nhập username và password, Sau khi xác thực là đúng người dùng đó thì hệ thống sẽ sinh ra JWT (Json Web Token) để gửi trả về cho người dùng. Sau này cứ mỗi request lên hệ thống thì sẽ gửi kèm theo JWT để hệ thống có thể xác thực và phân quyền.
+				\item Người dùng có thể lấy thông tin để xem và chỉnh sửa
 			\end{itemize}
 			\item \textbf{Order Service}
 			\begin{itemize}
@@ -93,16 +93,16 @@
 				\item Ngoài ra service còn chịu trách nhiệm phân phối các đơn hàng đến tài xế
 				\item Đây là service chịu tải khá lớn trong hệ thống vì nhóm sử dụng kết hợp các giải pháp sau nhằm tăng hiệu suất cho service: 
 					\begin{itemize}
-						\item Sử dụng Message Queue để hiện thực cơ chế bất đồng bộ cho các tác vụ: Tạo đơn hàng, ghi dữ liệu vào Database.
-						\item Sử dụng Kafka để gửi message cho service khác
-						\item Trong quá trinh xử lý thì dữ liệu của đơn hàng được lưu trên Cache. Đến khi nào có \textbf{trạng thái cuối} thì đơn hàng mới được lưu vào Database. Bởi vì đơn hàng đươc lấy và thay đổi trạng thái rất nhiều lần trong quá trình xử lý, nếu ghi vào Database (thực hiện nhiều I/O operations) sau mỗi lần xử lý như vậy thì sẽ làm giảm hiệu năng của hệ thống rất nhiều. Việc xử lý dữ liệu trên Cache cũng có thể gặp rủi ro như Cache Server sập thì dữ liệu có thể mất hết, nhưng rất may Redis có hỗ trợ cơ chế Persistence (định kỳ sao lưu dữ liệu) nên rủi ro này có thể chấp nhận được.
+						\item Sử dụng \textbf{Message Queue} để hiện thực cơ chế bất đồng bộ cho các tác vụ: Tạo đơn hàng, ghi dữ liệu vào Database.
+						\item Sử dụng \textbf{Kafka} để gửi message cho service khác
+						\item \textbf{Trong quá trình xử lý thì dữ liệu của đơn hàng được lưu trên Cache. Đến khi nào có trạng thái cuối thì đơn hàng mới được lưu vào Database}. Bởi vì đơn hàng đươc lấy và thay đổi trạng thái rất nhiều lần trong quá trình xử lý, nếu ghi vào Database (thực hiện nhiều I/O operations) sau mỗi lần xử lý như vậy thì sẽ làm giảm hiệu năng của hệ thống rất nhiều. Việc xử lý dữ liệu trên Cache cũng có thể gặp rủi ro như Cache Server sập thì dữ liệu có thể mất hết, nhưng rất may Redis có hỗ trợ cơ chế Persistence (định kỳ sao lưu dữ liệu) nên rủi ro này có thể chấp nhận được.
 					\end{itemize}
-				\item Mỗi khi đơn hàng thay đổi trạng thái hoăc tài xế đươc phân phối đơn thì service sẽ produce message vào \textbf{Kafka Broker} để \textbf{Notify Service} consume và tiếp tục xử lý
+				\item Mỗi khi đơn hàng thay đổi trạng thái hoặc tài xế được phân phối đơn thì service sẽ produce message vào \textbf{Kafka Broker} để \textbf{Notify Service} consume và tiếp tục xử lý
 			\end{itemize}
 			\item \textbf{Notify Service}
 			\begin{itemize}
 				\item Service chịu trách nhiệm quản lý các thông báo cho hệ thống.
-				\item Service sẽ consume message tử \textbf{Order Service} và gửi yêu cầu về mail cho \textbf{Google Mail Server}.
+				\item Service sẽ consume message từ \textbf{Order Service} và gửi yêu cầu về mail cho \textbf{Google Mail Server}.
 				\item Hệ thống sẽ gửi thông báo mỗi khi: 
 					\begin{itemize}
 						\item Gửi thông báo cho khách hàng mỗi khi trạng thái đơn hàng thay đổi. 
@@ -169,7 +169,7 @@
 				\item Thông tin về món hàng muốn gửi:
 				\begin{itemize}
 					\item Loại hàng hóa
-					\item Khối lượng (Để tính phí vận chuyển). Nhân viên đến lấy hàng sẽ tiến hành xác nhận bằng cách đo lại và sẽ yêu cầu khách hàng cập nhật lại khối lượng nếu như khối lượng đã nhập trước đó là không chính xác.
+					\item Khối lượng (để tính phí vận chuyển). Nhân viên đến lấy hàng sẽ tiến hành xác nhận bằng cách đo lại và sẽ yêu cầu khách hàng cập nhật lại khối lượng nếu như khối lượng đã nhập trước đó là không chính xác.
 					\item Giá trị hàng hóa (VND): Giá trị ước tính của hàng hóa để đền bù khi gặp sự cố.
 					
 				\end{itemize}
@@ -206,7 +206,7 @@
 					\caption{Tạo đơn hàng}
 				\end{table}
 			
-			\item \textbf{Xem đơn hàng được nhận}: Người nhận có thể nhập số điện thoại để xem các đơn hàng được nhận, các đơn hàng sẽ được chia theo trạng thái đã định nghĩa ở trên và người gửi có thể xem list các đơn hàng lọc theo trạng thái đó. 
+			\item \textbf{Xem đơn hàng được nhận}: Người nhận có thể nhập số điện thoại để xem các đơn hàng được nhận, các đơn hàng sẽ được chia theo trạng thái đã định nghĩa ở trên và người gửi có thể xem danh sách các đơn hàng lọc theo trạng thái đó. 
 			
 			
 			\begin{table}[H]
@@ -598,7 +598,7 @@
 		
 		\item \textbf{Xem đơn hàng đang có trong kho}: Thủ kho có thể xem thông tin về các đơn hàng có trong kho mà mình đang quản lý.
 		
-		\item \textbf{Xem lịch sử nhập xuất kho}: Thủ kho có thể xem lịch sử nhập / xuất kho. Các thông tin bao gồm mã yêu cầu / đơn hàng, thông tin tài xế, thông tin thủ kho và thông tin chi tiết của đơn hàng.
+		\item \textbf{Xem lịch sử nhập xuất kho}: Thủ kho có thể xem lịch sử nhập/xuất kho. Các thông tin bao gồm mã yêu cầu/đơn hàng, thông tin tài xế, thông tin thủ kho và thông tin chi tiết của đơn hàng.
 		
 	\end{itemize}
 		
