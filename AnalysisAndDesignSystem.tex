@@ -688,7 +688,54 @@
 			
 		\end{itemize}
 	\end{itemize}
+
+\newpage
     
+    \subsection{Mô tả trạng thái đơn hàng, kiện hàng}
+    
+    \begin{itemize}
+    	\item \textbf{Trạng thái đơn hàng}
+    	
+    	\begin{figure}[H]
+    		\centering
+    		\includegraphics[width=0.7\linewidth]{Images/orderstatus.png}
+    		\linebreak
+    		\caption{Trạng thái đơn hàng}
+    	\end{figure}
+    	
+    	\begin{enumerate}
+    		\item \textbf{INIT (Khởi tạo)}: Trạng thái ban đầu của đơn hàng khi mới khởi tạo.
+    		\item \textbf{CANCELED (Đã hủy)}: Nếu trạng thái đơn hàng chưa chuyển sang TRANSFERRING(đang vận chuyển) thì khách hàng vẫn có thể hủy đơn hàng.
+    		\item \textbf{FAIL (Thất bại)}: Sau khi có vấn đề được về kiện hàng hoặc đơn hàng được báo cáo từ tài xế thì quản lý có thể cập nhật đơn hàng thất bại và có chính sách xử lý theo quy định của công ty.
+    		\item \textbf{TRANSFERRING (Đang vận chuyển)}: Đơn hàng chuyển sang trạng thái đang vận chuyển khi tài xế đang vận chuyển kiện hàng về kho nguồn (kiện hàng đầu tiên nếu đơn hàng có nhiều kiện hàng).
+    		\item \textbf{SUCCESS (Thành công)}: Đơn hàng chuyển sang trạng thái thành công khi tài xế đã giao kiện hàng cho người nhận (hoặc tất cả kiện hàng đã được giao trong trường hợp đơn hàng có nhiều kiện hàng).
+    	\end{enumerate}
+    
+    	
+    	\item \textbf{Trạng thái kiện hàng}
+    	
+    	\begin{figure}[H]
+    		\centering
+    		\includegraphics[width=0.7\linewidth]{Images/suborderstatus.png}
+    		\linebreak
+    		\caption{Trạng thái kiện hàng}
+    	\end{figure}
+    
+    
+    	\begin{enumerate}
+    		\item \textbf{ACCEPTED (Đã chấp nhận)}: Sau khi tài xế lấy hàng chấp nhận đơn hàng thì 1 kiện hàng mới sẽ được tạo ra và có trạng thái ban đầu là đã chấp nhận.
+    		\item \textbf{COMING-SEND-STOCK (Đang đến kho nguồn)}: Kiện hàng có trạng thái đang đến kho nguồn sau khi tài xế đã lấy hàng và xác nhận khối lượng kiện hàng đã lấy cho hệ thống.
+    		\item \textbf{ARRIVED-SEND-STOCK (Đã đến kho nguồn)}: Kiện hàng có trạng thái đã đến kho nguồn sau khi tài xế đã nhập hàng vào kho nguồn.
+    		\item \textbf{TRANSFERRING-ARRIVED-STOCK (Đang đến kho đích)}: Kiện hàng có trạng thái đang đến kho đích sau khi tài xế liên tỉnh nhận hàng từ kho và bắt đầu vận chuyển liên tỉnh.
+    		\item \textbf{ARRIVED-DEST-STOCK (Đã đến kho đích)}: Kiện hàng có trạng thái đã đến kho đích sau khi tài xế liên tỉnh đến kho và nhập hàng vào kho đích.
+    		\item \textbf{TRANSFERRING-TO-RECEIVER (Đang vận chuyển đến người nhận)}: Kiện hàng có trạng thái đang vận chuyển đến người nhận sau khi tài xế giao hàng đến kho lấy hàng và xuất hàng đi giao.
+    		\item \textbf{PENDING (Đang xử lý)}: Kiện hàng có trạng thái đang xử lý nếu quản lý nhận được báo cáo về sự cố đối với kiện hàng đó. Sau khi xử lý thì quản lý có thể cập nhật trạng thái cuối của kiện hàng là Thất bại hoặc Thành công.
+    		\item \textbf{FAIL (Thất bại)}: Trạng thái của kiện hàng thất bại khi kiện hàng xảy ra các vấn đề trong quá trình vận chuyển như mất hàng,...
+    		\item \textbf{SUCCESS (Thành công)}: Kiện hàng có trạng thái thành công sau khi khách hàng đã nhận hàng thành công.
+    	\end{enumerate}
+    
+    
+    \end{itemize}
 	
 	\subsection{Thiết kế cơ sở dữ liệu}
 	
