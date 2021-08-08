@@ -706,8 +706,9 @@
     	\begin{enumerate}
     		\item \textbf{INIT (Khởi tạo)}: Trạng thái ban đầu của đơn hàng khi mới khởi tạo.
     		\item \textbf{CANCELED (Đã hủy)}: Nếu trạng thái đơn hàng chưa chuyển sang TRANSFERRING(đang vận chuyển) thì khách hàng vẫn có thể hủy đơn hàng.
-    		\item \textbf{FAIL (Thất bại)}: Sau khi có vấn đề được về kiện hàng hoặc đơn hàng được báo cáo từ tài xế thì quản lý có thể cập nhật đơn hàng thất bại và có chính sách xử lý theo quy định của công ty.
     		\item \textbf{TRANSFERRING (Đang vận chuyển)}: Đơn hàng chuyển sang trạng thái đang vận chuyển khi tài xế đang vận chuyển kiện hàng về kho nguồn (kiện hàng đầu tiên nếu đơn hàng có nhiều kiện hàng).
+    		\item \textbf{PENDING (Đang xử lý)}: Đơn hàng có trạng trái đang xử lý nếu tài xế báo cáo sự cố về kiện hàng trong đơn hàng đó.
+    		\item \textbf{FAIL (Thất bại)}: Sau khi có vấn đề được về kiện hàng hoặc đơn hàng được báo cáo từ tài xế thì quản lý có thể cập nhật đơn hàng thất bại và có chính sách xử lý theo quy định của công ty.
     		\item \textbf{SUCCESS (Thành công)}: Đơn hàng chuyển sang trạng thái thành công khi tài xế đã giao kiện hàng cho người nhận (hoặc tất cả kiện hàng đã được giao trong trường hợp đơn hàng có nhiều kiện hàng).
     	\end{enumerate}
     
