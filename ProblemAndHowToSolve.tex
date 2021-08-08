@@ -95,7 +95,12 @@
 			
 		\section{Bài toán xác định kho nguồn - kho đích ngắn nhất và tính chi phí vận chuyển}
 			Để doanh nghiệp có thể tiết kiệm chi phí cũng như giảm được chi phí vận chuyển cho khách hàng thì bài toán xác định kho nguồn - kho đích so với địa chỉ của người gửi - người nhận ngắn nhất là một bài toán cần phải giải quyết sao cho tối ưu.\\\\
-			\indent	Để xác định kho nguồn - kho đích ngắn nhất nhóm đã tìm quãng đường vận chuyển ngắn nhất giữa địa chỉ của người gửi so với tất cả địa chỉ của kho nguồn và giữa địa chỉ của người nhận so với tất cả địa chỉ của kho đích. Để xác định được quãng đường (km) nhóm đã sử dụng \textbf{Google Map API} để có thể tính đường quãng đường giữa hai địa chỉ cần xác định. Từ đó nhóm đã tìm được quãng đường tối ưu ngắn nhất và sử dụng tổng quãng đường vẫn chuyển ngắn nhất giữa hai địa chỉ người gửi - người nhận để tính toán chi phí cần vận chuyển đơn hàng cho người gửi. 
+			\indent	Để xác định kho nguồn - kho đích ngắn nhất nhóm đã tìm quãng đường vận chuyển ngắn nhất giữa địa chỉ của người gửi so với tất cả địa chỉ của kho nguồn và giữa địa chỉ của người nhận so với tất cả địa chỉ của kho đích. Để xác định được quãng đường (km) nhóm đã sử dụng \textbf{Google Map API} để có thể tính đường quãng đường giữa hai địa chỉ cần xác định. Từ đó nhóm đã tìm được quãng đường tối ưu ngắn nhất và sử dụng tổng quãng đường vẫn chuyển ngắn nhất giữa hai địa chỉ người gửi - người nhận để tính toán chi phí cần vận chuyển đơn hàng cho người gửi. \\\\
+			\indent Công thức tính chi phí vận chuyển:\\
+			\indent \indent \textbf{Transportation Cost = Price * Distance} \\
+			\indent Trong đó,\\
+			\indent \indent \indent \textbf{Price}: được tính dựa vào khối lượng vận chuyển từ \textbf{0 - 3kg} (mặc định \textbf{16000VND}) cứ thêm \textbf{0.5kg} sẽ cộng thêm \textbf{4000VND}.\\
+			\indent \indent \indent \textbf{Distance}: quãng đường vận chuyển ngắn nhất giữa hai địa chỉ người gửi - người nhận.
 		\section{Bài toán thanh toán chi phí vận chuyển} 
 		Thông thường để thanh toán chi phí vận chuyển thì người dùng sử dụng phương thức thu hộ (COD) hoặc thanh toán bằng tiền mặt khi nhận hàng, điều này gây ra nhiều bất tiện cho người dùng. Vì vậy, với xu hướng thanh toán không tiền mặt đang phát triển rộng rãi như hiện nay nên nhóm đẵ bắt kịp xu thế tích hợp cổng thanh toán online ZaloPay để người dùng có thể sử dụng thanh toán qua 3 hình thức thanh toán ví ZaloPay, Visa, Master, JCB (qua Cổng ZaloPay), thẻ ATM (qua Cổng ZaloPay).
 		
